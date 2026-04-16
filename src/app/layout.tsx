@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Serif, Inter } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ConciergeFloat from "@/components/ConciergeFloat";
 import "./globals.css";
 
 const notoSerif = Noto_Serif({
@@ -27,10 +30,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt" className="dark">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         className={`${notoSerif.variable} ${inter.variable} antialiased bg-surface text-on-surface font-body`}
       >
-        {children}
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <ConciergeFloat />
       </body>
     </html>
   );
