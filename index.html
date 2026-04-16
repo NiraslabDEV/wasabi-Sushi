@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WASABI | Gastronomic Ritual</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-primary-container": "#79bb87",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface": "#131313",
+                        "tertiary-container": "#414040",
+                        "surface-container": "#201f1f",
+                        "primary-fixed-dim": "#93d6a0",
+                        "surface-tint": "#93d6a0",
+                        "on-tertiary": "#313030",
+                        "primary": "#93d6a0",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#003919",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#aeacab",
+                        "tertiary": "#c9c6c5",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-fixed": "#00210c",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#af8d11",
+                        "primary-container": "#004b23",
+                        "surface-bright": "#3a3939",
+                        "outline": "#8a9389",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-secondary-container": "#342800",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface-variant": "#c0c9be",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#241a00",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#2a6a3f",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed": "#aef2bb",
+                        "secondary": "#e9c349",
+                        "on-primary-fixed-variant": "#0b5229",
+                        "outline-variant": "#404941",
+                        "background": "#131313",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-on-surface": "#313030",
+                        "surface-dim": "#131313",
+                        "on-secondary": "#3c2f00",
+                        "secondary-fixed": "#ffe088",
+                        "surface-variant": "#353534",
+                        "surface-container-highest": "#353534",
+                        "surface-container-lowest": "#0e0e0e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #ffe088 0%, #af8d11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .emerald-glow {
+            box-shadow: inset 0 0 20px rgba(147, 214, 160, 0.1);
+        }
+        .dark-map-overlay {
+            filter: grayscale(100%) invert(90%) contrast(150%) brightness(50%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 selection:text-primary">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-2xl shadow-black/40">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<img alt="WASABI Vilanculos Logo" class="h-10 w-auto" src="logo_wasabi.jpeg"/>
+<div class="hidden md:flex gap-8 items-center font-headline tracking-tight">
+<a class="text-on-surface/70 hover:text-primary transition-colors" href="#menu">Menu</a>
+<a class="text-on-surface/70 hover:text-on-surface transition-colors" href="#experience">Experience</a>
+<a class="text-emerald-400 font-bold border-b-2 border-emerald-500 pb-1" href="#reservations">Reservations</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface/70 hover:text-on-surface transition-colors text-sm font-medium tracking-widest">PT/EN</button>
+<span class="material-symbols-outlined text-on-surface/70">language</span>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section: Editorial Focus -->
+<section class="relative h-screen flex items-center overflow-hidden pt-20">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/60 to-transparent z-10"></div>
+<img class="w-full h-full object-cover grayscale-[20%] brightness-75" data-alt="Cinematic close-up of a master sushi chef preparing a delicate nigiri under warm spotlight, dark atmospheric background, moody luxury kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1JB7PrH9KmLuGPAb7jnZp1NIffiSV9vC87VS-pLTgmkHK3sCQyvr2ZeY8FOEVeb3MFeBOO7UldZ1-8JoExKuYIdPwMF8K9Lh2WJlGtJJ-hoBS1B-bWwhh4CVbcM9uPTp9GNNEkbU9Fyk_eXOoSp5K2gmQvE4Lj1B73kcqHdtit7H7s9cxPCYFRMhkkWgq18uyoeBXNZIqkHxye3QuYOAIb1WiT9wYYOdWMSPFhNsSCJwos6Hia7p5ADTYMOeBBE-vSMBMg-JllyBk"/>
+</div>
+<div class="relative z-20 px-8 md:px-24 max-w-5xl">
+<h1 class="font-headline text-6xl md:text-9xl leading-none tracking-tighter mb-6 opacity-90">
+                    The <span class="italic text-secondary">Obsidian</span><br/>Ritual.
+                </h1>
+<p class="font-body text-lg md:text-xl text-on-surface-variant max-w-lg mb-10 leading-relaxed">
+                    A dialogue between Japanese precision and the untamed coastal flavors of Vilanculos. Each bite is a curated moment of silence.
+                </p>
+<div class="flex flex-wrap gap-4">
+<a class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded shadow-lg font-bold tracking-[0.1em] uppercase text-sm hover:scale-105 transition-transform inline-block" href="#reservations">
+                        Secure a Table
+                    </a>
+<button class="border border-outline-variant/20 text-secondary-fixed px-8 py-4 rounded font-bold tracking-[0.1em] uppercase text-sm hover:bg-surface-container-high transition-colors">
+                        Explore the Omakase
+                    </button>
+</div>
+</div>
+<div class="absolute bottom-12 left-8 md:left-24 z-20 flex gap-12 items-center text-xs tracking-[0.3em] uppercase text-on-surface/40">
+<span class="flex items-center gap-2"><span class="w-8 h-px bg-secondary"></span> Vilanculos, MZ</span>
+<span class="flex items-center gap-2"><span class="w-8 h-px bg-secondary"></span> 18:00 — 23:00</span>
+</div>
+</section>
+<!-- Menu Navigation - Floating Filter -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto" id="menu">
+<div class="flex flex-col md:flex-row gap-4 mb-20 items-baseline border-b border-outline-variant/10 pb-8">
+<h2 class="font-headline text-4xl md:text-5xl text-secondary pr-12">The Collection</h2>
+<div class="flex flex-wrap gap-6 text-sm font-medium tracking-widest uppercase text-on-surface/60 overflow-x-auto pb-4 md:pb-0">
+<a class="hover:text-primary transition-colors whitespace-nowrap" href="#entradas">Entradas</a>
+<a class="hover:text-primary transition-colors whitespace-nowrap" href="#sushi">Sushi Tradicional</a>
+<a class="text-primary border-b border-primary whitespace-nowrap" href="#especialidades">Especialidades</a>
+<a class="hover:text-primary transition-colors whitespace-nowrap" href="#mocambicana">Cozinha Moçambicana</a>
+<a class="hover:text-primary transition-colors whitespace-nowrap" href="#combinados">Combinados</a>
+</div>
+</div>
+<!-- Bento Grid - Specialties -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-32" id="especialidades">
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl h-[500px] bg-surface-container-low shadow-2xl">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" data-alt="Top view of a luxury sashimi platter on dark basalt stone, garnished with edible gold flakes and fresh microgreens, dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsuYpFHz_hemHaa3RedZAVf30rXTlJxvnI-k3aQBs7UHOyNXDZLPDBPJSMEqhrpfgUPYEgMad5k7P4pho4795KvgiBtdKu5kqBweChXJytay6jJhwUa5i0v_wJGm9UO1HKA432r7JUYBptzBBZ2NILY700iNAQFlkqvkf61e_7UJKjq-3kODgppUrEUSiLSFvPV-iXiSBdFJCpFSG4Qy7w71dFAbtVQXaMbbTcQHKRaC4VQqI9Sq3iFzc32LhQFNywqOfdcDqTxYwD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+<div class="absolute bottom-10 left-10">
+<span class="text-secondary-fixed text-xs font-bold tracking-widest uppercase mb-2 block">House Signature</span>
+<h3 class="font-headline text-4xl mb-2">Tuna Truffle Tataki</h3>
+<p class="text-on-surface-variant max-w-md mb-6">Seared Atlantic tuna, black truffle ponzu, crispy garlic chips, and maldon sea salt.</p>
+<span class="text-secondary font-headline text-2xl">2.450 MT</span>
+</div>
+</div>
+<div class="md:col-span-4 grid grid-rows-2 gap-6">
+<div class="bg-surface-container-high p-8 rounded-xl flex flex-col justify-between emerald-glow">
+<div>
+<h3 class="font-headline text-2xl mb-2">Prawn Carpaccio</h3>
+<p class="text-on-surface-variant text-sm">Local Bazaruto prawns, citrus emulsion, and pink peppercorns.</p>
+</div>
+<div class="flex justify-between items-center mt-8">
+<span class="text-secondary font-headline text-xl">1.850 MT</span>
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+</div>
+<div class="bg-surface-container-high p-8 rounded-xl flex flex-col justify-between border-l border-secondary/20">
+<div>
+<h3 class="font-headline text-2xl mb-2">A5 Wagyu Nigiri</h3>
+<p class="text-on-surface-variant text-sm">Torched Miyazaki beef, foie gras mousse, and nikiri glaze.</p>
+</div>
+<div class="flex justify-between items-center mt-8">
+<span class="text-secondary font-headline text-xl">3.200 MT</span>
+<span class="material-symbols-outlined text-secondary">workspace_premium</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Combinados Section -->
+<div class="mb-32" id="combinados">
+<div class="flex justify-between items-end mb-12">
+<div>
+<span class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-2 block">Curated Selections</span>
+<h2 class="font-headline text-4xl md:text-5xl italic">The Combinados</h2>
+</div>
+<div class="hidden md:block text-right">
+<p class="text-on-surface-variant text-sm italic">Designed for the shared ritual.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Combinado 1 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-primary/30 transition-all duration-500">
+<div class="relative h-64">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Elegant sushi boat platter with variety of nigiri and uramaki on a dark table, warm ambient restaurant lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjT6HRUXhkoCW3npZYXYOOQUX2oi2cNVkRidCEnFa87Fsz7Xf_4xAR_YRHJUCbri5cvR_HJN2bIaOjqcHzX6-qmSL5WS0puYXx4hT6Z9eOS8-Uio8BrdbjYEJnXO6horD7oQXxIku2-a24On3ovOOv_hiTXtmGvwbHraYkh9YVAU39gi87iq4lOpMJcHk6p9IjXX-5Z7sfN6l2YJZMcom1r3ABx6PPC8Hnd7dsaUDiPP2qExCYfO2aZUnB-e7teSbleU1Bm6pwQIT1"/>
+<div class="absolute top-4 right-4 bg-error-container/90 text-on-error-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                                Only 5 Daily
+                            </div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-headline text-2xl">Zanzibar Drift</h4>
+<span class="text-secondary font-headline text-xl">4.200 MT</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-8 leading-relaxed">
+                                32 Pieces. A tribute to the Indian Ocean. Features spicy tuna, tempura prawns, and local white fish nigiri.
+                            </p>
+<button class="w-full py-4 border border-outline-variant/30 text-xs font-bold tracking-widest uppercase hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
+                                Request Selection
+                            </button>
+</div>
+</div>
+<!-- Combinado 2 -->
+<div class="bg-surface-container-highest rounded-xl overflow-hidden border border-secondary/20 shadow-2xl relative scale-105 z-10">
+<div class="absolute top-0 left-0 w-full h-1 bg-secondary"></div>
+<div class="relative h-64">
+<img class="w-full h-full object-cover" data-alt="Grand omakase platter with premium sashimi, nigiri and gold-leaf uramaki, dark professional food photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgu7cW5NEa89UpzEIIl_jbVRoI8a2jaFzkRZ135iDo7177gBs4RonI6-mZWey_4X4thvG7OXA-sS-F7BB9RRZHnkB6u2p-LONcti5nenmUX6ZR6L2GV4UVHInHheQ2t4t050yiCcxmXix3y54by-QUe2HzI7M7XKyUQUN1v1uBDm5INHdDarK73h2SauCpz_wiuBM9xFC1_y4MR6bdDAlh66YBLtbXDi_iYSmw1XzRMIzulaKxAsma13pE8N0IBF1JoaOhzEJ7fzjr"/>
+<div class="absolute inset-0 bg-black/20"></div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-headline text-2xl text-secondary-fixed">The Omakase Deck</h4>
+<span class="text-secondary-fixed font-headline text-xl">7.500 MT</span>
+</div>
+<p class="text-tertiary-fixed text-sm mb-8 leading-relaxed">
+                                48 Pieces. The Chef's ultimate vision. Includes premium imported Wagyu, scallops, and fresh Bazaruto lobster rolls.
+                            </p>
+<button class="w-full py-4 bg-secondary text-on-secondary text-xs font-bold tracking-widest uppercase hover:brightness-110 transition-all">
+                                Reserve Collection
+                            </button>
+</div>
+</div>
+<!-- Combinado 3 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-primary/30 transition-all duration-500">
+<div class="relative h-64">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Minimalist selection of vegetarian sushi rolls and nigiri, clean composition on a black slate, high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeVM_5KiH93NaSwZ9VTb216niTgceFDyz3LrI5lVRBZyn0AcD-Tom6YLEgtO9w1BquGbevN60pDzMDYBXIjJMzKa330NTsXqumOfXlQQZPij__hHt5vJ1RAoaXAQ8cUM4yJxtsInY3xzMGWLUGEoL5mYFCd2tWMmpgO2w8WOalTeFYTIltKXrXoYRSFGEU_WvBlYJHHmIBGDoA2BRg-EaoGA90d7WgnNVVUxZRiNSjdxeeBy9_pSfnbkhgdDxNBBoAJIAHMHl0DWzv"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-headline text-2xl">Bazaruto Bloom</h4>
+<span class="text-secondary font-headline text-xl">3.100 MT</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-8 leading-relaxed">
+                                24 Pieces. Vegan &amp; Vegetarian focus. Mango uramaki, avocado nigiri, and tempura sweet potato.
+                            </p>
+<button class="w-full py-4 border border-outline-variant/30 text-xs font-bold tracking-widest uppercase hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
+                                Request Selection
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Experience Detail: Mozambique Influence -->
+<section class="bg-surface-container-low py-32 overflow-hidden" id="experience">
+<div class="max-w-screen-2xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="relative">
+<div class="absolute -top-10 -left-10 w-40 h-40 border-t border-l border-secondary/30 hidden md:block"></div>
+<img class="rounded-lg shadow-2xl relative z-10" data-alt="Grilled Mozambican peri-peri prawns served with a Japanese twist, charred lemon, and fresh herbs on a handcrafted ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC2Ny-gPXDgOvERVm9IXQWzBUDOTmWTEaYHTn-AynoUsGcCL3UHn4_Jsmt33g37Aavvj_mhD55MoPGyQEJrwAZVlSCq7L5L5ZcTQSW1u_zkoSJnwG_If2a3pgDmFRWK_4OPRWm6t68NW8IDor0iAbBxISho6XtNVnRMqHKsyAVg2ihOoqo8V-MYQkziD9uv63R8JzgyXcPo82BDPniFEDg2ShiOsgqDuYy9iiMv0lPt8hpmTQxFuBa-R4zjgr6df6StWV6t7hf5OZy"/>
+<div class="absolute -bottom-10 -right-10 w-64 h-80 bg-surface-container-high -z-10 rounded-lg"></div>
+</div>
+<div>
+<span class="text-primary text-xs font-bold tracking-[0.4em] uppercase mb-6 block">Soul of Mozambique</span>
+<h2 class="font-headline text-5xl md:text-6xl mb-8 italic">Where Africa<br/>Meets the Sun.</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10">
+                        Our Cozinha Moçambicana isn't just an addition—it's the foundation. We use local spices from the Vilanculos markets and the freshest catch from the dhows to reinvent classics. 
+                    </p>
+<ul class="space-y-6">
+<li class="flex items-start gap-4">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full mt-2"></span>
+<div>
+<h4 class="font-headline text-xl mb-1">Peri-Peri Sashimi</h4>
+<p class="text-on-surface-variant text-sm">White fish drizzled with a mild coconut-chili infusion.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full mt-2"></span>
+<div>
+<h4 class="font-headline text-xl mb-1">Bazaruto Crab Curry Roll</h4>
+<p class="text-on-surface-variant text-sm">Fresh crab meat with a hint of turmeric and local curry leaf.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Reservation Section -->
+<section class="py-32 bg-surface" id="reservations">
+<div class="max-w-4xl mx-auto px-8">
+<div class="text-center mb-16">
+<span class="text-primary text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Gastronomic Journey</span>
+<h2 class="font-headline text-5xl md:text-6xl italic mb-6">Reserva de Mesa</h2>
+<div class="w-24 h-px bg-secondary mx-auto"></div>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-low p-12 rounded-2xl shadow-2xl border border-outline-variant/10 emerald-glow">
+<div class="space-y-2">
+<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="date">Data</label>
+<input class="w-full bg-surface-container-highest border-outline-variant/20 rounded-lg text-on-surface focus:ring-primary focus:border-primary transition-all p-4" id="date" type="date"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="time">Hora</label>
+<select class="w-full bg-surface-container-highest border-outline-variant/20 rounded-lg text-on-surface focus:ring-primary focus:border-primary transition-all p-4" id="time">
+<option>18:00</option>
+<option>18:30</option>
+<option>19:00</option>
+<option>19:30</option>
+<option>20:00</option>
+<option>20:30</option>
+<option>21:00</option>
+</select>
+</div>
+<div class="space-y-2 md:col-span-2">
+<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="guests">Número de Pessoas</label>
+<input class="w-full bg-surface-container-highest border-outline-variant/20 rounded-lg text-on-surface focus:ring-primary focus:border-primary transition-all p-4" id="guests" min="1" placeholder="Ex: 2" type="number"/>
+</div>
+<div class="md:col-span-2 py-4 px-6 bg-primary-container/20 border border-primary/20 rounded-lg flex items-start gap-4">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5">info</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            To ensure the exclusivity of the ritual, a <strong class="text-primary">50% deposit</strong> is required for confirmation. Our concierge will contact you shortly after the request.
+                        </p>
+</div>
+<button class="md:col-span-2 w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold tracking-[0.2em] uppercase rounded-lg shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
+                        Request Ritual
+                        <span class="material-symbols-outlined">arrow_right_alt</span>
+</button>
+</form>
+<div class="mt-12 text-center">
+<p class="text-on-surface/40 text-xs tracking-widest uppercase">For groups larger than 8, please contact us via <a class="text-secondary hover:underline" href="#">Private Events</a>.</p>
+</div>
+</div>
+</section>
+<!-- Location Section -->
+<section class="py-32 bg-surface-container-low border-y border-outline-variant/10" id="location">
+<div class="max-w-screen-2xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1">
+<span class="text-primary text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Visit the Sanctuary</span>
+<h2 class="font-headline text-5xl md:text-6xl italic mb-10">Localização</h2>
+<div class="space-y-10 mb-12">
+<div class="flex items-start gap-6">
+<span class="material-symbols-outlined text-secondary text-3xl">location_on</span>
+<div>
+<h4 class="font-headline text-xl text-on-surface mb-2">The Address</h4>
+<p class="text-on-surface-variant leading-relaxed">Av. Eduardo Mondlane, Vilanculos<br/>(Próximo à costa)</p>
+</div>
+</div>
+<div class="flex items-start gap-6">
+<span class="material-symbols-outlined text-secondary text-3xl">schedule</span>
+<div>
+<h4 class="font-headline text-xl text-on-surface mb-2">Hours of Ritual</h4>
+<p class="text-on-surface-variant leading-relaxed">Terça a Domingo:<br/>12:00h — 22:00h</p>
+</div>
+</div>
+</div>
+<a class="inline-flex items-center gap-4 bg-surface-container-highest border border-secondary/30 px-8 py-5 rounded-lg text-secondary font-bold tracking-widest uppercase text-sm hover:bg-secondary hover:text-on-secondary transition-all group" href="https://wa.me/yourwhatsappnumber">
+                            Confirmar pelo WhatsApp
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chat_bubble</span>
+</a>
+</div>
+<div class="order-1 md:order-2 h-[500px] w-full relative rounded-2xl overflow-hidden shadow-2xl group">
+<!-- Simulated Dark Stylized Map -->
+<div class="absolute inset-0 bg-[#0a0a0a]">
+<img class="w-full h-full object-cover opacity-30 dark-map-overlay" data-alt="Abstract dark-themed minimalist map showing the coastline of Vilanculos, Mozambique with an elegant gold marker" onerror="this.src='https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?q=80&amp;w=2000&amp;auto=format&amp;fit=crop'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9n8g0E9g8-x5V8X8V8X8V8X8V8X8V8X8V8X8V8X8V8X8V8X8V8X8V8X8V"/>
+<!-- Custom Marker Overlay -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative">
+<div class="absolute -inset-4 bg-primary/20 rounded-full animate-ping"></div>
+<div class="relative bg-surface p-3 rounded-full border border-secondary shadow-[0_0_20px_rgba(233,195,73,0.4)]">
+<span class="material-symbols-outlined text-secondary fill-1">restaurant</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 pointer-events-none border-inset border-[12px] border-surface-container-low opacity-40"></div>
+<div class="absolute bottom-6 left-6 right-6 p-4 bg-surface/90 backdrop-blur-md rounded border border-outline-variant/20 flex justify-between items-center md:hidden">
+<span class="text-xs font-bold tracking-widest uppercase">Vilanculos Coastline</span>
+<span class="text-[10px] text-on-surface-variant">S 22.00° / E 35.31°</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface w-full py-12 px-8">
+<div class="flex flex-col md:flex-row justify-between items-start gap-8 max-w-screen-2xl mx-auto border-t border-outline-variant/10 pt-16">
+<div class="space-y-6">
+<img alt="WASABI Vilanculos Logo" class="h-8 w-auto grayscale" src="logo_wasabi.jpeg"/>
+<p class="text-on-surface-variant text-sm max-w-xs leading-relaxed">
+                    Elevated dining in the heart of Vilanculos. A sanctuary for the senses.
+                </p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-emerald-500">location_on</span>
+<span class="font-inter text-sm tracking-wide text-on-surface-variant">Av. Eduardo Mondlane, Vilanculos</span>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+<div>
+<h5 class="text-emerald-500 font-bold text-xs tracking-widest uppercase mb-6">Explore</h5>
+<ul class="space-y-4 font-inter text-sm tracking-wide text-on-surface-variant">
+<li><a class="hover:text-emerald-300 transition-colors" href="#">Instagram</a></li>
+<li><a class="hover:text-emerald-300 transition-colors" href="#">Facebook</a></li>
+<li><a class="hover:text-emerald-300 transition-colors" href="#">The Story</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-emerald-500 font-bold text-xs tracking-widest uppercase mb-6">Reservations</h5>
+<ul class="space-y-4 font-inter text-sm tracking-wide text-on-surface-variant">
+<li><a class="hover:text-emerald-300 transition-colors" href="#reservations">Book a Table</a></li>
+<li><a class="hover:text-emerald-300 transition-colors" href="#">Private Events</a></li>
+<li><a class="hover:text-emerald-300 transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-emerald-500 font-bold text-xs tracking-widest uppercase mb-6">Legal</h5>
+<ul class="space-y-4 font-inter text-sm tracking-wide text-on-surface-variant">
+<li><a class="hover:text-emerald-300 transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-emerald-300 transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-screen-2xl mx-auto mt-20 text-center md:text-left">
+<p class="font-inter text-sm tracking-wide text-on-surface-variant opacity-60">
+                © 2024 WASABI Vilanculos. All rights reserved.
+            </p>
+</div>
+</footer>
+<!-- Concierge Float -->
+<button class="fixed bottom-8 right-8 z-50 bg-surface-bright text-secondary p-4 rounded-full shadow-2xl flex items-center gap-3 border border-secondary/20 hover:scale-105 transition-all glass-nav">
+<span class="font-bold text-xs tracking-widest uppercase pl-2">Concierge</span>
+<div class="bg-emerald-500 p-2 rounded-full flex items-center justify-center">
+<svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.599-3.835c1.402.831 2.755 1.246 4.195 1.246h.001c5.479 0 9.94-4.461 9.943-9.94 0-2.652-1.032-5.145-2.906-7.02s-4.367-2.906-7.021-2.906c-5.48 0-9.941 4.461-9.943 9.941-.001 1.574.373 2.894 1.106 4.16l-1.011 3.693 3.736-.98zm11.215-5.412c-.309-.154-1.829-.903-2.112-1.006-.283-.103-.49-.154-.695.154-.206.309-.798 1.006-.979 1.211-.18.206-.36.232-.67.077-.309-.154-1.305-.481-2.485-1.534-.919-.819-1.538-1.831-1.718-2.14-.181-.309-.018-.477.137-.63.14-.139.309-.36.463-.541.154-.181.206-.309.309-.515.103-.206.052-.386-.026-.541-.077-.154-.695-1.677-.953-2.293-.251-.599-.505-.518-.695-.527-.181-.01-.386-.01-.592-.01-.206 0-.541.077-.824.386-.283.309-1.082 1.056-1.082 2.575 0 1.52 1.107 2.987 1.262 3.193.154.206 2.179 3.328 5.278 4.664.737.318 1.311.507 1.758.649.741.235 1.415.202 1.947.123.593-.088 1.829-.747 2.086-1.468.257-.721.257-1.339.18-1.468-.077-.129-.283-.206-.592-.36z"></path>
+</svg>
+</div>
+</button>
+</body></html>
