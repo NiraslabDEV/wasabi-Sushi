@@ -473,7 +473,7 @@
                             To ensure the exclusivity of the ritual, a <strong class="text-primary">50% deposit</strong> is required for confirmation. Our concierge will contact you shortly after the request.
                         </p>
 </div>
-<button class="md:col-span-2 w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold tracking-[0.2em] uppercase rounded-lg shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
+<button type="submit" class="md:col-span-2 w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold tracking-[0.2em] uppercase rounded-lg shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
                         Request Ritual
                         <span class="material-symbols-outlined">arrow_right_alt</span>
 </button>
@@ -506,7 +506,7 @@
 </div>
 </div>
 </div>
-<a class="inline-flex items-center gap-4 bg-surface-container-highest border border-secondary/30 px-8 py-5 rounded-lg text-secondary font-bold tracking-widest uppercase text-sm hover:bg-secondary hover:text-on-secondary transition-all group" href="https://wa.me/yourwhatsappnumber">
+<a class="inline-flex items-center gap-4 bg-surface-container-highest border border-secondary/30 px-8 py-5 rounded-lg text-secondary font-bold tracking-widest uppercase text-sm hover:bg-secondary hover:text-on-secondary transition-all group" href="https://wa.me/258846007007">
                             Confirmar pelo WhatsApp
                             <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chat_bubble</span>
 </a>
@@ -581,7 +581,7 @@
 </div>
 </footer>
 <!-- Concierge Float -->
-<button class="fixed bottom-8 right-8 z-50 bg-surface-bright text-secondary p-4 rounded-full shadow-2xl flex items-center gap-3 border border-secondary/20 hover:scale-105 transition-all glass-nav">
+<button onclick="window.open('https://wa.me/258846007007','_blank')" class="fixed bottom-8 right-8 z-50 bg-surface-bright text-secondary p-4 rounded-full shadow-2xl flex items-center gap-3 border border-secondary/20 hover:scale-105 transition-all glass-nav">
 <span class="font-bold text-xs tracking-widest uppercase pl-2">Concierge</span>
 <div class="bg-emerald-500 p-2 rounded-full flex items-center justify-center">
 <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24">
@@ -589,4 +589,17 @@
 </svg>
 </div>
 </button>
+<script>
+document.querySelector('#reservations form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var date = document.getElementById('date').value;
+  var time = document.getElementById('time').value;
+  var guests = document.getElementById('guests').value;
+  if (!date || !guests) { alert('Por favor preencha todos os campos.'); return; }
+  var msg = encodeURIComponent(
+    'Olá Wasabi! Gostaria de fazer uma reserva:\n📅 Data: ' + date + '\n⏰ Hora: ' + time + '\n👥 Pessoas: ' + guests + '\n\nAguardo confirmação. Obrigado!'
+  );
+  window.open('https://wa.me/258846007007?text=' + msg, '_blank');
+});
+</script>
 </body></html>
