@@ -61,7 +61,7 @@ export default function ReviewsSection() {
             >
               {/* Quote Mark */}
               <span className="text-secondary text-5xl font-headline leading-none mb-4">
-                &ldquo;
+                "
               </span>
 
               {/* Review Text */}
