@@ -3,6 +3,7 @@ import { Noto_Serif, Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ConciergeFloat from "@/components/ConciergeFloat";
+import { TranslationProvider } from "./TranslationProvider";
 import "./globals.css";
 
 const notoSerif = Noto_Serif({
@@ -39,10 +40,12 @@ export default function RootLayout({
       <body
         className={`${notoSerif.variable} ${inter.variable} antialiased bg-surface text-on-surface font-body`}
       >
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <ConciergeFloat />
+        <TranslationProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <ConciergeFloat />
+        </TranslationProvider>
       </body>
     </html>
   );

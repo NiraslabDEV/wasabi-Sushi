@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "@/app/TranslationProvider";
 
 export default function HeroSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="relative h-screen flex items-center overflow-hidden pt-20">
       <div className="absolute inset-0 z-0">
@@ -19,14 +22,12 @@ export default function HeroSection() {
       
       <div className="relative z-20 px-8 md:px-24 max-w-5xl">
         <h1 className="font-headline text-6xl md:text-9xl leading-none tracking-tighter mb-6 opacity-90">
-          The <span className="italic text-secondary">Obsidian</span>
+          {t("heroTitle")} <span className="italic text-secondary">{t("heroTitleItalic")}</span>
           <br />
-          Ritual.
         </h1>
         
         <p className="font-body text-lg md:text-xl text-on-surface-variant max-w-lg mb-10 leading-relaxed">
-          A dialogue between Japanese precision and the untamed coastal flavors
-          of Vilanculos. Each bite is a curated moment of silence.
+          {t("heroDesc")}
         </p>
         
         <div className="flex flex-wrap gap-4">
@@ -34,21 +35,21 @@ export default function HeroSection() {
             href="#reservations"
             className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded shadow-lg font-bold tracking-[0.1em] uppercase text-sm hover:scale-105 transition-transform inline-block"
           >
-            Secure a Table
+            {t("secureTable")}
           </Link>
           
           <button className="border border-outline-variant/20 text-secondary-fixed px-8 py-4 rounded font-bold tracking-[0.1em] uppercase text-sm hover:bg-surface-container-high transition-colors">
-            Explore the Omakase
+            {t("exploreOmakase")}
           </button>
         </div>
       </div>
       
       <div className="absolute bottom-12 left-8 md:left-24 z-20 flex gap-12 items-center text-xs tracking-[0.3em] uppercase text-on-surface/40">
         <span className="flex items-center gap-2">
-          <span className="w-8 h-px bg-secondary"></span> Vilanculos, MZ
+          <span className="w-8 h-px bg-secondary"></span> {t("vilanculos")}
         </span>
         <span className="flex items-center gap-2">
-          <span className="w-8 h-px bg-secondary"></span> 18:00 — 23:00
+          <span className="w-8 h-px bg-secondary"></span> {t("hours")}
         </span>
       </div>
     </section>
