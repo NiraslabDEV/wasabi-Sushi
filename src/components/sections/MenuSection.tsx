@@ -260,7 +260,7 @@ export default function MenuSection() {
             {/* Large Card */}
             <div className="md:col-span-8 group relative overflow-hidden rounded-xl h-[500px] bg-surface-container-low shadow-2xl">
               <Image
-                src={specialties[0].image}
+                src={specialties[0].image!}
                 alt={specialties[0].name}
                 fill
                 className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
