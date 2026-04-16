@@ -5,6 +5,8 @@ import ChefSection from "@/components/sections/ChefSection";
 import StorySection from "@/components/sections/StorySection";
 import GallerySection from "@/components/sections/GallerySection";
 import ReviewsSection from "@/components/sections/ReviewsSection";
+import ReservationSection from "@/components/sections/ReservationSection";
+import LocationSection from "@/components/sections/LocationSection";
 
 export default function Home() {
   return (
@@ -16,6 +18,8 @@ export default function Home() {
       <StorySection />
       <GallerySection />
       <ReviewsSection />
+      <ReservationSection />
+      <LocationSection />
     </main>
   );
 }
