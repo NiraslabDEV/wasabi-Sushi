@@ -1,6 +1,9 @@
 "use client";
 
+import { useTranslation } from "@/app/TranslationProvider";
+
 export default function ConciergeFloat() {
+  const { t } = useTranslation();
   const whatsappNumber = "258846007007";
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
@@ -14,7 +17,7 @@ export default function ConciergeFloat() {
       className="fixed bottom-8 right-8 z-50 bg-surface-bright text-secondary p-4 rounded-full shadow-2xl flex items-center gap-3 border border-secondary/20 hover:scale-105 transition-all glass-nav group"
     >
       <span className="font-bold text-xs tracking-widest uppercase pl-2 group-hover:text-secondary-fixed-dim transition-colors">
-        Concierge
+        {t("concierge.label")}
       </span>
       <div className="bg-primary p-2 rounded-full flex items-center justify-center">
         <svg

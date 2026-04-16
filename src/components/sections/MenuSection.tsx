@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslation } from "@/app/TranslationProvider";
 
 interface MenuItem {
   name: string;
@@ -155,6 +156,7 @@ const menuData: MenuCategory[] = [
 ];
 
 export default function MenuSection() {
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState("entradas");
 
   // Special sections from the original HTML
@@ -214,7 +216,7 @@ export default function MenuSection() {
       {/* Header */}
       <div className="flex flex-col md:flex-row gap-4 mb-20 items-baseline border-b border-outline-variant/10 pb-8">
         <h2 className="font-headline text-4xl md:text-5xl text-secondary pr-12">
-          The Collection
+          {t("theCollection")}
         </h2>
         <div className="flex flex-wrap gap-6 text-sm font-medium tracking-widest uppercase text-on-surface/60 overflow-x-auto pb-4 md:pb-0">
           {categories.map((cat) => (
@@ -227,7 +229,7 @@ export default function MenuSection() {
                   : "hover:text-primary"
               }`}
             >
-              {cat.name}
+              {t(`menu.category.${cat.id}`)}
             </button>
           ))}
           <button
@@ -238,7 +240,7 @@ export default function MenuSection() {
                 : "hover:text-primary"
             }`}
           >
-            Cozinha Moçambicana
+            {t("menu.category.mocambicana")}
           </button>
         </div>
       </div>
@@ -248,10 +250,10 @@ export default function MenuSection() {
         <div className="mb-32" id="especialidades">
           <div className="mb-8">
             <span className="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-2 block">
-              House Specialties
+              {t("menu.houseSpecialties")}
             </span>
             <h3 className="font-headline text-3xl italic mb-12">
-              Especialidades Wasabi
+              {t("menu.especialidades")}
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
@@ -361,15 +363,15 @@ export default function MenuSection() {
         <div className="flex justify-between items-end mb-12">
           <div>
             <span className="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-2 block">
-              Curated Selections
+              {t("menu.curatedSelections")}
             </span>
             <h2 className="font-headline text-4xl md:text-5xl italic">
-              The Combinados
+              {t("menu.theCombinados")}
             </h2>
           </div>
           <div className="hidden md:block text-right">
             <p className="text-on-surface-variant text-sm italic">
-              Designed for the shared ritual.
+              {t("menu.designedForSharing")}
             </p>
           </div>
         </div>
@@ -431,7 +433,7 @@ export default function MenuSection() {
                       : "border border-outline-variant/30 hover:bg-primary hover:text-on-primary hover:border-primary"
                   }`}
                 >
-                  {combo.isFeatured ? "Reserve Collection" : "Request Selection"}
+                  {combo.isFeatured ? t("menu.reserveCollection") : t("menu.requestSelection")}
                 </button>
               </div>
             </div>

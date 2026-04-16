@@ -1,42 +1,55 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "@/app/TranslationProvider";
 
 const reviews = [
   {
-    text: "An experience that transcends dining. Every piece is a work of art, prepared with such precision and care. I'll be returning every time I'm in Vilanculos.",
+    textKey: "reviews.review1",
     author: "Maria S.",
+    authorKey: "reviews.author1",
     title: "Travel Blogger",
+    titleKey: "reviews.title1",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
   },
   {
-    text: "The best sushi I've had outside of Tokyo. The Bazaruto prawns are unforgettable, and the fusion with Mozambican flavors is genuinely inspired. Wasabi has set a new standard.",
+    textKey: "reviews.review2",
     author: "James K.",
+    authorKey: "reviews.author2",
     title: "Food Critic",
+    titleKey: "reviews.title2",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
   },
   {
-    text: "Wasabi Vilanculos redefines what luxury means on the African coast. Not just excellent food, but a complete sensory experience. The attention to detail is remarkable.",
+    textKey: "reviews.review3",
     author: "Ana P.",
+    authorKey: "reviews.author3",
     title: "Lifestyle Magazine",
+    titleKey: "reviews.title3",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
   },
   {
-    text: "The Omakase Deck is a journey. Each piece was a revelation. We came as guests and left as devotees. The chef understands his craft at the highest level.",
+    textKey: "reviews.review4",
     author: "Carlos M.",
+    authorKey: "reviews.author4",
     title: "Local Entrepreneur",
+    titleKey: "reviews.title4",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
   },
 ];
 
 export default function ReviewsSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="bg-surface-container-low py-32 px-8" id="reviews">
       <div className="max-w-screen-2xl mx-auto">
         <div className="mb-16">
           <span className="text-primary text-xs font-bold tracking-[0.4em] uppercase mb-2 block">
-            Voices
+            {t("reviews.voices")}
           </span>
           <h2 className="font-headline text-4xl md:text-5xl italic">
-            What They Say
+            {t("reviews.whatTheySay")}
           </h2>
         </div>
 
@@ -53,7 +66,7 @@ export default function ReviewsSection() {
 
               {/* Review Text */}
               <p className="text-on-surface italic mb-6 flex-grow leading-relaxed">
-                {review.text}
+                {t(review.textKey)}
               </p>
 
               {/* Author Info */}
@@ -61,17 +74,17 @@ export default function ReviewsSection() {
                 <div className="flex items-center gap-3">
                   <Image
                     src={review.image}
-                    alt={review.author}
+                    alt={t(review.authorKey)}
                     width={40}
                     height={40}
                     className="rounded-full"
                   />
                   <div>
                     <p className="font-headline font-bold text-sm">
-                      {review.author}
+                      {t(review.authorKey)}
                     </p>
                     <p className="text-on-surface-variant text-xs">
-                      {review.title}
+                      {t(review.titleKey)}
                     </p>
                   </div>
                 </div>

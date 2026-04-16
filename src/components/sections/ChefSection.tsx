@@ -1,55 +1,56 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "@/app/TranslationProvider";
 
 export default function ChefSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="py-32 px-8 max-w-screen-2xl mx-auto" id="masters">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
           <span className="text-primary text-xs font-bold tracking-[0.4em] uppercase mb-2 block">
-            The Artisan
+            {t("theArtisan")}
           </span>
           <h2 className="font-headline text-5xl md:text-6xl italic mb-12">
-            The Masters
+            {t("theMasters")}
           </h2>
 
           <div className="space-y-8">
             <div>
-              <h3 className="font-headline text-3xl mb-1">Chef Takeshi Yamamoto</h3>
+              <h3 className="font-headline text-3xl mb-1">{t("chefTakeshi")}</h3>
               <p className="text-primary text-sm font-bold tracking-widest uppercase mb-4">
-                Executive Chef & Founder
+                {t("executiveChef")}
               </p>
               <p className="text-on-surface-variant leading-relaxed">
-                With 20 years of mastery across Tokyo, São Paulo, and now Vilanculos,
-                Chef Takeshi brings an obsessive precision to every cut. His philosophy:
-                let the ocean speak through the blade.
+                {t("chefBio")}
               </p>
             </div>
 
             <div className="border-l-2 border-secondary pl-6 py-4">
               <p className="text-on-surface italic text-lg leading-relaxed">
-                "In sushi, there is no room for hesitation. Every movement, every
-                degree of temperature, every grain of rice—all matters. The ocean
-                gives us one chance. We must honor it."
+                "{t("chefPhilosophy")}"
               </p>
               <p className="text-secondary text-sm font-headline mt-4">
-                — Chef Takeshi
+                — {t("chefTakeshi")}
               </p>
             </div>
 
             <div>
-              <h4 className="font-headline text-lg mb-3">Philosophy</h4>
+              <h4 className="font-headline text-lg mb-3">{t("chefPhilosophyTitle")}</h4>
               <ul className="space-y-2">
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></span>
-                  <span className="text-on-surface-variant">Japanese precision meets African soul</span>
+                  <span className="text-on-surface-variant">{t("precisionMeets")}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></span>
-                  <span className="text-on-surface-variant">Sustainable sourcing from local waters</span>
+                  <span className="text-on-surface-variant">{t("sustainableSourcing")}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></span>
-                  <span className="text-on-surface-variant">Obsessive attention to detail</span>
+                  <span className="text-on-surface-variant">{t("obsessiveAttention")}</span>
                 </li>
               </ul>
             </div>

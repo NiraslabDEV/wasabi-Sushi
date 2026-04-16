@@ -1,6 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "@/app/TranslationProvider";
 
 export default function ExperienceSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="bg-surface-container-low py-32 overflow-hidden" id="experience">
       <div className="max-w-screen-2xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
@@ -18,25 +23,23 @@ export default function ExperienceSection() {
 
         <div>
           <span className="text-primary text-xs font-bold tracking-[0.4em] uppercase mb-6 block">
-            Soul of Mozambique
+            {t("soulOfMozambique")}
           </span>
           <h2 className="font-headline text-5xl md:text-6xl mb-8 italic">
-            Where Africa
+            {t("whereAfrica")}
             <br />
-            Meets the Sun.
+            {t("meetsTheSun")}
           </h2>
           <p className="text-on-surface-variant text-lg leading-relaxed mb-10">
-            Our Cozinha Moçambicana isn't just an addition—it's the foundation. We use
-            local spices from the Vilanculos markets and the freshest catch from the
-            dhows to reinvent classics.
+            {t("experienceDesc")}
           </p>
           <ul className="space-y-6">
             <li className="flex items-start gap-4">
               <span className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0"></span>
               <div>
-                <h4 className="font-headline text-xl mb-1">Peri-Peri Sashimi</h4>
+                <h4 className="font-headline text-xl mb-1">{t("periPeriSashimi")}</h4>
                 <p className="text-on-surface-variant text-sm">
-                  White fish drizzled with a mild coconut-chili infusion.
+                  {t("periPeriDesc")}
                 </p>
               </div>
             </li>
@@ -44,10 +47,10 @@ export default function ExperienceSection() {
               <span className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0"></span>
               <div>
                 <h4 className="font-headline text-xl mb-1">
-                  Bazaruto Crab Curry Roll
+                  {t("bazarutoCrabCurry")}
                 </h4>
                 <p className="text-on-surface-variant text-sm">
-                  Fresh crab meat with a hint of turmeric and local curry leaf.
+                  {t("crabCurryDesc")}
                 </p>
               </div>
             </li>

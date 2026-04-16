@@ -1,22 +1,25 @@
 "use client";
 
+import { useTranslation } from "@/app/TranslationProvider";
+
 export default function LocationSection() {
+  const { t } = useTranslation();
   return (
     <section className="bg-surface py-32 px-8" id="location">
       <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
           <span className="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-6 block">
-            Find Us
+            {t("location.findUs")}
           </span>
           <h2 className="font-headline text-4xl md:text-5xl mb-12">
-            Location & Hours
+            {t("location.locationHours")}
           </h2>
 
           <div className="space-y-8">
             {/* Address */}
             <div>
               <h3 className="text-primary font-bold text-xs tracking-widest uppercase mb-2">
-                Endereço
+                {t("location.address")}
               </h3>
               <p className="text-on-surface text-lg mb-2">
                 Av. Eduardo Mondlane
@@ -31,31 +34,31 @@ export default function LocationSection() {
                 className="text-secondary hover:text-secondary-fixed transition-colors flex items-center gap-2"
               >
                 <span className="material-symbols-outlined">location_on</span>
-                Ver no Mapa
+                {t("location.viewOnMap")}
               </a>
             </div>
 
             {/* Hours */}
             <div>
               <h3 className="text-primary font-bold text-xs tracking-widest uppercase mb-4">
-                Horário de Funcionamento
+                {t("location.hoursOfOperation")}
               </h3>
               <div className="space-y-2 text-on-surface">
                 <div className="flex justify-between">
-                  <span>Terça - Quinta</span>
+                  <span>{t("location.tuesThurs")}</span>
                   <span className="text-on-surface-variant">18:00 — 22:00</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Sexta - Sábado</span>
+                  <span>{t("location.friSat")}</span>
                   <span className="text-on-surface-variant">18:00 — 23:00</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Domingo</span>
+                  <span>{t("location.sunday")}</span>
                   <span className="text-on-surface-variant">12:00 — 22:00</span>
                 </div>
                 <div className="flex justify-between pt-2 border-t border-outline-variant/10">
-                  <span className="text-on-surface-variant">Segunda</span>
-                  <span className="text-on-surface-variant italic">Fechado</span>
+                  <span className="text-on-surface-variant">{t("location.monday")}</span>
+                  <span className="text-on-surface-variant italic">{t("location.closed")}</span>
                 </div>
               </div>
             </div>
@@ -63,7 +66,7 @@ export default function LocationSection() {
             {/* Contact */}
             <div>
               <h3 className="text-primary font-bold text-xs tracking-widest uppercase mb-4">
-                Contato
+                {t("location.contact")}
               </h3>
               <a
                 href="https://wa.me/258846007007"
@@ -75,7 +78,7 @@ export default function LocationSection() {
                 +258 84 600 7007
               </a>
               <p className="text-on-surface-variant text-sm">
-                WhatsApp & Reservas
+                {t("location.whatsappReservations")}
               </p>
             </div>
 
@@ -87,7 +90,7 @@ export default function LocationSection() {
                 rel="noopener noreferrer"
                 className="inline-block bg-primary text-on-primary px-8 py-4 rounded font-bold tracking-[0.1em] uppercase text-sm hover:scale-105 transition-transform"
               >
-                Confirmar pelo WhatsApp
+                {t("location.confirmWhatsapp")}
               </a>
             </div>
           </div>
@@ -115,27 +118,27 @@ export default function LocationSection() {
             <span className="material-symbols-outlined text-5xl text-primary block mb-4">
               location_on
             </span>
-            <h4 className="font-headline text-lg mb-1">Localização Perfeita</h4>
+            <h4 className="font-headline text-lg mb-1">{t("location.perfectLocation")}</h4>
             <p className="text-on-surface-variant text-sm">
-              Vistazo direto para o Oceano Índico
+              {t("location.oceanView")}
             </p>
           </div>
           <div>
             <span className="material-symbols-outlined text-5xl text-primary block mb-4">
               schedule
             </span>
-            <h4 className="font-headline text-lg mb-1">Horário Flexível</h4>
+            <h4 className="font-headline text-lg mb-1">{t("location.flexibleHours")}</h4>
             <p className="text-on-surface-variant text-sm">
-              Almoço aos domingos e noites elegantes
+              {t("location.sundayElegantNights")}
             </p>
           </div>
           <div>
             <span className="material-symbols-outlined text-5xl text-primary block mb-4">
               contactless
             </span>
-            <h4 className="font-headline text-lg mb-1">Acesso Fácil</h4>
+            <h4 className="font-headline text-lg mb-1">{t("location.easyAccess")}</h4>
             <p className="text-on-surface-variant text-sm">
-              Reservas simples pelo WhatsApp
+              {t("location.simpleReservations")}
             </p>
           </div>
         </div>

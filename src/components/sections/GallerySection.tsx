@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "@/app/TranslationProvider";
 
 const galleryImages = [
   {
@@ -35,15 +38,17 @@ const galleryImages = [
 ];
 
 export default function GallerySection() {
+  const { t } = useTranslation();
+
   return (
     <section className="bg-surface py-32 px-8" id="gallery">
       <div className="max-w-screen-2xl mx-auto">
         <div className="mb-16">
           <span className="text-primary text-xs font-bold tracking-[0.4em] uppercase mb-2 block">
-            Atmosphere
+            {t("gallery.atmosphere")}
           </span>
           <h2 className="font-headline text-4xl md:text-5xl italic">
-            The Gallery
+            {t("gallery.title")}
           </h2>
         </div>
 
@@ -70,7 +75,7 @@ export default function GallerySection() {
         {/* View More */}
         <div className="mt-16 text-center">
           <button className="border border-outline-variant/30 text-on-surface px-8 py-4 rounded font-bold tracking-[0.1em] uppercase text-sm hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
-            View More
+            {t("gallery.viewMore")}
           </button>
         </div>
       </div>

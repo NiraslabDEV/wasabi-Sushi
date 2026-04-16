@@ -1,8 +1,10 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useTranslation } from "@/app/TranslationProvider";
 
 export default function ReservationSection() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     nome: "",
     telefone: "",
@@ -70,21 +72,20 @@ export default function ReservationSection() {
       <div className="max-w-2xl mx-auto">
         <div className="mb-16">
           <span className="text-primary text-xs font-bold tracking-[0.4em] uppercase mb-2 block">
-            Secure Your Moment
+            {t("reservation.secureYourMoment")}
           </span>
           <h2 className="font-headline text-4xl md:text-5xl italic mb-4">
-            Book Your Table
+            {t("reservation.bookYourTable")}
           </h2>
           <p className="text-on-surface-variant">
-            Join us for The Obsidian Ritual. Reserve your table and let us
-            prepare for your arrival.
+            {t("reservation.joinUs")}
           </p>
         </div>
 
         <div className="bg-surface-container-high p-8 md:p-12 rounded-lg border border-outline-variant/10 emerald-glow">
           {submitted && (
             <div className="mb-6 p-4 bg-primary/20 border border-primary text-primary rounded">
-              ✓ Reserva enviada com sucesso! Confirmação será enviada via WhatsApp.
+              ✓ {t("reservation.successMessage")}
             </div>
           )}
 
@@ -93,7 +94,7 @@ export default function ReservationSection() {
               {/* Nome */}
               <div>
                 <label className="block text-sm font-bold tracking-widest uppercase text-on-surface mb-2">
-                  Nome Completo *
+                  {t("reservation.fullName")} *
                 </label>
                 <input
                   type="text"
@@ -102,14 +103,14 @@ export default function ReservationSection() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-surface border border-outline-variant/20 rounded text-on-surface focus:outline-none focus:border-primary transition-colors"
-                  placeholder="Seu nome"
+                  placeholder={t("reservation.placeholder.name")}
                 />
               </div>
 
               {/* Telefone */}
               <div>
                 <label className="block text-sm font-bold tracking-widest uppercase text-on-surface mb-2">
-                  Telefone *
+                  {t("reservation.phone")} *
                 </label>
                 <input
                   type="tel"
@@ -125,7 +126,7 @@ export default function ReservationSection() {
               {/* Data */}
               <div>
                 <label className="block text-sm font-bold tracking-widest uppercase text-on-surface mb-2">
-                  Data *
+                  {t("reservation.date")} *
                 </label>
                 <input
                   type="date"
@@ -140,7 +141,7 @@ export default function ReservationSection() {
               {/* Hora */}
               <div>
                 <label className="block text-sm font-bold tracking-widest uppercase text-on-surface mb-2">
-                  Hora *
+                  {t("reservation.time")} *
                 </label>
                 <select
                   name="hora"
@@ -161,7 +162,7 @@ export default function ReservationSection() {
               {/* Pessoas */}
               <div>
                 <label className="block text-sm font-bold tracking-widest uppercase text-on-surface mb-2">
-                  Número de Pessoas *
+                  {t("reservation.guests")} *
                 </label>
                 <select
                   name="pessoas"
@@ -171,7 +172,7 @@ export default function ReservationSection() {
                 >
                   {[1, 2, 3, 4, 5, 6, 8].map((n) => (
                     <option key={n} value={n}>
-                      {n} {n === 1 ? "pessoa" : "pessoas"}
+                      {n} {n === 1 ? t("reservation.person") : t("reservation.people")}
                     </option>
                   ))}
                 </select>
@@ -181,7 +182,7 @@ export default function ReservationSection() {
             {/* Mensagem */}
             <div>
               <label className="block text-sm font-bold tracking-widest uppercase text-on-surface mb-2">
-                Mensagem Especial
+                {t("reservation.specialMessage")}
               </label>
               <textarea
                 name="mensagem"
@@ -189,14 +190,14 @@ export default function ReservationSection() {
                 onChange={handleChange}
                 rows={3}
                 className="w-full px-4 py-3 bg-surface border border-outline-variant/20 rounded text-on-surface focus:outline-none focus:border-primary transition-colors resize-none"
-                placeholder="Preferências dietéticas, ocasião especial, etc."
+                placeholder={t("reservation.placeholder.message")}
               />
             </div>
 
             {/* Info */}
             <div className="p-4 bg-surface rounded border border-outline-variant/20">
               <p className="text-xs text-on-surface-variant">
-                💳 Um depósito de 50% será requerido para confirmar sua reserva.
+                💳 {t("reservation.depositInfo")}
               </p>
             </div>
 
@@ -206,7 +207,7 @@ export default function ReservationSection() {
               disabled={isLoading}
               className="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded font-bold tracking-[0.1em] uppercase text-sm hover:scale-105 transition-transform disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Enviando..." : "Enviar Reserva via WhatsApp"}
+              {isLoading ? t("reservation.sending") : t("reservation.sendReservation")}
             </button>
           </form>
         </div>
