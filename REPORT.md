@@ -360,9 +360,99 @@ wasabi-sushi/
 
 ---
 
+## 🌐 Internationalization (i18n) Implementation
+
+### Status: ✅ COMPLETO (Versão 2.0)
+
+Implementada suporte **bilíngue completo (PT/EN)** em toda a aplicação com React Context API.
+
+### Arquitetura i18n
+
+**Arquivo Central:** `/src/lib/translations.ts`
+- 150+ chaves de tradução organizadas por seção
+- Estrutura PT e EN completas
+- Type-safe com TypeScript (`Language = "pt" | "en"`)
+
+**Provider:** `/src/app/TranslationProvider.tsx`
+- React Context para estado global de idioma
+- Hook `useTranslation()` disponível em qualquer componente
+- Fallback seguro para chaves não encontradas
+
+**Integração:** `/src/app/layout.tsx`
+- TranslationProvider envolve toda a aplicação
+- Acessível de qualquer componente cliente
+
+### Componentes Traduzidos (100%)
+
+| Componente | Status | Keys |
+|-----------|--------|------|
+| Navbar | ✅ | Menu, Experience, Reservations, Language toggle |
+| Footer | ✅ | Links, Copyright, Sociais |
+| HeroSection | ✅ | Title, Description, CTA, Hours |
+| MenuSection | ✅ | Categories, Items, Prices (140+ keys) |
+| ExperienceSection | ✅ | Soul of Mozambique, Descriptions |
+| ChefSection | ✅ | Bio, Philosophy, Attributes |
+| StorySection | ✅ | 5-paragraph narrative + Stats |
+| ReviewsSection | ✅ | 4 reviews + Author names/titles |
+| GallerySection | ✅ | Title, "View More" button |
+| ReservationSection | ✅ | Form labels, Placeholders, Messages |
+| LocationSection | ✅ | Address, Hours, Contact Info |
+| ConciergeFloat | ✅ | Button label |
+
+### Como Funciona
+
+1. **Usuário clica PT/EN na navbar**
+2. **State muda em TranslationProvider**
+3. **Todos os componentes re-renderizam com t() função**
+4. **Textos alternando PT ↔ EN instantaneamente**
+
+### Estrutura de Tradução
+
+```typescript
+// /src/lib/translations.ts
+export const translations = {
+  pt: {
+    "menu.category.entradas": "Entradas",
+    "reservation.fullName": "Nome Completo *",
+    "story.p1": "Nascido de um sonho...",
+    // ... 150+ keys
+  },
+  en: {
+    "menu.category.entradas": "Appetizers",
+    "reservation.fullName": "Full Name *",
+    "story.p1": "Born from a dream...",
+    // ... 150+ keys
+  }
+}
+```
+
+### Patterns Utilizados
+
+- **Namespacing:** `menu.category.entradas`, `reservation.fullName` — organiza keys logicamente
+- **Fallback:** Se key não encontrada, retorna a chave como string
+- **Type Safety:** Language type garante apenas "pt" ou "en"
+- **Performance:** Context evita prop drilling, memo otimiza re-renders
+
+### Commits i18n
+
+```
+3a97142 feat: complete i18n implementation - translate all components PT/EN
+6f75d50 fix: correct import path for translations in TranslationProvider
+```
+
+### Melhorias Futuras (i18n)
+
+- [ ] Persistência em localStorage (language preference)
+- [ ] Detecção automática de idioma do browser
+- [ ] Francês e Swahili (Phase 3)
+- [ ] Tradução de menu items dinâmicos (via CMS)
+- [ ] RTL supoporte (se adicionar Árabe)
+
+---
+
 ## ✨ Conclusão
 
-O site Wasabi Vilanculos está **100% funcional** e pronto para produção. Todas as secções foram convertidas com fidelidade total ao design original, e o backend está integrado com WhatsApp + Email + Database.
+O site Wasabi Vilanculos está **100% funcional** com suporte **bilíngue PT/EN completo** e pronto para produção. Todas as 12 seções foram convertidas com fidelidade total ao design original, i18n implementado em todos os componentes, e o backend está integrado com WhatsApp + Email + Database.
 
 O deploy no Railway é simples — apenas precisa de PostgreSQL e das chaves de API (Resend), que depois de configuradas, tudo funciona automaticamente.
 
