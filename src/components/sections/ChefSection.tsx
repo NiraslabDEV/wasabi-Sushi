@@ -30,7 +30,7 @@ export default function ChefSection() {
 
             <div className="border-l-2 border-secondary pl-6 py-4">
               <p className="text-on-surface italic text-lg leading-relaxed">
-                "{t("chefPhilosophy")}"
+                &ldquo;{t("chefPhilosophy")}&rdquo;
               </p>
               <p className="text-secondary text-sm font-headline mt-4">
                 — {t("chefTakeshi")}
