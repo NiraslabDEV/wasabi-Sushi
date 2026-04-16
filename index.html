@@ -104,13 +104,13 @@
 <div class="flex items-center gap-8">
 <img alt="WASABI Vilanculos Logo" class="h-10 w-auto" src="logo_wasabi.jpeg"/>
 <div class="hidden md:flex gap-8 items-center font-headline tracking-tight">
-<a class="text-on-surface/70 hover:text-primary transition-colors" href="#menu">Menu</a>
-<a class="text-on-surface/70 hover:text-on-surface transition-colors" href="#experience">Experience</a>
-<a class="text-emerald-400 font-bold border-b-2 border-emerald-500 pb-1" href="#reservations">Reservations</a>
+<a class="text-on-surface/70 hover:text-primary transition-colors" href="#menu" data-en="Menu" data-pt="Menu">Menu</a>
+<a class="text-on-surface/70 hover:text-on-surface transition-colors" href="#experience" data-en="Experience" data-pt="Experiência">Experience</a>
+<a class="text-emerald-400 font-bold border-b-2 border-emerald-500 pb-1" href="#reservations" data-en="Reservations" data-pt="Reservas">Reservations</a>
 </div>
 </div>
 <div class="flex items-center gap-4">
-<button class="text-on-surface/70 hover:text-on-surface transition-colors text-sm font-medium tracking-widest">PT/EN</button>
+<button id="lang-toggle" class="text-on-surface/70 hover:text-on-surface transition-colors text-sm font-medium tracking-widest">PT/EN</button>
 <span class="material-symbols-outlined text-on-surface/70">language</span>
 </div>
 </div>
@@ -126,14 +126,14 @@
 <h1 class="font-headline text-6xl md:text-9xl leading-none tracking-tighter mb-6 opacity-90">
                     The <span class="italic text-secondary">Obsidian</span><br/>Ritual.
                 </h1>
-<p class="font-body text-lg md:text-xl text-on-surface-variant max-w-lg mb-10 leading-relaxed">
+<p class="font-body text-lg md:text-xl text-on-surface-variant max-w-lg mb-10 leading-relaxed" data-en="A dialogue between Japanese precision and the untamed coastal flavors of Vilanculos. Each bite is a curated moment of silence." data-pt="Um diálogo entre a precisão japonesa e os sabores costeiros de Vilanculos. Cada mordida é um momento curado de silêncio.">
                     A dialogue between Japanese precision and the untamed coastal flavors of Vilanculos. Each bite is a curated moment of silence.
                 </p>
 <div class="flex flex-wrap gap-4">
-<a class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded shadow-lg font-bold tracking-[0.1em] uppercase text-sm hover:scale-105 transition-transform inline-block" href="#reservations">
+<a class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded shadow-lg font-bold tracking-[0.1em] uppercase text-sm hover:scale-105 transition-transform inline-block" href="#reservations" data-en="Secure a Table" data-pt="Reservar Mesa">
                         Secure a Table
                     </a>
-<button class="border border-outline-variant/20 text-secondary-fixed px-8 py-4 rounded font-bold tracking-[0.1em] uppercase text-sm hover:bg-surface-container-high transition-colors">
+<button class="border border-outline-variant/20 text-secondary-fixed px-8 py-4 rounded font-bold tracking-[0.1em] uppercase text-sm hover:bg-surface-container-high transition-colors" data-en="Explore the Omakase" data-pt="Ver Omakase">
                         Explore the Omakase
                     </button>
 </div>
@@ -146,7 +146,7 @@
 <!-- Menu Navigation - Floating Filter -->
 <section class="py-24 px-8 max-w-screen-2xl mx-auto" id="menu">
 <div class="flex flex-col md:flex-row gap-4 mb-20 items-baseline border-b border-outline-variant/10 pb-8">
-<h2 class="font-headline text-4xl md:text-5xl text-secondary pr-12">The Collection</h2>
+<h2 class="font-headline text-4xl md:text-5xl text-secondary pr-12" data-en="The Collection" data-pt="A Colecção">The Collection</h2>
 <div class="flex flex-wrap gap-6 text-sm font-medium tracking-widest uppercase text-on-surface/60 overflow-x-auto pb-4 md:pb-0">
 <a class="hover:text-primary transition-colors whitespace-nowrap" href="#entradas">Entradas</a>
 <a class="hover:text-primary transition-colors whitespace-nowrap" href="#sushi">Sushi Tradicional</a>
@@ -414,8 +414,8 @@
 <div class="absolute -bottom-10 -right-10 w-64 h-80 bg-surface-container-high -z-10 rounded-lg"></div>
 </div>
 <div>
-<span class="text-primary text-xs font-bold tracking-[0.4em] uppercase mb-6 block">Soul of Mozambique</span>
-<h2 class="font-headline text-5xl md:text-6xl mb-8 italic">Where Africa<br/>Meets the Sun.</h2>
+<span class="text-primary text-xs font-bold tracking-[0.4em] uppercase mb-6 block" data-en="Soul of Mozambique" data-pt="Alma de Moçambique">Soul of Mozambique</span>
+<h2 class="font-headline text-5xl md:text-6xl mb-8 italic" data-en="Where Africa Meets the Sun." data-pt="Onde África Encontra o Sol." data-html-en="Where Africa<br/>Meets the Sun." data-html-pt="Onde África<br/>Encontra o Sol.">Where Africa<br/>Meets the Sun.</h2>
 <p class="text-on-surface-variant text-lg leading-relaxed mb-10">
                         Our Cozinha Moçambicana isn't just an addition—it's the foundation. We use local spices from the Vilanculos markets and the freshest catch from the dhows to reinvent classics. 
                     </p>
@@ -442,17 +442,17 @@
 <section class="py-32 bg-surface" id="reservations">
 <div class="max-w-4xl mx-auto px-8">
 <div class="text-center mb-16">
-<span class="text-primary text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Gastronomic Journey</span>
-<h2 class="font-headline text-5xl md:text-6xl italic mb-6">Reserva de Mesa</h2>
+<span class="text-primary text-xs font-bold tracking-[0.5em] uppercase mb-4 block" data-en="Gastronomic Journey" data-pt="Jornada Gastronómica">Gastronomic Journey</span>
+<h2 class="font-headline text-5xl md:text-6xl italic mb-6" data-en="Table Reservation" data-pt="Reserva de Mesa">Reserva de Mesa</h2>
 <div class="w-24 h-px bg-secondary mx-auto"></div>
 </div>
 <form class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-low p-12 rounded-2xl shadow-2xl border border-outline-variant/10 emerald-glow">
 <div class="space-y-2">
-<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="date">Data</label>
+<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="date" data-en="Date" data-pt="Data">Data</label>
 <input class="w-full bg-surface-container-highest border-outline-variant/20 rounded-lg text-on-surface focus:ring-primary focus:border-primary transition-all p-4" id="date" type="date"/>
 </div>
 <div class="space-y-2">
-<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="time">Hora</label>
+<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="time" data-en="Time" data-pt="Hora">Hora</label>
 <select class="w-full bg-surface-container-highest border-outline-variant/20 rounded-lg text-on-surface focus:ring-primary focus:border-primary transition-all p-4" id="time">
 <option>18:00</option>
 <option>18:30</option>
@@ -464,22 +464,22 @@
 </select>
 </div>
 <div class="space-y-2 md:col-span-2">
-<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="guests">Número de Pessoas</label>
+<label class="block text-xs font-bold tracking-widest uppercase text-on-surface/60" for="guests" data-en="Number of Guests" data-pt="Número de Pessoas">Número de Pessoas</label>
 <input class="w-full bg-surface-container-highest border-outline-variant/20 rounded-lg text-on-surface focus:ring-primary focus:border-primary transition-all p-4" id="guests" min="1" placeholder="Ex: 2" type="number"/>
 </div>
 <div class="md:col-span-2 py-4 px-6 bg-primary-container/20 border border-primary/20 rounded-lg flex items-start gap-4">
 <span class="material-symbols-outlined text-primary text-xl mt-0.5">info</span>
-<p class="text-sm text-on-surface-variant leading-relaxed">
+<p class="text-sm text-on-surface-variant leading-relaxed" data-en="To ensure the exclusivity of the ritual, a 50% deposit is required for confirmation. Our concierge will contact you shortly after the request." data-pt="Para garantir a exclusividade do ritual, é necessário um depósito de 50% para confirmação. O nosso concierge entrará em contacto após o pedido.">
                             To ensure the exclusivity of the ritual, a <strong class="text-primary">50% deposit</strong> is required for confirmation. Our concierge will contact you shortly after the request.
                         </p>
 </div>
-<button type="submit" class="md:col-span-2 w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold tracking-[0.2em] uppercase rounded-lg shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
+<button type="submit" class="md:col-span-2 w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold tracking-[0.2em] uppercase rounded-lg shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3" data-en="Request Ritual" data-pt="Solicitar Ritual">
                         Request Ritual
                         <span class="material-symbols-outlined">arrow_right_alt</span>
 </button>
 </form>
 <div class="mt-12 text-center">
-<p class="text-on-surface/40 text-xs tracking-widest uppercase">For groups larger than 8, please contact us via <a class="text-secondary hover:underline" href="#">Private Events</a>.</p>
+<p class="text-on-surface/40 text-xs tracking-widest uppercase" data-en="For groups larger than 8, please contact us via Private Events." data-pt="Para grupos maiores que 8, contacte-nos via Eventos Privados.">For groups larger than 8, please contact us via <a class="text-secondary hover:underline" href="#">Private Events</a>.</p>
 </div>
 </div>
 </section>
@@ -488,26 +488,26 @@
 <div class="max-w-screen-2xl mx-auto px-8">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 <div class="order-2 md:order-1">
-<span class="text-primary text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Visit the Sanctuary</span>
-<h2 class="font-headline text-5xl md:text-6xl italic mb-10">Localização</h2>
+<span class="text-primary text-xs font-bold tracking-[0.5em] uppercase mb-4 block" data-en="Visit the Sanctuary" data-pt="Visite o Santuário">Visit the Sanctuary</span>
+<h2 class="font-headline text-5xl md:text-6xl italic mb-10" data-en="Location" data-pt="Localização">Localização</h2>
 <div class="space-y-10 mb-12">
 <div class="flex items-start gap-6">
 <span class="material-symbols-outlined text-secondary text-3xl">location_on</span>
 <div>
-<h4 class="font-headline text-xl text-on-surface mb-2">The Address</h4>
+<h4 class="font-headline text-xl text-on-surface mb-2" data-en="The Address" data-pt="O Endereço">The Address</h4>
 <p class="text-on-surface-variant leading-relaxed">Av. Eduardo Mondlane, Vilanculos<br/>(Próximo à costa)</p>
 </div>
 </div>
 <div class="flex items-start gap-6">
 <span class="material-symbols-outlined text-secondary text-3xl">schedule</span>
 <div>
-<h4 class="font-headline text-xl text-on-surface mb-2">Hours of Ritual</h4>
+<h4 class="font-headline text-xl text-on-surface mb-2" data-en="Hours of Ritual" data-pt="Horário do Ritual">Hours of Ritual</h4>
 <p class="text-on-surface-variant leading-relaxed">Terça a Domingo:<br/>12:00h — 22:00h</p>
 </div>
 </div>
 </div>
 <a class="inline-flex items-center gap-4 bg-surface-container-highest border border-secondary/30 px-8 py-5 rounded-lg text-secondary font-bold tracking-widest uppercase text-sm hover:bg-secondary hover:text-on-secondary transition-all group" href="https://wa.me/258846007007">
-                            Confirmar pelo WhatsApp
+<span data-en="Confirm via WhatsApp" data-pt="Confirmar pelo WhatsApp">Confirmar pelo WhatsApp</span>
                             <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chat_bubble</span>
 </a>
 </div>
@@ -539,7 +539,7 @@
 <div class="space-y-6">
 <img alt="WASABI Vilanculos Logo" class="h-8 w-auto grayscale" src="logo_wasabi.jpeg"/>
 <p class="text-on-surface-variant text-sm max-w-xs leading-relaxed">
-                    Elevated dining in the heart of Vilanculos. A sanctuary for the senses.
+<span data-en="Elevated dining in the heart of Vilanculos. A sanctuary for the senses." data-pt="Gastronomia elevada no coração de Vilanculos. Um santuário para os sentidos.">Elevated dining in the heart of Vilanculos. A sanctuary for the senses.</span>
                 </p>
 <div class="flex gap-4">
 <span class="material-symbols-outlined text-emerald-500">location_on</span>
@@ -599,5 +599,35 @@ document.querySelector('#reservations form').addEventListener('submit', function
   );
   window.open('https://wa.me/258846007007?text=' + msg, '_blank');
 });
+
+(function() {
+  var lang = localStorage.getItem('wasabi-lang') || 'en';
+  var btn = document.getElementById('lang-toggle');
+
+  function applyLang(l) {
+    lang = l;
+    localStorage.setItem('wasabi-lang', l);
+    document.querySelectorAll('[data-en][data-pt]').forEach(function(el) {
+      if (el.getAttribute('data-html-' + l)) {
+        el.innerHTML = el.getAttribute('data-html-' + l);
+      } else {
+        var hasChildElements = el.querySelector('strong, a, span.material-symbols-outlined');
+        if (!hasChildElements) {
+          el.textContent = el.getAttribute('data-' + l);
+        } else {
+          el.textContent = el.getAttribute('data-' + l);
+        }
+      }
+    });
+    btn.textContent = l === 'en' ? 'PT' : 'EN';
+    document.documentElement.lang = l === 'en' ? 'en' : 'pt';
+  }
+
+  btn.addEventListener('click', function() {
+    applyLang(lang === 'en' ? 'pt' : 'en');
+  });
+
+  applyLang(lang);
+})();
 </script>
 </body></html>
