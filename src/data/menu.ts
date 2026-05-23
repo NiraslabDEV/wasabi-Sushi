@@ -1,0 +1,414 @@
+export type MenuItem = {
+  name: string;
+  en?: string;
+  desc?: string;
+  meta?: string;
+  price: number;
+  sunday?: boolean;
+  includes?: string[];
+  highlight?: boolean;
+};
+
+export type MenuCategory = {
+  id: string;
+  label: string;
+  meta?: string;
+  items: MenuItem[];
+};
+
+export type MenuSection = {
+  label: string;
+  tagline: string;
+  categories: MenuCategory[];
+};
+
+export type MenuSectionId = "sushi" | "cozinha" | "bar";
+
+export const MENU: Record<MenuSectionId, MenuSection> = {
+  sushi: {
+    label: "Sushi",
+    tagline: "Direto do balcão japonês — frescura todos os dias",
+    categories: [
+      {
+        id: "entradas-jp",
+        label: "Entradas",
+        items: [
+          { name: "Camarão Tempura", price: 400 },
+          { name: "Tempura Eby", price: 500 },
+          { name: "Seviche de Atum", price: 500 },
+          { name: "Soupa Miso", price: 500 },
+        ],
+      },
+      {
+        id: "california",
+        label: "California",
+        meta: "4 peças",
+        items: [
+          { name: "California de Atum", en: "Tuna", price: 460 },
+          { name: "California de Salmão", en: "Salmon", price: 460 },
+          { name: "California de Camarão", en: "Prawn", price: 460 },
+          { name: "California Vegetariana", en: "Vegetable", price: 360 },
+        ],
+      },
+      {
+        id: "sashimi",
+        label: "Sashimi",
+        items: [
+          { name: "Salmon Sashimi", meta: "3 peças", price: 460 },
+          { name: "Tuna Sashimi", meta: "3 peças", price: 460 },
+          { name: "Mix Sashimi", en: "Tuna & Salmon", meta: "4 peças", price: 600 },
+          { name: "Special Wasabi", meta: "8 peças", price: 1100 },
+        ],
+      },
+      {
+        id: "special",
+        label: "Special & Fried Rolls",
+        meta: "8 peças",
+        items: [
+          { name: "Dragon Roll", price: 880 },
+          { name: "Dragon Prawns Tempura", desc: "Crispy prawn tempura, daycon e salmão", price: 880 },
+          { name: "Crispy Prawns Urumaki", desc: "Crispy prawn ou salmão", price: 800 },
+          { name: "Hawaian Roll", desc: "Salmão, abacate, daycon e spice salmon", price: 900 },
+          { name: "Dragon Wasabi", desc: "Crispy prawn tempura, salmão e topping", price: 890 },
+          { name: "Philadelphia Roll", desc: "Salmão, philadelphia, queijo e sementes de sésamo", price: 860 },
+        ],
+      },
+      {
+        id: "temaki",
+        label: "Temaki",
+        items: [
+          { name: "Crispy", en: "Fried", price: 500 },
+          { name: "Tuna", desc: "Arroz, abacate, atum e sésamo", price: 450 },
+          { name: "Prawn", desc: "Arroz, abacate, camarão e sésamo", price: 450 },
+          { name: "Salmon", desc: "Arroz, abacate, salmão e sésamo", price: 450 },
+          { name: "Vegetarian", desc: "Arroz, alface, cenoura, abacate e pepino", price: 420 },
+        ],
+      },
+      {
+        id: "nigiri",
+        label: "Nigiri",
+        meta: "3 peças",
+        items: [
+          { name: "Salmon Nigiri", price: 450 },
+          { name: "Tuna Nigiri", price: 450 },
+          { name: "Prawn Nigiri", price: 450 },
+          { name: "Mixed Nigiri", desc: "Salmão, atum e camarão", price: 440 },
+          { name: "Nigiri Wasabi", desc: "Salmon spice / caviar", price: 620 },
+          { name: "Nigiri XL", desc: "Crisp rice, atum, óleo de sésamo", price: 670 },
+        ],
+      },
+      {
+        id: "maki",
+        label: "Maki",
+        meta: "6 peças",
+        items: [
+          { name: "Maki de Salmão", price: 510 },
+          { name: "Maki de Atum", price: 510 },
+          { name: "Maki de Camarão", price: 510 },
+          { name: "Maki de Vegetais", price: 450 },
+          { name: "Maki de Abacate", price: 500 },
+          { name: "Maki Philadelphia", desc: "Salmão ou atum e philadelphia", price: 550 },
+          { name: "Maki XL", desc: "Crispy, salmão/camarão, atum", price: 825 },
+          { name: "Crispy Maki", price: 750 },
+        ],
+      },
+      {
+        id: "rosas",
+        label: "Rosas",
+        meta: "3 peças",
+        items: [
+          { name: "Salmon Caviar", price: 460 },
+          { name: "Crispy Tempura", price: 480 },
+          { name: "Salmon Philadelphia", price: 480 },
+          { name: "Spice Salmon Rose", desc: "Rosa picante de salmão", price: 460 },
+          { name: "Spice Tuna Rose", desc: "Rosa picante de atum", price: 460 },
+          { name: "Spice Prawn Rose", desc: "Rosa picante de camarão", price: 460 },
+        ],
+      },
+      {
+        id: "sandwich",
+        label: "Sandwich",
+        meta: "4 peças",
+        items: [
+          { name: "Salmon Sandwich", price: 420 },
+          { name: "Tuna Sandwich", price: 420 },
+          { name: "Prawn Sandwich", price: 420 },
+          { name: "Crispy", price: 450 },
+        ],
+      },
+      {
+        id: "finest",
+        label: "Finest",
+        items: [
+          { name: "Hot Friends", meta: "8 peças", desc: "Spice salmon", price: 1600 },
+          { name: "California Arco Íris", meta: "8 peças", desc: "Atum, salmão, camarão, wakame", price: 1250 },
+          { name: "Rainbow Roll Especial", meta: "8 peças", desc: "Topping salmão, atum, abacate e queijo", price: 1610 },
+          { name: "California de Frutas", desc: "Frutas tropicais e chantilly", price: 850 },
+          { name: "Maki Hot Cold", desc: "Crispy topping salmão", price: 850 },
+          { name: "Wakame Caterpilar Roll", meta: "8 peças", desc: "Algas wakame", price: 870 },
+          { name: "Pok Bowl", desc: "Salmão / atum / camarão", price: 790 },
+        ],
+      },
+      {
+        id: "combos",
+        label: "Combos",
+        items: [
+          {
+            name: "Combo 01 — Santa Carolina",
+            meta: "10 peças",
+            price: 1250,
+            includes: [
+              "California Salmon (4 peças)",
+              "Rosas Caviar (2 peças)",
+              "Nigiri de Camarão (2 peças)",
+              "Sashimi de Atum (2 peças)",
+            ],
+          },
+          {
+            name: "Combo 02 — Benguerrua",
+            meta: "12 peças",
+            price: 1450,
+            includes: [
+              "Rainbow Roll (4 peças)",
+              "Philadelphia (4 peças)",
+              "Hawaiana Roll (4 peças)",
+            ],
+          },
+          {
+            name: "Combo 03 — All Fried",
+            meta: "15 peças",
+            price: 1850,
+            includes: [
+              "Prawn Maki (6 peças)",
+              "Salmon California (4 peças)",
+              "Hand Roll (1 peça)",
+              "Sandwich (4 peças)",
+            ],
+          },
+          {
+            name: "Combo 04 — Bazaruto",
+            meta: "23 peças",
+            price: 2500,
+            includes: [
+              "Salmon California Fried (4 peças)",
+              "Salmon Rose (4 peças)",
+              "Salmon Philadelphia (4 peças)",
+              "Salmon Maki (6 peças)",
+              "Salmon Sashimi (2 peças)",
+              "Salmon Nigiri (3 peças)",
+            ],
+          },
+          {
+            name: "Combo 05 — Vegetariano",
+            meta: "14 peças",
+            price: 1020,
+            includes: [
+              "California — cenoura, alface, pepino (4 peças)",
+              "Maki de Abacate (6 peças)",
+              "Sandwich — cenoura, alface, pepino (4 peças)",
+            ],
+          },
+          {
+            name: "Combo 06 — Wasabi",
+            meta: "50 peças",
+            price: 5100,
+            highlight: true,
+            includes: [
+              "Spice Salmon e Tuna Rose (4 peças)",
+              "Dragon Roll (4 peças)",
+              "Maki Philadelphia (6 peças)",
+              "Nigiri XL (4 peças)",
+              "Mix Sashimi — Salmon & Tuna (6 peças)",
+              "Prawn Maki (6 peças)",
+              "Tuna Nigiri (4 peças)",
+              "Salmon Sandwich (4 peças)",
+              "Hawaiana Roll (4 peças)",
+              "Salmon Philadelphia (4 peças)",
+              "Rainbow (4 peças)",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  cozinha: {
+    label: "Cozinha",
+    tagline: "Sabores de Moçambique, todo o dia",
+    categories: [
+      {
+        id: "pequeno-almoco",
+        label: "Pequeno-Almoço",
+        items: [
+          { name: "Chá Preto", price: 100 },
+          { name: "Chá Verde", desc: "Balacate, menta ou hortelã", price: 100 },
+          { name: "Omelete Simples", price: 200 },
+          { name: "Omelete de Queijo", price: 300 },
+          { name: "Ovos Estrelados", desc: "Com batata frita e salada", price: 400 },
+          { name: "Tostinha c/ Manteiga Caseira", price: 100 },
+          { name: "Tosta Mista", price: 250 },
+          { name: "Tosta de Atum", price: 250 },
+        ],
+      },
+      {
+        id: "petiscos",
+        label: "Petiscos & Sopas",
+        items: [
+          { name: "Chamuças de Carne", meta: "3 peças", price: 150 },
+          { name: "Chamuças de Caranguejo", meta: "3 peças", price: 180 },
+          { name: "Rissóis de Camarão", meta: "3 peças", price: 210 },
+          { name: "Tempura de Camarão", meta: "4 peças", price: 400 },
+          { name: "Combo de Aperitivos", meta: "2 pessoas", price: 700 },
+          { name: "Combo de Aperitivos", meta: "4 pessoas", price: 1380 },
+          { name: "Sopa de Legumes", price: 250 },
+          { name: "Sopa Miso", price: 500 },
+          { name: "Salada Grega", price: 400 },
+          { name: "Petisco de Cabeça de Vaca", price: 250 },
+          { name: "Moelas", price: 250 },
+        ],
+      },
+      {
+        id: "tostas-burgers",
+        label: "Tostas & Hambúrgueres",
+        items: [
+          { name: "Prego no Pão", price: 350 },
+          { name: "Baguete de Pato", desc: "Sandes de pato", price: 350 },
+          { name: "Hambúrguer Completo", desc: "Com batata frita", price: 500 },
+        ],
+      },
+      {
+        id: "pratos",
+        label: "Pratos Principais",
+        items: [
+          { name: "Prego no Prato", price: 500 },
+          { name: "Meio Frango", desc: "Com arroz malandro / batata e salada", price: 500 },
+          { name: "Frango Inteiro", price: 1000 },
+          { name: "Bife com Batatas Fritas", price: 1000 },
+          { name: "Picanha", desc: "Arroz, couve, feijão preto e ananás ou banana", price: 1100 },
+          { name: "Peixe Grelhado", desc: "Com legumes ou arroz e salada", price: 700 },
+          { name: "Posta de Peixe Serra Frita", desc: "Molho de tomate e xima", price: 500 },
+          { name: "Caldeirada de Peixe", price: 500 },
+          { name: "Choco Frito", desc: "Molho de ervas e arroz malandro", price: 600 },
+          { name: "Guisado de Cabrito", desc: "Com arroz ou com apas (3)", price: 500 },
+          { name: "Matapa com Caranguejo", desc: "Servido com arroz", price: 500 },
+          { name: "Feijoada com Todos", desc: "Apenas aos domingos", price: 500, sunday: true },
+          { name: "Ameijoas à Bulhão Pato", desc: "Apenas aos domingos", price: 350, sunday: true },
+        ],
+      },
+      {
+        id: "extras",
+        label: "Extras",
+        items: [
+          { name: "Salada de Alface", price: 100 },
+          { name: "Xima", price: 100 },
+          { name: "Arroz", price: 150 },
+          { name: "Batatas Fritas", price: 150 },
+          { name: "Arroz Malandro", price: 250 },
+        ],
+      },
+      {
+        id: "sobremesas",
+        label: "Sobremesas",
+        items: [
+          { name: "Bolo de Banana c/ Aveia", price: 150 },
+          { name: "Pudim de Ovos", price: 200 },
+          { name: "Bolo de Banana c/ Aveia", desc: "Com bola de sorvete", price: 250 },
+          { name: "Petit Gateaux", price: 300 },
+        ],
+      },
+    ],
+  },
+
+  bar: {
+    label: "Bar",
+    tagline: "Cafés, sumos e a boa cerveja Moçambicana",
+    categories: [
+      {
+        id: "cafe-cha",
+        label: "Café & Chá",
+        items: [
+          { name: "Café Expresso", en: "Descafeinado", price: 100 },
+          { name: "Café Duplo", price: 200 },
+          { name: "Café com Leite", price: 250 },
+          { name: "Chá", desc: "Preto, verde ou hortelã", price: 100 },
+          { name: "Capuccino", price: 200 },
+          { name: "Galão", price: 250 },
+        ],
+      },
+      {
+        id: "refrigerantes",
+        label: "Refrigerantes & Sumos",
+        items: [
+          { name: "Refresco em Lata", price: 100 },
+          { name: "Refresco Garrafa 300ml", price: 100 },
+          { name: "Água Pequena", price: 50 },
+          { name: "Água Grande", price: 100 },
+          { name: "Água Pequena Vumba", price: 50 },
+          { name: "Água das Pedras", price: 150 },
+          { name: "Água Tónica Schweppes", price: 80 },
+          { name: "Fitch & Leedes", price: 100 },
+          { name: "Redbull 250ml", price: 150 },
+          { name: "Sumo Cappy 330ml", price: 100 },
+          { name: "Sumo Ceres 1L", price: 200 },
+          { name: "Sumo Natural 250ml", price: 250 },
+        ],
+      },
+      {
+        id: "cervejas",
+        label: "Cervejas & Cidras",
+        items: [
+          { name: "Impala Lata", meta: "330ml", price: 70 },
+          { name: "Manica / 2M Lata", meta: "330ml", price: 80 },
+          { name: "2M / Manica Garrafa Média", meta: "550ml", price: 90 },
+          { name: "Brutal", meta: "275ml", price: 100 },
+          { name: "Heineken", meta: "210ml", price: 100 },
+          { name: "Castle Lite", meta: "330ml", price: 100 },
+          { name: "Savana Dry / Lemon", meta: "330ml", price: 100 },
+          { name: "2M Txoti / Laurentina Preta", meta: "250ml", price: 100 },
+          { name: "Corona", meta: "330ml", price: 125 },
+          { name: "Stella Artois", meta: "330ml", price: 125 },
+        ],
+      },
+      {
+        id: "espirituosas",
+        label: "Espirituosas",
+        meta: "doses simples",
+        items: [
+          { name: "Gin Gordon", price: 75 },
+          { name: "Jameson", price: 100 },
+          { name: "Amarula", price: 100 },
+          { name: "Gin Gordon Pink", price: 100 },
+          { name: "Gin Beefeater", price: 100 },
+          { name: "Vodka Smirnoff", price: 100 },
+          { name: "Tipo Tinto", price: 100 },
+          { name: "Jagermeister", price: 150 },
+          { name: "Bacardi", price: 150 },
+          { name: "Captain Morgan", price: 150 },
+          { name: "Mário 3 Tons", price: 150 },
+          { name: "Black Label", price: 200 },
+          { name: "Tanqueray", price: 200 },
+          { name: "Cocktail de Gin c/ Frutas", price: 350 },
+        ],
+      },
+      {
+        id: "vinhos",
+        label: "Vinhos & Espumantes",
+        items: [
+          { name: "Vinho de Mesa", meta: "copo", price: 200 },
+          { name: "Vinho Quinta da Bolota", meta: "copo", price: 250 },
+          { name: "Quinta da Bolota", meta: "garrafa", price: 1000 },
+          { name: "Fleur du Cap", meta: "garrafa", price: 1000 },
+          { name: "Espumante KWW Annabelle", meta: "750ml", price: 1200 },
+          { name: "J.C. Le Roux", meta: "garrafa", price: 1300 },
+          { name: "Nederburg Lyric", meta: "garrafa", price: 1500 },
+          { name: "Sangria de Vinho / Espumante", price: 1500 },
+          { name: "Silk & Spice", meta: "garrafa", price: 2000 },
+        ],
+      },
+    ],
+  },
+};
+
+export function formatPrice(n: number): string {
+  return n.toLocaleString("pt-PT").replace(/,/g, ".");
+}

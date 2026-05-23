@@ -1,0 +1,36 @@
+// Wasabi Sushi — database schema
+// Phase 1: reservations table (used by future booking form).
+// Phase 2+: menu_items, delivery_orders, dashboard users.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ReservaStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model Reserva {
+  id            String        @id @default(cuid())
+  nome          String
+  telefone      String
+  email         String?
+  data          DateTime
+  hora          String
+  numeroPessoas Int           @map("numero_pessoas")
+  mensagem      String?
+  status        ReservaStatus @default(PENDING)
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  @@map("reservas")
+  @@index([data])
+  @@index([status])
+}
