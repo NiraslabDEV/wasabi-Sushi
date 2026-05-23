@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Técnico & Visão de Futuro · Wasabi Sushi</title>
+  <style>
+    /* ============================================================
+       Print-first design. Optimizado para A4 (Ctrl+P → PDF).
+       Paleta: verde Wasabi, ink (preto-verde), dourado, parchment.
+       ============================================================ */
+
+    :root {
+      --green: #00b844;
+      --green-bright: #14d855;
+      --green-deep: #066b2a;
+      --green-wash: #ecf9f0;
+      --ink: #0a0f0c;
+      --ink-soft: #1b211d;
+      --ink-mid: #4a5550;
+      --ink-mute: #8b9690;
+      --paper: #ffffff;
+      --off: #f5f7f5;
+      --line: #e5eae6;
+      --gold: #c39b4e;
+      --gold-light: #f7eed8;
+      --amber: #92400E;
+      --amber-light: #FEF3C7;
+      --red: #B91C1C;
+      --red-light: #FEE2E2;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+      color: var(--ink);
+      background: #ddd;
+      font-size: 11.5pt;
+      line-height: 1.55;
+    }
+
+    /* ── A4 pages ── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 16px auto;
+      background: white;
+      padding: 22mm 22mm;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+      page-break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+    .page:last-child { page-break-after: auto; }
+
+    /* ── Cover ── */
+    .cover {
+      background: linear-gradient(135deg, var(--ink) 0%, #0d2e1a 55%, var(--green-deep) 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 35mm 22mm;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    .cover::after {
+      content: 'sushi';
+      position: absolute;
+      font-family: 'Anton', 'Impact', sans-serif;
+      font-style: italic;
+      font-size: 420pt;
+      letter-spacing: -10px;
+      color: rgba(20, 216, 85, 0.05);
+      bottom: -180px;
+      right: -60px;
+      line-height: 0.8;
+      pointer-events: none;
+    }
+    .cover-top, .cover-bottom { position: relative; z-index: 1; }
+
+    .cover-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30mm;
+    }
+    .cover-logo-dot {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 4px 14px rgba(0,184,68,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+    }
+    .cover-logo-text {
+      font-size: 14pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cover-eyebrow {
+      font-family: ui-monospace, monospace;
+      font-size: 9pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 14px;
+    }
+    .cover h1 {
+      font-size: 36pt;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .cover h1 .em { color: var(--green-bright); font-style: italic; }
+    .cover .subtitle {
+      font-size: 14pt;
+      color: rgba(255,255,255,0.75);
+      max-width: 140mm;
+      line-height: 1.4;
+    }
+
+    .cover-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 20mm;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+    .cover-meta-item .label {
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 4px;
+    }
+    .cover-meta-item .value {
+      font-size: 11pt;
+      font-weight: 600;
+      color: white;
+    }
+
+    /* ── Content pages ── */
+    .page-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 22px;
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      color: var(--ink-mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .page-header .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      background: var(--green-wash);
+      color: var(--green-deep);
+      border-radius: 50%;
+      font-size: 9pt;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .page-header .dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--ink-mute);
+      opacity: 0.5;
+    }
+
+    h2.section-title {
+      font-size: 22pt;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin-bottom: 8px;
+    }
+    h2.section-title .em { color: var(--green); font-style: italic; }
+    h2.section-title + .lead {
+      font-size: 11.5pt;
+      color: var(--ink-mid);
+      margin-bottom: 22px;
+      line-height: 1.55;
+    }
+
+    h3.subsection {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--green-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 22px 0 10px;
+    }
+    h3.subsection.first { margin-top: 4px; }
+
+    p { margin-bottom: 10px; }
+    p.muted { color: var(--ink-mid); font-size: 11pt; }
+
+    /* ── Number / stat grid ── */
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0 20px;
+    }
+    .number-card {
+      background: var(--off);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .number-card .big {
+      font-size: 22pt;
+      font-weight: 800;
+      color: var(--green-deep);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .number-card .label {
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      color: var(--ink-mute);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Feature list ── */
+    .feature-list { display: grid; gap: 6px; margin: 10px 0 18px; }
+    .feature-row {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(139,127,168,0.18);
+    }
+    .feature-row:last-child { border-bottom: none; }
+    .feature-row .check {
+      width: 18px; height: 18px;
+      background: var(--green-wash);
+      color: var(--green-deep);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9pt;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .feature-row .label-main {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 10.5pt;
+    }
+    .feature-row .label-sub {
+      color: var(--ink-mid);
+      font-size: 9.5pt;
+      line-height: 1.45;
+    }
+
+    /* ── Two-column "técnico vs simples" ── */
+    .twin {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0 18px;
+    }
+    .twin-card {
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+    }
+    .twin-card.tech { background: var(--off); }
+    .twin-card.plain { background: var(--green-wash); border-color: #c8e6d0; }
+    .twin-card .twin-tag {
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: var(--ink-mute);
+    }
+    .twin-card.plain .twin-tag { color: var(--green-deep); }
+    .twin-card p { font-size: 10pt; color: var(--ink-mid); margin: 0; }
+    .twin-card p code {
+      font-family: ui-monospace, monospace;
+      font-size: 9pt;
+      background: white;
+      padding: 1px 5px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+    }
+
+    /* ── Cost rows ── */
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      font-size: 10.5pt;
+    }
+    .cost-row:first-child { border-top: 1px solid var(--line); }
+    .cost-row .item { color: var(--ink); }
+    .cost-row .item small { color: var(--ink-mute); display: block; font-size: 9pt; margin-top: 2px; }
+    .cost-row .value {
+      font-family: ui-monospace, monospace;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .cost-row.total {
+      background: var(--gold-light);
+      border-radius: 8px;
+      border: 1px solid #ecd9a4;
+      margin-top: 8px;
+      padding: 14px 16px;
+    }
+    .cost-row.total .item { font-weight: 700; color: var(--amber); }
+    .cost-row.total .value { font-size: 13pt; color: var(--amber); }
+
+    /* ── Tier cards (tiers de manutenção) ── */
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0 18px;
+    }
+    .tier {
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 14px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+    .tier.recommended {
+      border-color: var(--green);
+      background: linear-gradient(180deg, var(--green-wash) 0%, white 60%);
+      position: relative;
+    }
+    .tier.recommended::before {
+      content: 'RECOMENDADO';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green);
+      color: white;
+      font-family: ui-monospace, monospace;
+      font-size: 7pt;
+      letter-spacing: 0.12em;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .tier h4 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .tier .tag {
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      color: var(--ink-mute);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .tier .price {
+      font-size: 20pt;
+      font-weight: 800;
+      color: var(--green-deep);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .tier .price-sub {
+      font-size: 9pt;
+      color: var(--ink-mute);
+      font-family: ui-monospace, monospace;
+      margin-bottom: 10px;
+    }
+    .tier .what {
+      font-size: 9.5pt;
+      color: var(--ink-mid);
+      line-height: 1.5;
+      margin: 10px 0 0;
+      flex: 1;
+    }
+    .tier .what li {
+      list-style: none;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 5px;
+    }
+    .tier .what li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--green-wash);
+      border-left: 4px solid var(--green);
+      padding: 14px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 10.5pt;
+      color: var(--ink);
+    }
+    .callout strong { color: var(--green-deep); }
+    .callout.gold {
+      background: var(--gold-light);
+      border-left-color: var(--gold);
+    }
+    .callout.gold strong { color: var(--amber); }
+    .callout.dark {
+      background: var(--ink);
+      color: white;
+      border-left-color: var(--green-bright);
+    }
+    .callout.dark strong { color: var(--green-bright); }
+
+    /* ── Roadmap timeline (fases evolutivas) ── */
+    .roadmap {
+      display: grid;
+      gap: 14px;
+      margin: 14px 0 18px;
+    }
+    .roadmap-phase {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 14px;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: white;
+      page-break-inside: avoid;
+    }
+    .roadmap-phase.done {
+      background: var(--green-wash);
+      border-color: #c8e6d0;
+    }
+    .roadmap-phase.now {
+      border-color: var(--green);
+      border-width: 2px;
+      background: linear-gradient(90deg, var(--green-wash) 0%, white 60%);
+    }
+    .roadmap-phase.future {
+      background: var(--off);
+      border-style: dashed;
+    }
+    .roadmap-tag {
+      font-family: 'Anton', 'Impact', sans-serif;
+      font-style: italic;
+      font-size: 28pt;
+      line-height: 0.9;
+      color: var(--green);
+      letter-spacing: -1px;
+    }
+    .roadmap-phase.done .roadmap-tag { color: var(--green-deep); }
+    .roadmap-phase.future .roadmap-tag { color: var(--ink-mute); }
+    .roadmap-meta {
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      color: var(--ink-mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .roadmap-body h4 {
+      font-size: 12pt;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .roadmap-body .roadmap-sub {
+      font-size: 10pt;
+      color: var(--ink-mid);
+      margin-bottom: 8px;
+    }
+    .roadmap-body ul {
+      list-style: none;
+      padding: 0;
+      font-size: 9.5pt;
+      color: var(--ink-mid);
+      line-height: 1.55;
+    }
+    .roadmap-body ul li {
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+    .roadmap-body ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* ── Architecture / stack table ── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+    .stack-item {
+      background: var(--off);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .stack-item .stack-label {
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 4px;
+    }
+    .stack-item .stack-name {
+      font-size: 12pt;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .stack-item .stack-why {
+      font-size: 9.5pt;
+      color: var(--ink-mid);
+      line-height: 1.45;
+    }
+
+    /* ── File tree ── */
+    .tree {
+      background: var(--ink);
+      color: rgba(255,255,255,0.85);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: ui-monospace, monospace;
+      font-size: 9pt;
+      line-height: 1.7;
+      margin: 12px 0 18px;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .tree .com { color: var(--green-bright); }
+    .tree .dir { color: var(--gold); font-weight: 600; }
+
+    /* ── Visual mock (system schematics, e.g. QR ordering flow) ── */
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      align-items: stretch;
+      margin: 14px 0 18px;
+    }
+    .flow-step {
+      background: white;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+      font-size: 9pt;
+      color: var(--ink-mid);
+      position: relative;
+    }
+    .flow-step .num {
+      font-family: 'Anton', 'Impact', sans-serif;
+      font-style: italic;
+      font-size: 20pt;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .flow-step strong {
+      display: block;
+      color: var(--ink);
+      font-size: 9.5pt;
+      margin-bottom: 4px;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      font-weight: 700;
+      font-size: 12pt;
+      z-index: 1;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 22mm;
+      right: 22mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      color: var(--ink-mute);
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── Print rules ── */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    @media print {
+      body { background: white; font-size: 10.5pt; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+        width: 210mm;
+        min-height: 297mm;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PÁGINA 1 — CAPA
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="page cover">
+    <div class="cover-top">
+      <div class="cover-logo">
+        <div class="cover-logo-dot">W</div>
+        <span class="cover-logo-text">Wasabi · Vilanculos</span>
+      </div>
+
+      <div class="cover-eyebrow">Manual · Maio 2026</div>
+      <h1>Manual Técnico<br>&amp; <span class="em">Visão de Futuro</span></h1>
+      <p class="subtitle">Tudo que foi construído na Fase 1, como funciona por dentro, e até onde este sistema pode chegar — de site institucional a plataforma de pedidos na mesa por QR code e PDV no celular do garçom.</p>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <div class="label">Cliente</div>
+          <div class="value">Wasabi · Café, Lanches &amp; Sushi</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Desenvolvido por</div>
+          <div class="value">Gabriel dos Santos · NiraslabDEV</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Versão</div>
+          <div class="value">v1.0 · Maio 2026</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">URL em produção</div>
+          <div class="value">web-production-6003c.up.railway.app</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PÁGINA 2 — O QUE FOI ENTREGUE (FASE 1)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <div class="badge">W</div>
+      <span>Wasabi</span>
+      <div class="dot"></div>
+      <span>Manual Técnico</span>
+      <div class="dot"></div>
+      <span style="margin-left:auto">01 / Entrega Fase 1</span>
+    </div>
+
+    <h2 class="section-title">O site já está no <span class="em">ar</span>.</h2>
+    <p class="lead">Em uma única sessão de desenvolvimento acelerado, o Wasabi saiu de um protótipo HTML estático para um <strong>site profissional em produção</strong>, hospedado em servidor próprio, com banco de dados conectado e pronto para escalar.</p>
+
+    <div class="callout">
+      <strong>Lembras do que foi pedido?</strong> Um site bonito do Wasabi com o cardápio completo, identidade do restaurante, contactos e delivery — para quem visita Vilanculos ou já é cliente local. <strong>Está feito.</strong> E foi montado em cima de uma base que aguenta crescer até virar PDV, sistema de reservas, delivery online e pedidos por QR code nas mesas — sem precisar refazer nada.</p>
+    </div>
+
+    <h3 class="subsection first">Módulos entregues</h3>
+    <div class="feature-list">
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">Hero impactante &amp; identidade visual</div>
+          <div class="label-sub">Tipografia japonesa (Anton itálico), paleta verde Wasabi + ink, logo oficial, marquee animado, badge "aberto agora"</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">Cardápio completo organizado em 3 secções</div>
+          <div class="label-sub">Sushi (10 categorias, incluindo combos), Cozinha Moçambicana (6 categorias), Bar (5 categorias) — total 60+ itens com filtros por categoria</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">Combos especiais com destaque</div>
+          <div class="label-sub">6 combos (Santa Carolina → Wasabi 50 peças), com o "Combo 06" marcado como "Mais pedido" e itens inclusos detalhados</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">Sobre / Filosofia do restaurante</div>
+          <div class="label-sub">Bloco "Onde o Japão encontra Moçambique" com fotos compostas, estatísticas (4,5★ · 89 críticas · 60+ itens · desde 2022)</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">Bloco de Delivery com chamada direta</div>
+          <div class="label-sub">Card destacado com telefone clicável (85 727 7152), horário de entrega, cidade de cobertura, link de "ligar agora"</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">Visite-nos — Horário + Contacto + Mapa</div>
+          <div class="label-sub">Horário semana inteira com dia atual marcado e segunda destacada como encerrado, contactos (endereço, 2 telefones, Instagram), botão para Google Maps</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">Avaliações &amp; prova social</div>
+          <div class="label-sub">Resumo agregado 4,5★ + 3 críticas em destaque com avatar e data</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">Footer institucional completo</div>
+          <div class="label-sub">4 colunas: marca + tagline, navegação, contactos, horário, links sociais</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">✓</div>
+        <div>
+          <div class="label-main">100% responsivo + acessível</div>
+          <div class="label-sub">Funciona perfeitamente em telemóvel, tablet e desktop. Tipografia escala automaticamente</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="number-grid">
+      <div class="number-card">
+        <div class="big">9</div>
+        <div class="label">Secções<br>do site</div>
+      </div>
+      <div class="number-card">
+        <div class="big">60+</div>
+        <div class="label">Itens do<br>cardápio</div>
+      </div>
+      <div class="number-card">
+        <div class="big">21</div>
+        <div class="label">Categorias<br>organizadas</div>
+      </div>
+      <div class="number-card">
+        <div class="big">✓</div>
+        <div class="label">No ar /<br>HTTP 200</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Wasabi · Manual Técnico &amp; Visão de Futuro</span>
+      <span>Página 2 de 8</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PÁGINA 3 — STACK & ARQUITETURA (TÉCNICO ↔ NÃO-TÉCNICO)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <div class="badge">W</div>
+      <span>Wasabi</span>
+      <div class="dot"></div>
+      <span>Manual Técnico</span>
+      <div class="dot"></div>
+      <span style="margin-left:auto">02 / Stack &amp; Arquitetura</span>
+    </div>
+
+    <h2 class="section-title">Como o site <span class="em">funciona por dentro</span>.</h2>
+    <p class="lead">Esta secção traduz cada peça do sistema em duas linguagens: a versão <strong>técnica</strong> (para quem for desenvolver depois) e a versão <strong>simples</strong> (para a Direcção do Wasabi entender o que está a pagar).</p>
+
+    <h3 class="subsection first">A pilha tecnológica em uma página</h3>
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-label">Frontend (o que o cliente vê)</div>
+        <div class="stack-name">Next.js 14 · React · TypeScript</div>
+        <div class="stack-why">Framework moderno usado por Nike, Notion, TikTok. Carrega rápido, é seguro, e tem suporte oficial da Vercel. TypeScript evita 80% dos bugs comuns.</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-label">Estilo &amp; design</div>
+        <div class="stack-name">Tailwind CSS + design custom</div>
+        <div class="stack-why">Permite que o design fique 100% fiel ao protótipo original. O site mantém a identidade do Wasabi sem depender de templates genéricos.</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-label">Banco de dados</div>
+        <div class="stack-name">PostgreSQL + Prisma ORM</div>
+        <div class="stack-why">O mesmo banco usado por Spotify, Apple, Reddit. Prisma é a camada que torna seguro escrever/ler dados — preparado para reservas, pedidos, clientes.</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-label">Hospedagem</div>
+        <div class="stack-name">Railway (servidor + DB)</div>
+        <div class="stack-why">Servidor profissional na América do Norte. Sempre online, com backups, deploy automático quando o código é actualizado, e HTTPS incluído.</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-label">Código-fonte</div>
+        <div class="stack-name">GitHub (NiraslabDEV/wasabi-Sushi)</div>
+        <div class="stack-why">Todo o código vive em repositório versionado — histórico completo de mudanças, possível reverter qualquer alteração em segundos.</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-label">Build &amp; deploy</div>
+        <div class="stack-name">Nixpacks · Node 22</div>
+        <div class="stack-why">Push no GitHub → Railway compila → site actualizado em ~2 minutos. Sem FTP, sem mexer em servidor manualmente.</div>
+      </div>
+    </div>
+
+    <h3 class="subsection">Traduzido em linguagem do dia-a-dia</h3>
+
+    <div class="twin">
+      <div class="twin-card tech">
+        <div class="twin-tag">Versão técnica</div>
+        <p>O frontend é renderizado server-side via <code>Next.js App Router</code>, com componentes em React 18 tipados em TS strict. O CSS usa custom properties + Tailwind utility classes. Persistência via <code>@prisma/client</code> contra Postgres 16 do Railway, com <code>output: standalone</code> no build para imagem mínima.</p>
+      </div>
+      <div class="twin-card plain">
+        <div class="twin-tag">O que significa na prática</div>
+        <p>O site abre rápido em qualquer celular ou computador. Toda a página é construída do servidor antes de chegar ao cliente — Google entende perfeitamente o conteúdo, o que ajuda no SEO. Os dados (reservas, futuramente pedidos) ficam guardados de forma segura num banco profissional.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection">O fluxo de uma actualização (do código ao cliente)</h3>
+    <div class="flow">
+      <div class="flow-step"><div class="num">1</div><strong>Editar</strong>código no GitHub</div>
+      <div class="flow-step"><div class="num">2</div><strong>Push</strong>commit enviado</div>
+      <div class="flow-step"><div class="num">3</div><strong>Build</strong>Railway compila</div>
+      <div class="flow-step"><div class="num">4</div><strong>Deploy</strong>~2 min depois</div>
+      <div class="flow-step"><div class="num">5</div><strong>No ar</strong>cliente vê</div>
+    </div>
+
+    <div class="callout gold">
+      <strong>Por que isto importa para o negócio?</strong> Mudar um preço, adicionar um prato novo ou trocar uma foto leva minutos — não horas, não dias, não exige terceirizar. Se quiseres aprender a fazer pequenas alterações sozinho, em 1 sessão de 1h consegues mudar texto, preços e imagens de forma autónoma.
+    </div>
+
+    <div class="page-footer">
+      <span>Wasabi · Manual Técnico &amp; Visão de Futuro</span>
+      <span>Página 3 de 8</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PÁGINA 4 — ESTRUTURA DO REPO + COMO MUDAR COISAS
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <div class="badge">W</div>
+      <span>Wasabi</span>
+      <div class="dot"></div>
+      <span>Manual Técnico</span>
+      <div class="dot"></div>
+      <span style="margin-left:auto">03 / Estrutura do código</span>
+    </div>
+
+    <h2 class="section-title">Onde fica <span class="em">cada coisa</span>.</h2>
+    <p class="lead">A organização do repositório foi pensada para ser óbvia. Cada secção do site é um ficheiro pequeno e independente — quem mexer no código (agora ou daqui a 3 anos) sabe exactamente onde ir.</p>
+
+    <h3 class="subsection first">Mapa do repositório</h3>
+    <div class="tree"><span class="dir">wasabi-Sushi/</span>
+├── <span class="dir">src/</span>
+│   ├── <span class="dir">app/</span>                  <span class="com"># Páginas do site (Next.js App Router)</span>
+│   │   ├── layout.tsx        <span class="com"># Estrutura HTML, fontes, metadata SEO</span>
+│   │   ├── page.tsx          <span class="com"># Página inicial (Home)</span>
+│   │   └── globals.css       <span class="com"># Estilos globais (paleta Wasabi)</span>
+│   ├── <span class="dir">components/</span>           <span class="com"># Cada secção visual = 1 ficheiro</span>
+│   │   ├── Nav.tsx           <span class="com"># Barra de navegação no topo</span>
+│   │   ├── Hero.tsx          <span class="com"># "Que tal sushi?" + imagem</span>
+│   │   ├── Marquee.tsx       <span class="com"># Faixa verde animada</span>
+│   │   ├── About.tsx         <span class="com"># Sobre o Wasabi</span>
+│   │   ├── Menu.tsx          <span class="com"># Cardápio completo com filtros</span>
+│   │   ├── Delivery.tsx      <span class="com"># Bloco "Temos delivery!"</span>
+│   │   ├── Visit.tsx         <span class="com"># Horário, contactos, mapa</span>
+│   │   ├── Reviews.tsx       <span class="com"># Avaliações dos clientes</span>
+│   │   ├── Footer.tsx        <span class="com"># Rodapé institucional</span>
+│   │   └── Icons.tsx         <span class="com"># Todos os ícones SVG</span>
+│   ├── <span class="dir">data/</span>
+│   │   └── menu.ts           <span class="com"># ★ CARDÁPIO COMPLETO — mudar preços aqui</span>
+│   └── <span class="dir">lib/</span>
+│       └── prisma.ts         <span class="com"># Conexão com o banco</span>
+├── <span class="dir">prisma/</span>
+│   └── schema.prisma         <span class="com"># Estrutura das tabelas do banco</span>
+├── <span class="dir">public/</span>
+│   └── logo.jpg              <span class="com"># Logo oficial</span>
+├── <span class="dir">_legacy/</span>                  <span class="com"># Arquivos HTML originais (referência)</span>
+├── nixpacks.toml             <span class="com"># Configuração de build do Railway</span>
+├── railway.json              <span class="com"># Configuração do deploy</span>
+└── README.md                 <span class="com"># Documentação do projeto</span>
+</div>
+
+    <h3 class="subsection">As perguntas mais comuns &amp; onde mexer</h3>
+    <div class="feature-list">
+      <div class="feature-row">
+        <div class="check">$</div>
+        <div>
+          <div class="label-main">"Quero mudar o preço do Combo Bazaruto"</div>
+          <div class="label-sub">Editar <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">src/data/menu.ts</code> — procurar "Bazaruto", mudar o número em <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">price: 2500</code>. Push no GitHub → 2 minutos depois está no ar.</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">$</div>
+        <div>
+          <div class="label-main">"Quero adicionar um prato novo ao cardápio"</div>
+          <div class="label-sub">Mesmo ficheiro. Adicionar uma linha <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">{ name: "...", price: 000, desc: "..." }</code> dentro da categoria certa. Tudo aparece automaticamente, incluindo nos filtros.</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">$</div>
+        <div>
+          <div class="label-main">"Quero mudar o telefone do delivery"</div>
+          <div class="label-sub">Procurar "857277152" no projeto — está em <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">Hero.tsx</code>, <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">Nav.tsx</code>, <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">Delivery.tsx</code>, <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">Visit.tsx</code> e <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">Footer.tsx</code>.</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">$</div>
+        <div>
+          <div class="label-main">"Quero trocar a foto do hero"</div>
+          <div class="label-sub">Em <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">Hero.tsx</code> — trocar URL da imagem. Pode usar imagens próprias colocando na pasta <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">public/</code> e referenciando <code style="font-family:ui-monospace,monospace;background:#f5f7f5;padding:1px 5px;border-radius:4px;font-size:9pt">/foto.jpg</code>.</div>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="check">$</div>
+        <div>
+          <div class="label-main">"Algo quebrou em produção"</div>
+          <div class="label-sub">Rollback em 1 clique no Railway — volta para o deploy anterior em ~30 segundos. Nada se perde.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Wasabi · Manual Técnico &amp; Visão de Futuro</span>
+      <span>Página 4 de 8</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PÁGINA 5 — ROADMAP FASE 2 + 3 (RESERVAS, DASHBOARD)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <div class="badge">W</div>
+      <span>Wasabi</span>
+      <div class="dot"></div>
+      <span>Visão de Futuro</span>
+      <div class="dot"></div>
+      <span style="margin-left:auto">04 / Roadmap curto prazo</span>
+    </div>
+
+    <h2 class="section-title">O que vem a <span class="em">seguir</span>.</h2>
+    <p class="lead">O sistema foi construído em <strong>fases evolutivas</strong>. A Fase 1 (esta) é só a fundação visível. As Fases 2 a 4 são as próximas — cada uma agrega valor real ao negócio sem refazer o que existe.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-phase done">
+        <div>
+          <div class="roadmap-tag">F1</div>
+          <div class="roadmap-meta">Concluído</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>Site institucional + cardápio digital</h4>
+          <div class="roadmap-sub">Presença online profissional, cardápio sempre actualizado, contactos clicáveis.</div>
+          <ul>
+            <li>9 secções com design 100% fiel</li>
+            <li>60+ itens organizados em 21 categorias</li>
+            <li>Hospedagem profissional + HTTPS + banco pronto</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase now">
+        <div>
+          <div class="roadmap-tag">F2</div>
+          <div class="roadmap-meta">Próximo · ~1-2 sem.</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>Reservas online com WhatsApp + e-mail automático</h4>
+          <div class="roadmap-sub">Formulário simples no site → mensagem chega no WhatsApp do restaurante + e-mail formal arquivado.</div>
+          <ul>
+            <li><strong>Cliente preenche:</strong> nome, telefone, data, hora, nº pessoas, observação</li>
+            <li><strong>Sistema envia automaticamente:</strong> mensagem formatada para o WhatsApp do balcão (84 600 7007) + e-mail HTML para o gerente</li>
+            <li><strong>Tudo fica registado</strong> no banco — futuro relatório de reservas/mês</li>
+            <li><strong>Confirmação automática</strong> para o cliente por SMS ou WhatsApp (opcional)</li>
+            <li>Email transaccional via Resend (~$0/mês até 3.000 emails/mês)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div>
+          <div class="roadmap-tag">F3</div>
+          <div class="roadmap-meta">~3-4 sem.</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>Dashboard interno (gestão do dia-a-dia)</h4>
+          <div class="roadmap-sub">Painel privado, só para a Direcção e gerência — gerir tudo sem mexer em código.</div>
+          <ul>
+            <li><strong>Editar cardápio</strong>: adicionar/remover pratos, mudar preços, marcar "esgotado" em segundos</li>
+            <li><strong>Reservas do dia/semana</strong>: lista visual, marcar como confirmadas, alterar estado</li>
+            <li><strong>Estatísticas</strong>: nº de reservas/mês, dia mais movimentado, prato mais vendido</li>
+            <li><strong>Login com permissões</strong>: Direcção (tudo), Gerente (cardápio + reservas), Caixa (só visualizar)</li>
+            <li>Sobe naturalmente em cima da base já criada — sem refazer nada</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div>
+          <div class="roadmap-tag">F4</div>
+          <div class="roadmap-meta">~6-8 sem.</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>Delivery online com carrinho + pagamento</h4>
+          <div class="roadmap-sub">Cliente faz o pedido pelo site sem precisar ligar — entrega ou take-away.</div>
+          <ul>
+            <li><strong>Carrinho de compras</strong> com adicionar/remover itens, observações por prato</li>
+            <li><strong>Cálculo automático</strong> de subtotal + taxa de entrega por bairro de Vilanculos</li>
+            <li><strong>Pagamento</strong>: M-Pesa, transferência ou "pagar na entrega" (cash on delivery)</li>
+            <li><strong>Notificação</strong> em tempo real para a cozinha quando entra pedido (som + popup)</li>
+            <li><strong>Tracking do cliente</strong>: "preparando → pronto → a caminho → entregue"</li>
+            <li>Reduz drasticamente o tempo gasto a anotar pedidos por telefone</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Wasabi · Manual Técnico &amp; Visão de Futuro</span>
+      <span>Página 5 de 8</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PÁGINA 6 — ROADMAP FASE 5 + 6 (QR CODE NA MESA, PDV GARÇOM)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <div class="badge">W</div>
+      <span>Wasabi</span>
+      <div class="dot"></div>
+      <span>Visão de Futuro</span>
+      <div class="dot"></div>
+      <span style="margin-left:auto">05 / Roadmap médio prazo</span>
+    </div>
+
+    <h2 class="section-title">Quando o Wasabi virar <span class="em">plataforma</span>.</h2>
+    <p class="lead">A partir da Fase 5, o sistema deixa de ser "site com reservas" e passa a ser o <strong>cérebro operacional</strong> do restaurante. Mesas, garçons, cozinha — tudo conectado em tempo real.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-phase">
+        <div>
+          <div class="roadmap-tag">F5</div>
+          <div class="roadmap-meta">~3-4 meses</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>QR Code nas mesas — cliente pede pelo celular</h4>
+          <div class="roadmap-sub">Cada mesa tem um QR fixo. Cliente abre câmara → vê o cardápio do Wasabi → adiciona ao pedido → confirma — tudo sem instalar nada.</div>
+          <ul>
+            <li><strong>Setup físico</strong>: QR codes plastificados nas mesas (mesa 1, 2, 3...) — custo único de impressão</li>
+            <li><strong>Cliente</strong>: scan → cardápio abre no navegador → escolhe → "Chamar garçom" ou "Confirmar pedido"</li>
+            <li><strong>Pedido chega directo na cozinha</strong> com o número da mesa, sem ambiguidade</li>
+            <li><strong>Cliente acompanha</strong>: "pedido recebido → na cozinha → pronto"</li>
+            <li><strong>Fecha a conta</strong>: chama garçom ou paga directo no app por M-Pesa</li>
+            <li>Reduz erros de comanda. Liberta garçom para atender melhor. Mesas giram mais rápido.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div>
+          <div class="roadmap-tag">F6</div>
+          <div class="roadmap-meta">~4-5 meses</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>App de Garçom no celular (PDV móvel)</h4>
+          <div class="roadmap-sub">O sistema também funciona para o lado oposto: garçom com celular vira ponto de venda móvel — tira pedido directo na mesa, envia para cozinha.</div>
+          <ul>
+            <li><strong>App instalável</strong> (PWA) no celular Android do garçom — sem precisar publicar na Play Store</li>
+            <li><strong>Login por garçom</strong>: cada pedido fica associado a quem atendeu (comissão / desempenho)</li>
+            <li><strong>Mesa → cliente → pedido</strong>: garçom escolhe mesa, vê o cardápio, marca itens, envia</li>
+            <li><strong>Trabalha offline</strong>: se o Wi-Fi cair, o pedido fica guardado e sincroniza quando voltar</li>
+            <li><strong>Modificadores</strong>: "sem cebola", "ponto bem passado", "extra wasabi" — escolhas rápidas</li>
+            <li><strong>Conta dividida</strong> na hora: 4 pessoas dividem o combo igual ou por consumo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection">Como os dois lados convivem</h3>
+    <div class="flow">
+      <div class="flow-step"><div class="num">A</div><strong>Cliente</strong>scan QR na mesa</div>
+      <div class="flow-step"><div class="num">B</div><strong>OU Garçom</strong>tira pedido no app</div>
+      <div class="flow-step"><div class="num">C</div><strong>Banco</strong>regista o pedido</div>
+      <div class="flow-step"><div class="num">D</div><strong>Cozinha</strong>recebe em tela</div>
+      <div class="flow-step"><div class="num">E</div><strong>Cliente</strong>acompanha + paga</div>
+    </div>
+
+    <div class="callout">
+      <strong>Por que isto vale o investimento?</strong> Um restaurante com 15 mesas que rotaciona 3x por noite faz ~45 contas/noite. Cada erro de comanda custa em média 200 MT (prato refeito ou comp). Reduzir erros em 50% = ~3.000 MT/semana só nisso. E o cliente que pede pelo celular tende a pedir 15-20% a mais (estudos de mercado em redes que adoptaram QR menu).
+    </div>
+
+    <div class="page-footer">
+      <span>Wasabi · Manual Técnico &amp; Visão de Futuro</span>
+      <span>Página 6 de 8</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PÁGINA 7 — ROADMAP FASE 7 + 8 (KDS, MULTI-LOJA, FIDELIDADE)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <div class="badge">W</div>
+      <span>Wasabi</span>
+      <div class="dot"></div>
+      <span>Visão de Futuro</span>
+      <div class="dot"></div>
+      <span style="margin-left:auto">06 / Roadmap longo prazo</span>
+    </div>
+
+    <h2 class="section-title">A ambição máxima do <span class="em">sistema</span>.</h2>
+    <p class="lead">Até onde esta base pode chegar? Aqui está o cenário completo — não é fantasia, é o que cada uma destas peças permite hoje em dia, e o que já existe em redes maiores.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-phase future">
+        <div>
+          <div class="roadmap-tag">F7</div>
+          <div class="roadmap-meta">~6 meses</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>KDS (Kitchen Display System) + impressora térmica</h4>
+          <div class="roadmap-sub">A cozinha passa a ter uma tela própria — pedidos aparecem em cards coloridos por prioridade, com tempo de espera, e podem ser marcados como "pronto" com um toque.</div>
+          <ul>
+            <li><strong>Tela na cozinha</strong> (tablet de 10" ~3.000 MT, fixo na parede) — sem mais comandas em papel</li>
+            <li><strong>Cards por prato</strong>: nome, mesa, observações, tempo decorrido, alerta vermelho se passar do prazo</li>
+            <li><strong>Estações separadas</strong>: sushi vs cozinha quente vs bar — cada um só vê o que lhe compete</li>
+            <li><strong>Impressora térmica</strong> opcional para imprimir comanda de cozinha + recibo do cliente</li>
+            <li><strong>Métricas</strong>: tempo médio de preparo por prato — onde existe gargalo?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase future">
+        <div>
+          <div class="roadmap-tag">F8</div>
+          <div class="roadmap-meta">~9-12 meses</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>Fidelidade, BI &amp; multi-loja</h4>
+          <div class="roadmap-sub">Quando o Wasabi crescer (segunda loja em Maputo? franquia?), o sistema acompanha sem refazer nada.</div>
+          <ul>
+            <li><strong>Cadastro de clientes</strong>: cada pedido associa-se a um número de telefone — histórico de compras, prato favorito</li>
+            <li><strong>Programa de pontos</strong>: cada 1.000 MT gastos = 1 ponto. 10 pontos = combo grátis</li>
+            <li><strong>Cupões e promoções</strong>: "Quarta-feira combo 04 com 20% off" — agenda automática</li>
+            <li><strong>Painel BI</strong>: facturação por dia/semana/mês, ranking de pratos, horários de pico, ticket médio</li>
+            <li><strong>Multi-loja</strong>: cada filial tem o seu cardápio/preços/equipa — Direcção vê tudo num só painel</li>
+            <li><strong>Integração contabilidade</strong>: exportar facturação para sistemas fiscais moçambicanos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase future">
+        <div>
+          <div class="roadmap-tag">F9</div>
+          <div class="roadmap-meta">"Quando fizer sentido"</div>
+        </div>
+        <div class="roadmap-body">
+          <h4>Integrações externas &amp; expansão</h4>
+          <div class="roadmap-sub">A partir daqui é o limite da imaginação — tudo é possível com a base que já temos.</div>
+          <ul>
+            <li><strong>Integração com Yango / Bolt Food / Glovo</strong> — pedidos externos chegam no mesmo dashboard</li>
+            <li><strong>Reservas integradas com Booking / TripAdvisor</strong> — turistas reservam direto</li>
+            <li><strong>Stock de ingredientes</strong>: quando salmão acaba, "California de Salmão" some automaticamente do cardápio digital</li>
+            <li><strong>App próprio do Wasabi</strong> publicado na Play Store / App Store (após validar PWA)</li>
+            <li><strong>WhatsApp Business API</strong>: reservas e pedidos via conversa formal automatizada</li>
+            <li><strong>Marketing automatizado</strong>: cliente que não vem há 30 dias recebe cupão de regresso</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout dark">
+      <strong>A pergunta certa não é "podemos fazer isto?"</strong> — podemos. A base técnica suporta tudo o que está nesta página. <strong>A pergunta é: "quando vale a pena cada peça?"</strong> Isso depende do crescimento do Wasabi, do volume de pedidos, e do orçamento disponível em cada momento. O plano é evoluir conforme o negócio cresce — não construir o que ainda não rende.
+    </div>
+
+    <div class="page-footer">
+      <span>Wasabi · Manual Técnico &amp; Visão de Futuro</span>
+      <span>Página 7 de 8</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PÁGINA 8 — CUSTOS, TIERS DE MANUTENÇÃO + PRÓXIMOS PASSOS
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-header">
+      <div class="badge">W</div>
+      <span>Wasabi</span>
+      <div class="dot"></div>
+      <span>Visão de Futuro</span>
+      <div class="dot"></div>
+      <span style="margin-left:auto">07 / Custos &amp; próximos passos</span>
+    </div>
+
+    <h2 class="section-title">Quanto custa <span class="em">manter</span>.</h2>
+    <p class="lead">A Fase 1 já está paga (foi desenvolvimento). A partir daqui, o custo é apenas <strong>hospedagem mensal</strong> + (se for o caso) <strong>desenvolvimento adicional</strong> para evoluir nas Fases 2-9.</p>
+
+    <h3 class="subsection first">Custo operacional fixo (já correndo hoje)</h3>
+    <div class="cost-row">
+      <div class="item">Hospedagem Railway (servidor + Postgres)
+        <small>Plano Hobby — suficiente até ~1.000 visitas/dia. Backups diários incluídos.</small>
+      </div>
+      <div class="value">~320 MZN / mês</div>
+    </div>
+    <div class="cost-row">
+      <div class="item">Domínio próprio (wasabi-vilanculos.co.mz ou .com)
+        <small>Recomendado em vez do subdomínio actual da Railway. Renovação anual.</small>
+      </div>
+      <div class="value">~800 MZN / ano</div>
+    </div>
+    <div class="cost-row">
+      <div class="item">Resend (e-mail transaccional) — só na Fase 2
+        <small>3.000 e-mails/mês grátis. Mais que suficiente para reservas.</small>
+      </div>
+      <div class="value">0 MZN / mês</div>
+    </div>
+    <div class="cost-row total">
+      <div class="item">Total operacional</div>
+      <div class="value">~400 MZN / mês</div>
+    </div>
+
+    <h3 class="subsection">Tiers de manutenção &amp; evolução</h3>
+    <div class="tiers">
+      <div class="tier">
+        <h4>1 · Apenas hosting</h4>
+        <div class="tag">Cobre custos</div>
+        <div class="price">500 MZN</div>
+        <div class="price-sub">/ mês</div>
+        <ul class="what">
+          <li>Pago directo à Railway</li>
+          <li>Sem desenvolvimento</li>
+          <li>Sem suporte técnico</li>
+          <li>Bugs ficam no ar</li>
+        </ul>
+      </div>
+
+      <div class="tier recommended">
+        <h4>2 · Manutenção activa</h4>
+        <div class="tag">Recomendado</div>
+        <div class="price">3.500 MZN</div>
+        <div class="price-sub">/ mês</div>
+        <ul class="what">
+          <li>Hosting incluído</li>
+          <li>4h/mês de desenvolvimento</li>
+          <li>Mudanças de cardápio, fotos, preços</li>
+          <li>Resposta a bugs em 24h</li>
+          <li>Backups verificados</li>
+          <li>Suporte WhatsApp</li>
+        </ul>
+      </div>
+
+      <div class="tier">
+        <h4>3 · Crescimento</h4>
+        <div class="tag">+ projecto por fase</div>
+        <div class="price">3.500 + fase</div>
+        <div class="price-sub">orçamento por Fase 2-9</div>
+        <ul class="what">
+          <li>Tudo do Tier 2</li>
+          <li>F2 (Reservas): ~12.000 MZN</li>
+          <li>F3 (Dashboard): ~25.000 MZN</li>
+          <li>F4 (Delivery): ~40.000 MZN</li>
+          <li>F5 (QR mesa): ~30.000 MZN</li>
+          <li>F6 (PDV garçom): ~35.000 MZN</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="muted" style="font-size:9.5pt;margin-top:4px"><em>Valores indicativos. Cada Fase tem orçamento fechado antes de começar, após levantamento detalhado. Pagamento parcelado conforme entregas.</em></p>
+
+    <h3 class="subsection">Próximos passos sugeridos</h3>
+    <ol style="margin-left:1.2em;color:var(--ink-mid);font-size:10.5pt;line-height:1.8">
+      <li><strong>Esta semana:</strong> registar domínio próprio (wasabi-vilanculos.co.mz ou .com) e apontar para o site</li>
+      <li><strong>Próximas 2 semanas:</strong> arrancar Fase 2 (reservas online com WhatsApp + e-mail)</li>
+      <li><strong>Antes do verão:</strong> Fase 3 (dashboard interno) — a Direcção passa a gerir o cardápio sozinha</li>
+      <li><strong>Quando o volume justificar:</strong> Fases 4-6 (delivery online, QR na mesa, PDV do garçom)</li>
+      <li><strong>Sessão de 1h</strong>: apresentação do site à equipa do Wasabi + treino básico para mudar cardápio</li>
+    </ol>
+
+    <div class="callout gold">
+      <strong>Garantias:</strong> todo o código é propriedade do Wasabi. Em caso de fim de contrato, é entregue o repositório completo, base de dados exportada e instruções de migração para qualquer outro prestador. <strong>Sem amarras</strong>.
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:30px">
+      <div style="border-top:1px solid var(--ink-mid);padding-top:8px;font-size:9.5pt">
+        <div>Wasabi · Vilanculos</div>
+        <div style="font-family:ui-monospace,monospace;font-size:8pt;color:var(--ink-mute);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px">Cliente</div>
+      </div>
+      <div style="border-top:1px solid var(--ink-mid);padding-top:8px;font-size:9.5pt">
+        <div>Gabriel dos Santos · NiraslabDEV</div>
+        <div style="font-family:ui-monospace,monospace;font-size:8pt;color:var(--ink-mute);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px">Desenvolvimento</div>
+      </div>
+    </div>
+
+    <a href="https://web-production-6003c.up.railway.app" target="_blank" rel="noopener" style="margin-top:24px;padding:22px 28px;background:linear-gradient(135deg, var(--ink) 0%, var(--green-deep) 100%);border-radius:14px;display:flex;justify-content:space-between;align-items:center;gap:16px;color:white;text-decoration:none;page-break-inside:avoid">
+      <div>
+        <div style="font-family:ui-monospace,monospace;font-size:8pt;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px">Aceder agora</div>
+        <div style="font-family:'Anton','Impact',sans-serif;font-style:italic;font-size:24pt;line-height:1;letter-spacing:-0.5px;text-transform:uppercase;color:white">Wasabi · Vilanculos</div>
+        <div style="font-size:10pt;color:rgba(255,255,255,0.75);margin-top:6px;font-family:ui-monospace,monospace">web-production-6003c.up.railway.app</div>
+      </div>
+      <span style="background:var(--green-bright);color:var(--ink);padding:14px 22px;border-radius:999px;font-weight:700;font-size:10pt;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;box-shadow:0 4px 14px rgba(20,216,85,0.35)">Visitar o site →</span>
+    </a>
+
+    <div class="page-footer">
+      <span>Wasabi · Manual Técnico &amp; Visão de Futuro</span>
+      <span>Página 8 de 8</span>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -59,7 +59,12 @@ export default function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Wasabi Café, Lanches &amp; Sushi · Todos os direitos reservados</span>
-          <span>Feito com 💚 em Vilanculos</span>
+          <span>
+            <a href="/manual.html" target="_blank" rel="noopener noreferrer" style={{ marginRight: 16, opacity: 0.7 }}>
+              Manual técnico
+            </a>
+            Feito com 💚 em Vilanculos
+          </span>
         </div>
       </div>
     </footer>
