@@ -1,4 +1,5 @@
-import { Arrow, Moto } from "./Icons";
+import { Arrow } from "./Icons";
+import { WHATSAPP_URL } from "@/lib/contact";
 
 export default function Hero() {
   return (
@@ -10,20 +11,19 @@ export default function Hero() {
             Vilanculos · Moçambique
           </div>
           <h1>
-            <span style={{ display: "block" }}>Que tal</span>
-            <span className="accent">sushi</span>
-            <span>?</span>
-            <span className="small">Café, lanches & sushi — desde 2022</span>
+            <span className="accent">Sushi</span>
+            <span> fresco.</span>
+            <span className="small">Experiência autêntica · Entrega com qualidade</span>
           </h1>
           <p className="hero-sub">
-            Sabores do Japão e da terra moçambicana, servidos com frescura todos os dias na Av. Eduardo Mondlane. Coma no salão ou peça em casa.
+            No Wasabi Sushi, cada peça é preparada com ingredientes frescos, atenção aos detalhes e paixão pela verdadeira experiência japonesa.
           </p>
           <div className="hero-actions">
             <a href="#cardapio" className="btn btn-primary">
-              Ver Cardápio <Arrow />
+              🍣 Fazer Pedido <Arrow />
             </a>
-            <a href="tel:+258857277152" className="btn btn-ghost">
-              <Moto size={18} /> Pedir Delivery
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+              📲 Pedir no WhatsApp
             </a>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="hero-bg-word">sushi?</div>
+      <div className="hero-bg-word">wasabi</div>
     </section>
   );
 }

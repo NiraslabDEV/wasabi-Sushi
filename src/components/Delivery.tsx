@@ -1,20 +1,35 @@
 import { Arrow, Moto, Phone } from "./Icons";
+import { WHATSAPP_URL } from "@/lib/contact";
+
+const PROMISES = [
+  "Ingredientes frescos",
+  "Preparação na hora",
+  "Atendimento personalizado",
+  "Entrega rápida",
+];
 
 export default function Delivery() {
   return (
     <section className="delivery">
       <div className="container delivery-grid">
         <div>
-          <h2>Temos <span className="em">delivery!</span></h2>
+          <h2>Rápido, fresco e <span className="em">seguro</span></h2>
           <p>
-            Sushi, comida moçambicana, cafés e bebidas, entregues quentes em Vilanculos. Ligue e o seu pedido sai já. Mínimo de 30 minutos.
+            Garantimos preparação cuidadosa e entregas rápidas para que o seu sushi chegue sempre fresco e saboroso à porta da sua casa.
           </p>
-          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-            <a href="tel:+258857277152" className="btn btn-primary">
-              <Phone size={16} /> Ligar agora
+
+          <ul className="delivery-promises">
+            {PROMISES.map((p) => (
+              <li key={p}><span className="tick">✓</span>{p}</li>
+            ))}
+          </ul>
+
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginTop: 28 }}>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              📲 Pedir no WhatsApp
             </a>
-            <a href="#cardapio" className="btn" style={{ background: "white", color: "var(--ink)" }}>
-              Ver Cardápio <Arrow />
+            <a href="tel:+258857277152" className="btn" style={{ background: "white", color: "var(--ink)" }}>
+              <Phone size={16} /> Ligar agora
             </a>
           </div>
         </div>

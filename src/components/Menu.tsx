@@ -82,9 +82,9 @@ export default function Menu() {
     <section className="section alt" id="cardapio">
       <div className="container">
         <div className="section-head">
-          <div className="kicker">Cardápio Completo</div>
-          <h2>Escolha o seu <span className="em">favorito</span></h2>
-          <p>Clique para filtrar por categoria. Todos os preços em meticais (MT).</p>
+          <div className="kicker">Nosso Menu</div>
+          <h2>Explore os nossos <span className="em">sabores</span></h2>
+          <p>Do sushi clássico às combinações especiais da casa, cada pedido é preparado com dedicação e frescura. Clique para filtrar por categoria — preços em meticais (MT).</p>
         </div>
 
         <div className="menu-tabs">

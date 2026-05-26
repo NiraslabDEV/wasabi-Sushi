@@ -15,15 +15,18 @@ export default function Footer() {
               </div>
             </div>
             <p className="footer-tag">
-              No coração do sushi em Vilanculos. Sabores do Japão e da terra moçambicana — desde 2022.
+              <em>&ldquo;Uma experiência japonesa além do sabor.&rdquo;</em>
+            </p>
+            <p className="footer-tag" style={{ marginTop: 10 }}>
+              No coração do sushi em Vilanculos — desde 2022.
             </p>
           </div>
           <div>
             <h4>Navegar</h4>
             <ul>
-              <li><a href="#cardapio">Cardápio</a></li>
+              <li><a href="#cardapio">Menu</a></li>
               <li><a href="#sobre">Sobre</a></li>
-              <li><a href="#visitar">Visitar</a></li>
+              <li><a href="#visitar">Contactos</a></li>
               <li><a href="#avaliacoes">Avaliações</a></li>
             </ul>
           </div>

@@ -4,16 +4,16 @@ export default function About() {
       <div className="container">
         <div className="section-head">
           <div className="kicker">Sobre o Wasabi</div>
-          <h2>Onde o <span className="em">Japão</span> encontra<br />Moçambique</h2>
+          <h2>Mais do que <span className="em">sushi</span>.<br />Uma experiência.</h2>
         </div>
         <div className="about-grid">
           <div className="about-copy">
-            <h3>No coração do sushi.</h3>
+            <h3>Arte, sabor e frescura.</h3>
             <p>
-              Desde 2022, o Wasabi é o ponto de encontro em Vilanculos para quem ama um bom sushi e a comida da terra. Combinamos a precisão japonesa com a alma moçambicana — matapa, picanha, choco frito, e o melhor salmão fresco para nigiris, makis e combinados.
+              O Wasabi Sushi nasceu da paixão pela gastronomia japonesa e do desejo de oferecer uma experiência diferenciada, moderna e acolhedora em Vilanculos. Mais do que servir comida, queremos proporcionar momentos especiais através de sabores autênticos, ingredientes frescos e atendimento de qualidade.
             </p>
             <p>
-              De manhã servimos café, omeletes e tostas. Ao almoço e jantar, escolha entre o cardápio japonês ou os pratos tradicionais. Tudo preparado na hora.
+              Cada prato é preparado com dedicação para garantir frescura, apresentação e sabor em cada detalhe — do sushi clássico aos pratos da cozinha moçambicana.
             </p>
             <div className="about-stats">
               <div className="about-stat">
@@ -40,7 +40,22 @@ export default function About() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=700&q=80&auto=format&fit=crop" alt="Chef plating" />
             </div>
-            <div className="sticker">No coração<br />do<br />sushi</div>
+            <div className="sticker">Arte<br />no<br />sabor</div>
+          </div>
+        </div>
+
+        <div className="mvv-grid">
+          <div className="mvv-card">
+            <div className="mvv-tag">Missão</div>
+            <p>Oferecer uma experiência gastronómica de qualidade, combinando sabor, criatividade e excelência no atendimento.</p>
+          </div>
+          <div className="mvv-card">
+            <div className="mvv-tag">Visão</div>
+            <p>Tornar-se uma referência em sushi e gastronomia oriental, reconhecida pela qualidade, inovação e satisfação dos clientes.</p>
+          </div>
+          <div className="mvv-card">
+            <div className="mvv-tag">Valores</div>
+            <p>Qualidade · Frescura · Respeito ao cliente · Criatividade · Excelência</p>
           </div>
         </div>
       </div>

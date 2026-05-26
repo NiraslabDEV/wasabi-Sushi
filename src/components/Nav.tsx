@@ -1,3 +1,5 @@
+import { WHATSAPP_URL } from "@/lib/contact";
+
 export default function Nav() {
   return (
     <nav className="nav">
@@ -11,14 +13,14 @@ export default function Nav() {
           </span>
         </a>
         <div className="nav-links">
-          <a href="#cardapio">Cardápio</a>
+          <a href="#cardapio">Menu</a>
           <a href="#sobre">Sobre</a>
-          <a href="#visitar">Visitar</a>
+          <a href="#visitar">Contactos</a>
           <a href="#avaliacoes">Avaliações</a>
         </div>
-        <a href="tel:+258857277152" className="nav-cta">
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="nav-cta">
           <span className="dot" />
-          Pedir Delivery
+          Fazer Pedido
         </a>
       </div>
     </nav>

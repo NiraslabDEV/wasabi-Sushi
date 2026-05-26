@@ -1,6 +1,6 @@
 const items = [
-  "Fresh Sushi", "•", "Comida Moçambicana", "•", "Delivery em Vilanculos",
-  "•", "Café da Manhã", "•", "Combos a partir de 1.020 MT", "•",
+  "Preparado na hora", "•", "Qualidade em cada peça", "•", "Sabores que surpreendem",
+  "•", "Experiência japonesa autêntica", "•", "Feito com frescura e paixão", "•",
 ];
 
 function Track({ ariaHidden = false }: { ariaHidden?: boolean }) {

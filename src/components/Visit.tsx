@@ -15,11 +15,12 @@ export default function Visit() {
     <section className="section" id="visitar">
       <div className="container">
         <div className="section-head">
-          <div className="kicker">Visite-nos</div>
+          <div className="kicker">Entre em Contacto</div>
           <h2>
-            Encontre-nos em <span className="em">Vilanculos</span>
+            Visite-nos em <span className="em">Vilanculos</span>
             <span className="status-badge"><span className="dot" />Aberto agora</span>
           </h2>
+          <p>Estamos disponíveis para pedidos, reservas, dúvidas ou informações. Será um prazer atendê-lo.</p>
         </div>
 
         <div className="visit-grid">
@@ -55,7 +56,7 @@ export default function Visit() {
             <div className="contact-line">
               <div className="ic"><Moto size={20} /></div>
               <div>
-                <div className="label">Delivery</div>
+                <div className="label">WhatsApp / Delivery</div>
                 <div className="value">85 727 7152</div>
               </div>
             </div>
