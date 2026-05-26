@@ -1,16 +1,27 @@
-import { Arrow, Insta, Moto, Phone, Pin } from "./Icons";
+"use client";
 
-const hours = [
-  { day: "Segunda-feira", hrs: "Encerrado", closed: true },
-  { day: "Terça-feira", hrs: "08:00 – 22:00" },
-  { day: "Quarta-feira", hrs: "08:00 – 22:00" },
-  { day: "Quinta-feira", hrs: "08:00 – 22:00" },
-  { day: "Sexta-feira", hrs: "08:00 – 22:00" },
-  { day: "Sábado", hrs: "08:00 – 22:00", today: true },
-  { day: "Domingo", hrs: "08:00 – 22:00" },
+import { useEffect, useState } from "react";
+import { Arrow, Insta, Moto, Phone, Pin } from "./Icons";
+import OpenBadge from "./OpenBadge";
+
+// dow: Sun=0 ... Sat=6 (matches Date.getDay()). Display order Mon → Sun.
+const HOURS = [
+  { dow: 1, day: "Segunda-feira", hrs: "Encerrado", closed: true },
+  { dow: 2, day: "Terça-feira", hrs: "08:00 – 22:00" },
+  { dow: 3, day: "Quarta-feira", hrs: "08:00 – 22:00" },
+  { dow: 4, day: "Quinta-feira", hrs: "08:00 – 22:00" },
+  { dow: 5, day: "Sexta-feira", hrs: "08:00 – 22:00" },
+  { dow: 6, day: "Sábado", hrs: "08:00 – 22:00" },
+  { dow: 0, day: "Domingo", hrs: "08:00 – 22:00" },
 ];
 
 export default function Visit() {
+  const [todayDow, setTodayDow] = useState<number | null>(null);
+
+  useEffect(() => {
+    setTodayDow(new Date().getDay());
+  }, []);
+
   return (
     <section className="section" id="visitar">
       <div className="container">
@@ -18,7 +29,7 @@ export default function Visit() {
           <div className="kicker">Entre em Contacto</div>
           <h2>
             Visite-nos em <span className="em">Vilanculos</span>
-            <span className="status-badge"><span className="dot" />Aberto agora</span>
+            <OpenBadge variant="status" />
           </h2>
           <p>Estamos disponíveis para pedidos, reservas, dúvidas ou informações. Será um prazer atendê-lo.</p>
         </div>
@@ -26,15 +37,18 @@ export default function Visit() {
         <div className="visit-grid">
           <div className="info-card">
             <h3>Horário</h3>
-            {hours.map((h) => (
-              <div
-                key={h.day}
-                className={"hours-row" + (h.today ? " today" : "") + (h.closed ? " closed" : "")}
-              >
-                <span className="day">{h.day}{h.today && " · Hoje"}</span>
-                <span className="hrs">{h.hrs}</span>
-              </div>
-            ))}
+            {HOURS.map((h) => {
+              const isToday = h.dow === todayDow;
+              return (
+                <div
+                  key={h.day}
+                  className={"hours-row" + (isToday ? " today" : "") + (h.closed ? " closed" : "")}
+                >
+                  <span className="day">{h.day}{isToday && " · Hoje"}</span>
+                  <span className="hrs">{h.hrs}</span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="info-card">

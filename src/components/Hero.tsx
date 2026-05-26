@@ -1,5 +1,6 @@
 import { Arrow } from "./Icons";
 import { WHATSAPP_URL } from "@/lib/contact";
+import OpenBadge from "./OpenBadge";
 
 export default function Hero() {
   return (
@@ -31,7 +32,7 @@ export default function Hero() {
         <div className="hero-art">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=900&q=80&auto=format&fit=crop" alt="Sushi platter" />
-          <div className="badge"><span className="dot" />Aberto agora</div>
+          <OpenBadge />
           <div className="price-tag">
             <div className="label">Combos desde</div>
             <div className="value">1.020 MT</div>

@@ -794,6 +794,9 @@ img { display: block; max-width: 100%; }
   vertical-align: middle;
 }
 .status-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-bright); }
+.status-badge .dot.closed { background: #c44545; }
+.status-badge:has(.dot.closed) { color: #c44545; background: #fdecec; }
+.hero-art .badge .dot.closed { background: #c44545; }
 @media (max-width: 820px) {
   .visit-grid { grid-template-columns: 1fr; }
 }
