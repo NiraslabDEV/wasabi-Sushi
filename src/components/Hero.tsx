@@ -29,9 +29,13 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-art">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=900&q=80&auto=format&fit=crop" alt="Sushi platter" />
+        <div
+          className="hero-art has-photo"
+          style={{ backgroundImage: "url('/images/hero.jpg')" }}
+          role="img"
+          aria-label="Sushi premium servido no Wasabi"
+        >
+          <span className="momento-fallback">🍣</span>
           <OpenBadge />
           <div className="price-tag">
             <div className="label">Combos desde</div>
