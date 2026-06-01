@@ -54,18 +54,10 @@ img { display: block; max-width: 100%; }
   position: sticky;
   top: 0;
   z-index: 60;
-  background: rgba(10, 15, 12, 0.78);
-  backdrop-filter: saturate(160%) blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--line);
 }
-.nav .brand { color: white; }
-.nav .brand-text .name { color: white; }
-.nav .brand-text .sub { color: rgba(255, 255, 255, 0.6); }
-.nav .brand img { border-color: white; }
-.nav .nav-links a { color: rgba(255, 255, 255, 0.85); }
-.nav .nav-links a:hover { color: var(--green-bright); }
-.nav .nav-cta { background: var(--green); color: white; }
-.nav .nav-cta:hover { background: var(--green-bright); color: var(--ink); }
 .nav-inner {
   display: flex;
   align-items: center;
@@ -144,7 +136,7 @@ img { display: block; max-width: 100%; }
   .nav-links { display: none; }
 }
 
-/* ---------- HERO (legacy light — kept for fallback) ---------- */
+/* ---------- HERO ---------- */
 .hero {
   position: relative;
   overflow: hidden;
@@ -160,7 +152,78 @@ img { display: block; max-width: 100%; }
   z-index: 2;
 }
 
-/* ---------- HERO DARK (premium chef edition) ---------- */
+/* ---------- HERO CHEF · sem moldura, fade radial ---------- */
+.hero-chef-bleed {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+}
+.hero-chef-img {
+  position: absolute;
+  inset: -6% -8% -2% -4%;
+  background-image: url("/images/chef-hero.webp");
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  /* fade radial — dissolve as bordas escuras do PNG no fundo claro */
+  -webkit-mask-image: radial-gradient(ellipse 68% 78% at 52% 58%, black 45%, transparent 85%);
+  mask-image: radial-gradient(ellipse 68% 78% at 52% 58%, black 45%, transparent 85%);
+  filter: drop-shadow(0 20px 40px rgba(10, 15, 12, 0.18));
+}
+.hero-chef-bleed .badge {
+  position: absolute;
+  top: 18px;
+  left: 6%;
+  background: white;
+  color: var(--ink);
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-md);
+  z-index: 3;
+}
+.hero-chef-bleed .badge .dot {
+  width: 8px; height: 8px;
+  background: var(--green-bright);
+  border-radius: 50%;
+}
+.hero-chef-bleed .badge .dot.closed { background: #c44545; }
+.hero-chef-bleed .price-tag {
+  position: absolute;
+  bottom: 8%;
+  right: 0%;
+  background: var(--green);
+  color: white;
+  border-radius: 999px;
+  padding: 16px 22px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-6deg);
+  z-index: 3;
+}
+.hero-chef-bleed .price-tag .label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.hero-chef-bleed .price-tag .value {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+@media (max-width: 900px) {
+  .hero-chef-bleed { aspect-ratio: 4/4; }
+}
+
+/* ---------- HERO DARK (legacy — deprecated) ---------- */
 .hero-dark {
   position: relative;
   overflow: hidden;
