@@ -43,3 +43,31 @@ export const Arrow = ({ size = 16 }: IconProps) => (
     <polyline points="12 5 19 12 12 19" />
   </svg>
 );
+
+export const Leaf = ({ size = 22 }: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" width={size} height={size}>
+    <path d="M11 20A7 7 0 0 1 4 13c0-5 4.5-9 13-9-1 9-5 13-6 16Z" />
+    <path d="M2 21c0-3 1.85-5.36 5.08-6" />
+  </svg>
+);
+
+export const Sparkle = ({ size = 22 }: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" width={size} height={size}>
+    <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+
+export const Crown = ({ size = 22 }: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" width={size} height={size}>
+    <path d="M3 8l4 5 5-7 5 7 4-5v11H3z" />
+    <line x1="3" y1="19" x2="21" y2="19" />
+  </svg>
+);
+
+export const ArrowDown = ({ size = 18 }: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width={size} height={size}>
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <polyline points="19 12 12 19 5 12" />
+  </svg>
+);
