@@ -5,12 +5,12 @@ type Momento = {
 };
 
 const MOMENTOS: Momento[] = [
-  { src: "/images/momentos/01.jpg", alt: "Chef em acção no Wasabi", span: "big" },
+  { src: "/images/momentos/05.webp", alt: "Amigos a partilhar combos no Wasabi", span: "big" },
   { src: "/images/momentos/02.jpg", alt: "Sushi servido na mesa", span: "tall" },
   { src: "/images/momentos/03.jpg", alt: "Detalhe do preparo", span: "small" },
   { src: "/images/momentos/04.jpg", alt: "Ambiente do restaurante", span: "small" },
-  { src: "/images/momentos/05.jpg", alt: "Clientes a celebrar", span: "wide" },
-  { src: "/images/momentos/06.jpg", alt: "Momentos no Wasabi", span: "wide" },
+  { src: "/images/momentos/06.webp", alt: "Família a saborear sushi no Wasabi", span: "wide" },
+  { src: "/images/momentos/01.jpg", alt: "Chef em acção no Wasabi", span: "wide" },
 ];
 
 export default function Gallery() {
