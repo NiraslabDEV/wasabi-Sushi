@@ -13,7 +13,7 @@ export default function Nav() {
           </span>
         </a>
         <div className="nav-links">
-          <a href="#cardapio">Menu</a>
+          <a href="/cardapio">Cardápio</a>
           <a href="#sobre">Sobre</a>
           <a href="#visitar">Contactos</a>
           <a href="#avaliacoes">Avaliações</a>

@@ -34,3 +34,13 @@ model Reserva {
   @@index([data])
   @@index([status])
 }
+
+model Lead {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String   @default("exit_popup")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("leads")
+  @@index([createdAt])
+}
