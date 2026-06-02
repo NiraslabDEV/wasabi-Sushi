@@ -1115,10 +1115,8 @@ img { display: block; max-width: 100%; }
   display: block;
 }
 .momento-big { grid-column: span 2; grid-row: span 2; }
-.momento-big img { object-fit: cover; }
 .momento-small { grid-column: span 1; grid-row: span 1; }
-.momento-wide { grid-column: span 4; grid-row: span 1; }
-.momento-wide img { object-fit: cover; object-position: center; }
+.momento-wide { grid-column: span 2; grid-row: span 1; }
 
 @media (max-width: 900px) {
   .momentos-grid {

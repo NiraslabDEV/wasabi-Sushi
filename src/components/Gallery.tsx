@@ -4,11 +4,18 @@ type Momento = {
   span: "big" | "small" | "wide";
 };
 
+// Order matters — grid fills row-by-row.
+// Layout (4 cols × 3 rows):
+//   [BIG p1     ] [WIDE p2 ]
+//   [BIG p1     ] [WIDE p3 ]
+//   [WIDE sushi ] [s] [s]
 const MOMENTOS: Momento[] = [
-  { src: "/images/momentos/01.webp", alt: "Clientes felizes no Wasabi Sushi", span: "big" },
+  { src: "/images/momentos/01.webp", alt: "Clientes felizes no Wasabi", span: "big" },
+  { src: "/images/momentos/05.webp", alt: "Amigos a partilhar combos", span: "wide" },
+  { src: "/images/momentos/06.webp", alt: "Família a celebrar no Wasabi", span: "wide" },
+  { src: "/images/momentos/04.webp", alt: "Combo Wasabi completo", span: "wide" },
   { src: "/images/momentos/02.webp", alt: "Sushi servido na mesa", span: "small" },
-  { src: "/images/momentos/03.webp", alt: "Combos especiais do Wasabi", span: "small" },
-  { src: "/images/momentos/04.webp", alt: "Sabores frescos do Wasabi", span: "wide" },
+  { src: "/images/momentos/03.webp", alt: "Combo especial", span: "small" },
 ];
 
 export default function Gallery() {
