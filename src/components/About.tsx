@@ -32,21 +32,13 @@ export default function About() {
           </div>
 
           <div className="about-art">
-            <div
-              className="photo a"
-              style={{ backgroundImage: "url('/images/about-1.jpg')" }}
-              role="img"
-              aria-label="Chef do Wasabi a preparar sushi"
-            >
-              <span className="momento-fallback">🍣</span>
+            <div className="photo a">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/about-1.webp" alt="Sushi do Wasabi" loading="lazy" />
             </div>
-            <div
-              className="photo b"
-              style={{ backgroundImage: "url('/images/about-2.jpg')" }}
-              role="img"
-              aria-label="Ambiente do Wasabi"
-            >
-              <span className="momento-fallback">🥢</span>
+            <div className="photo b">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/about-2.webp" alt="Combo Wasabi" loading="lazy" />
             </div>
             <div className="sticker">Arte<br />no<br />sabor</div>
           </div>

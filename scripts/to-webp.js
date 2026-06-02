@@ -1,4 +1,4 @@
-// One-off image optimizer: PNG → WebP, max 1600px wide, quality 82.
+// One-off image optimizer: PNG/JPG/JFIF → WebP, max 1600px wide, quality 82.
 // Run: node scripts/to-webp.js
 const sharp = require("sharp");
 const path = require("path");
@@ -6,9 +6,17 @@ const fs = require("fs");
 
 const root = path.resolve(__dirname, "..");
 const conversions = [
+  // Hero (video — kept for fallback)
   { in: "assets/chef-fundo-escuro.png", out: "public/images/chef-hero.webp", maxW: 1400 },
-  { in: "assets/pessoas.png", out: "public/images/momentos/05.webp", maxW: 1600 },
-  { in: "assets/pessoas2.png", out: "public/images/momentos/06.webp", maxW: 1600 },
+  // About (sushi)
+  { in: "assets/sushis-bonito.jfif", out: "public/images/about-1.webp", maxW: 1400 },
+  { in: "assets/shushi-bonito2.jfif", out: "public/images/about-2.webp", maxW: 1400 },
+  // Gallery — pessoas (vida)
+  { in: "assets/pessoas-felizes.jfif", out: "public/images/momentos/01.webp", maxW: 1600 },
+  // Gallery — sushi
+  { in: "assets/sushi-bonito3.jfif", out: "public/images/momentos/02.webp", maxW: 1200 },
+  { in: "assets/sushis-bonito.jfif", out: "public/images/momentos/03.webp", maxW: 1200 },
+  { in: "assets/shushi-bonito2.jfif", out: "public/images/momentos/04.webp", maxW: 1200 },
 ];
 
 (async () => {

@@ -1,16 +1,14 @@
 type Momento = {
   src: string;
   alt: string;
-  span: "big" | "tall" | "wide" | "small";
+  span: "big" | "small" | "wide";
 };
 
 const MOMENTOS: Momento[] = [
-  { src: "/images/momentos/05.webp", alt: "Amigos a partilhar combos no Wasabi", span: "big" },
-  { src: "/images/momentos/02.jpg", alt: "Sushi servido na mesa", span: "tall" },
-  { src: "/images/momentos/03.jpg", alt: "Detalhe do preparo", span: "small" },
-  { src: "/images/momentos/04.jpg", alt: "Ambiente do restaurante", span: "small" },
-  { src: "/images/momentos/06.webp", alt: "Família a saborear sushi no Wasabi", span: "wide" },
-  { src: "/images/momentos/01.jpg", alt: "Chef em acção no Wasabi", span: "wide" },
+  { src: "/images/momentos/01.webp", alt: "Clientes felizes no Wasabi Sushi", span: "big" },
+  { src: "/images/momentos/02.webp", alt: "Sushi servido na mesa", span: "small" },
+  { src: "/images/momentos/03.webp", alt: "Combos especiais do Wasabi", span: "small" },
+  { src: "/images/momentos/04.webp", alt: "Sabores frescos do Wasabi", span: "wide" },
 ];
 
 export default function Gallery() {
@@ -27,14 +25,9 @@ export default function Gallery() {
 
         <div className="momentos-grid">
           {MOMENTOS.map((m, i) => (
-            <div
-              key={i}
-              className={"momento momento-" + m.span}
-              style={{ backgroundImage: `url('${m.src}')` }}
-              role="img"
-              aria-label={m.alt}
-            >
-              <span className="momento-fallback">📸</span>
+            <div key={i} className={"momento momento-" + m.span}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={m.src} alt={m.alt} loading="lazy" />
             </div>
           ))}
         </div>
