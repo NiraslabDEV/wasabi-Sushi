@@ -7,6 +7,43 @@ import { getCategoryVisual } from "@/lib/menu-visual";
 import { PHONE_DELIVERY } from "@/lib/contact";
 
 // ─────────────────────────────────────────────────────────────────────────────
+// CART TYPES + STORAGE
+// ─────────────────────────────────────────────────────────────────────────────
+
+type CartItem = {
+  key: string;
+  name: string;
+  meta?: string;
+  price: number;
+  qty: number;
+  emoji: string;
+  gradient: string;
+};
+
+type Cart = Record<string, CartItem>;
+
+const STORAGE_KEY = "wasabi_cart_v1";
+
+function loadCart(): Cart {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return typeof parsed === "object" && parsed ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveCart(cart: Cart) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+  } catch {}
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // WIZARD — curated picks per step
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -58,14 +95,30 @@ const WIZARD_STEPS: { id: string; title: string; subtitle: string; options: Wiza
 // MAIN COMPONENT
 // ─────────────────────────────────────────────────────────────────────────────
 
-type Picks = Record<string, WizardItem | null>;
+type WizardPicks = Record<string, WizardItem | null>;
 
 export default function CardapioClient() {
   const [activeSection, setActiveSection] = useState<MenuSectionId>("sushi");
+  const [cart, setCart] = useState<Cart>({});
+  const [cartOpen, setCartOpen] = useState(false);
+  const [waiterMode, setWaiterMode] = useState(false);
+
   const [wizardOpen, setWizardOpen] = useState(false);
   const [step, setStep] = useState(0);
-  const [picks, setPicks] = useState<Picks>({});
+  const [picks, setPicks] = useState<WizardPicks>({});
+
   const [exitOpen, setExitOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  // ── Hydrate cart from localStorage once ──────────────────────────────────
+  useEffect(() => {
+    setCart(loadCart());
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (hydrated) saveCart(cart);
+  }, [cart, hydrated]);
 
   // ── Exit-intent detection ────────────────────────────────────────────────
   useEffect(() => {
@@ -80,13 +133,10 @@ export default function CardapioClient() {
       setExitOpen(true);
     };
 
-    // Desktop: mouseleave to top
     const onMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0) show();
     };
     document.addEventListener("mouseleave", onMouseLeave);
-
-    // Fallback: 45s on page (mobile/everyone)
     const timer = window.setTimeout(show, 45000);
 
     return () => {
@@ -94,6 +144,60 @@ export default function CardapioClient() {
       clearTimeout(timer);
     };
   }, []);
+
+  // ── Cart helpers ─────────────────────────────────────────────────────────
+  function addToCart(key: string, partial: Omit<CartItem, "key" | "qty">) {
+    setCart((c) => {
+      const existing = c[key];
+      const qty = (existing?.qty || 0) + 1;
+      return { ...c, [key]: { ...partial, key, qty } };
+    });
+  }
+  function inc(key: string) {
+    setCart((c) => {
+      const it = c[key];
+      if (!it) return c;
+      return { ...c, [key]: { ...it, qty: it.qty + 1 } };
+    });
+  }
+  function dec(key: string) {
+    setCart((c) => {
+      const it = c[key];
+      if (!it) return c;
+      if (it.qty <= 1) {
+        const { [key]: _, ...rest } = c;
+        return rest;
+      }
+      return { ...c, [key]: { ...it, qty: it.qty - 1 } };
+    });
+  }
+  function removeFromCart(key: string) {
+    setCart((c) => {
+      const { [key]: _, ...rest } = c;
+      return rest;
+    });
+  }
+  function clearCart() {
+    setCart({});
+  }
+
+  const totalItems = useMemo(
+    () => Object.values(cart).reduce((s, it) => s + it.qty, 0),
+    [cart]
+  );
+  const totalPrice = useMemo(
+    () => Object.values(cart).reduce((s, it) => s + it.qty * it.price, 0),
+    [cart]
+  );
+
+  const whatsappCartMsg = useMemo(() => {
+    const lines = ["Olá! Gostaria de fazer este pedido no Wasabi Sushi:"];
+    Object.values(cart).forEach((it) => {
+      lines.push(`• ${it.qty}× ${it.name}${it.meta ? ` (${it.meta})` : ""} — ${formatPrice(it.qty * it.price)} MT`);
+    });
+    lines.push("", `Total: ${formatPrice(totalPrice)} MT`);
+    return encodeURIComponent(lines.join("\n"));
+  }, [cart, totalPrice]);
 
   // ── Wizard helpers ───────────────────────────────────────────────────────
   function openWizard() {
@@ -113,35 +217,37 @@ export default function CardapioClient() {
     setStep(0);
     setPicks({});
   }
-  function closeWizard() {
+  function addWizardPicksToCart() {
+    WIZARD_STEPS.forEach((s) => {
+      const p = picks[s.id];
+      if (!p) return;
+      const key = `wz::${s.id}::${p.name}`;
+      addToCart(key, {
+        name: p.name,
+        meta: p.meta,
+        price: p.price,
+        emoji: p.emoji,
+        gradient: p.gradient,
+      });
+    });
     setWizardOpen(false);
+    setCartOpen(true);
   }
 
   const isSummary = step >= WIZARD_STEPS.length;
-  const total = useMemo(
+  const wizardTotal = useMemo(
     () => Object.values(picks).reduce((s, it) => s + (it?.price || 0), 0),
     [picks]
   );
 
-  const whatsappMsg = useMemo(() => {
-    const lines = ["Olá! Gostaria de fazer um pedido no Wasabi Sushi:"];
-    WIZARD_STEPS.forEach((s) => {
-      const p = picks[s.id];
-      if (p) lines.push(`• ${p.name}${p.meta ? ` (${p.meta})` : ""} — ${formatPrice(p.price)} MT`);
-    });
-    lines.push("", `Total: ${formatPrice(total)} MT`);
-    return encodeURIComponent(lines.join("\n"));
-  }, [picks, total]);
-
   const cur = MENU[activeSection];
 
+  // ─── RENDER ──────────────────────────────────────────────────────────────
   return (
     <div className="cardapio-page">
       {/* HEADER */}
       <header className="cardapio-header">
-        <Link href="/" className="cardapio-back">
-          ← Voltar
-        </Link>
+        <Link href="/" className="cardapio-back">← Voltar</Link>
         <div className="cardapio-brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.jpg" alt="Wasabi" />
@@ -161,10 +267,8 @@ export default function CardapioClient() {
           <div className="wizard-banner-content">
             <div>
               <div className="kicker">Não sabes por onde começar?</div>
-              <h2>
-                Deixa-nos <span className="em">guiar-te</span> em 3 passos
-              </h2>
-              <p>Entrada → Prato principal → Bebida. No final, mandas o pedido pelo WhatsApp.</p>
+              <h2>Deixa-nos <span className="em">guiar-te</span> em 3 passos</h2>
+              <p>Entrada → Prato principal → Bebida. No fim ficam no teu pedido.</p>
             </div>
             <button className="btn btn-primary btn-lg" onClick={openWizard}>
               🍣 Começar pedido →
@@ -190,38 +294,135 @@ export default function CardapioClient() {
         <p className="cardapio-tagline">{cur.tagline}</p>
 
         {cur.categories.map((cat) => (
-          <CategoryBlock key={cat.id} cat={cat} />
+          <CategoryBlock key={cat.id} cat={cat} cart={cart} onAdd={addToCart} onInc={inc} onDec={dec} />
         ))}
       </section>
 
+      {/* CART FLOATING BUTTON */}
+      {totalItems > 0 && !cartOpen && !waiterMode && (
+        <button className="cart-fab" onClick={() => setCartOpen(true)}>
+          <span className="fab-icon">🛒</span>
+          <span className="fab-info">
+            <span className="fab-qty">{totalItems} {totalItems === 1 ? "item" : "itens"}</span>
+            <span className="fab-price">{formatPrice(totalPrice)} MT</span>
+          </span>
+          <span className="fab-arrow">→</span>
+        </button>
+      )}
+
+      {/* CART MODAL */}
+      {cartOpen && (
+        <div className="cart-modal-bg" onClick={() => setCartOpen(false)}>
+          <div className="cart-modal" onClick={(e) => e.stopPropagation()}>
+            <header className="cart-modal-head">
+              <div>
+                <div className="kicker">O meu pedido</div>
+                <h2>{totalItems} {totalItems === 1 ? "item" : "itens"} no carrinho</h2>
+              </div>
+              <button className="cart-close" onClick={() => setCartOpen(false)} aria-label="Fechar">×</button>
+            </header>
+
+            {totalItems === 0 ? (
+              <div className="cart-empty">
+                <div className="emoji">🛒</div>
+                <p>Ainda não adicionaste nada. Toca em <strong>+ Adicionar</strong> em qualquer prato do menu.</p>
+                <button className="btn btn-primary" onClick={() => setCartOpen(false)}>Ver menu</button>
+              </div>
+            ) : (
+              <>
+                <ul className="cart-items">
+                  {Object.values(cart).map((it) => (
+                    <li key={it.key}>
+                      <div className="cart-item-visual" style={{ background: it.gradient }}>
+                        <span className="emoji">{it.emoji}</span>
+                      </div>
+                      <div className="cart-item-body">
+                        <div className="cart-item-head">
+                          <span className="name">{it.name}</span>
+                          {it.meta && <span className="meta">{it.meta}</span>}
+                        </div>
+                        <div className="cart-item-foot">
+                          <div className="qty-control">
+                            <button onClick={() => dec(it.key)} aria-label="Diminuir">−</button>
+                            <span>{it.qty}</span>
+                            <button onClick={() => inc(it.key)} aria-label="Aumentar">+</button>
+                          </div>
+                          <span className="line-price">{formatPrice(it.qty * it.price)} MT</span>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="cart-total">
+                  <span>Total</span>
+                  <span className="big">{formatPrice(totalPrice)} MT</span>
+                </div>
+
+                <div className="cart-actions">
+                  <button className="btn btn-ghost" onClick={() => { setCartOpen(false); setWaiterMode(true); }}>
+                    📋 Mostrar ao garçom
+                  </button>
+                  <a
+                    href={`https://wa.me/${PHONE_DELIVERY}?text=${whatsappCartMsg}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    📲 Enviar pelo WhatsApp
+                  </a>
+                </div>
+
+                <button className="cart-clear" onClick={() => { if (confirm("Apagar todos os itens?")) clearCart(); }}>
+                  🗑 Limpar carrinho
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* WAITER MODE (fullscreen big text) */}
+      {waiterMode && (
+        <div className="waiter-view">
+          <button className="waiter-back" onClick={() => setWaiterMode(false)}>← Voltar</button>
+          <div className="waiter-content">
+            <div className="kicker">Pedido para o garçom</div>
+            <h1>O meu <span className="em">pedido</span></h1>
+            <ul className="waiter-items">
+              {Object.values(cart).map((it) => (
+                <li key={it.key}>
+                  <span className="qty">{it.qty}×</span>
+                  <span className="name">
+                    {it.name}
+                    {it.meta && <span className="meta"> · {it.meta}</span>}
+                  </span>
+                  <span className="price">{formatPrice(it.qty * it.price)} MT</span>
+                </li>
+              ))}
+            </ul>
+            <div className="waiter-total">
+              <span>Total</span>
+              <span className="big">{formatPrice(totalPrice)} MT</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* WIZARD MODAL */}
       {wizardOpen && (
-        <div className="wizard-modal-bg" onClick={closeWizard}>
+        <div className="wizard-modal-bg" onClick={() => setWizardOpen(false)}>
           <div className="wizard-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="wizard-close" onClick={closeWizard} aria-label="Fechar">
-              ×
-            </button>
+            <button className="wizard-close" onClick={() => setWizardOpen(false)} aria-label="Fechar">×</button>
 
-            {/* progress */}
             <div className="wizard-progress">
               {WIZARD_STEPS.map((s, i) => (
-                <div
-                  key={s.id}
-                  className={
-                    "wizard-progress-step" +
-                    (i < step ? " done" : "") +
-                    (i === step ? " active" : "")
-                  }
-                >
+                <div key={s.id} className={"wizard-progress-step" + (i < step ? " done" : "") + (i === step ? " active" : "")}>
                   <span className="num">{i + 1}</span>
                   <span className="label">{s.id}</span>
                 </div>
               ))}
-              <div
-                className={
-                  "wizard-progress-step" + (isSummary ? " active" : "")
-                }
-              >
+              <div className={"wizard-progress-step" + (isSummary ? " active" : "")}>
                 <span className="num">✓</span>
                 <span className="label">Pedido</span>
               </div>
@@ -251,14 +452,8 @@ export default function CardapioClient() {
                 </div>
 
                 <div className="wizard-actions">
-                  {step > 0 && (
-                    <button className="btn btn-ghost" onClick={backStep}>
-                      ← Voltar
-                    </button>
-                  )}
-                  <button className="btn btn-link" onClick={() => pickAndAdvance(null)}>
-                    Saltar este passo →
-                  </button>
+                  {step > 0 && <button className="btn btn-ghost" onClick={backStep}>← Voltar</button>}
+                  <button className="btn-link" onClick={() => pickAndAdvance(null)}>Saltar este passo →</button>
                 </div>
               </>
             )}
@@ -266,7 +461,7 @@ export default function CardapioClient() {
             {isSummary && (
               <div className="wizard-summary">
                 <div className="wizard-step-head">
-                  <div className="kicker">Pedido finalizado</div>
+                  <div className="kicker">Pedido sugerido</div>
                   <h2>O teu <span className="em">pedido</span></h2>
                 </div>
 
@@ -281,7 +476,7 @@ export default function CardapioClient() {
                     );
                     return (
                       <li key={s.id}>
-                        <span className="label">{s.title.replace("Escolha ", "").replace("Escolha uma ", "")}</span>
+                        <span className="label">{s.id}</span>
                         <span className="val">
                           <span className="name">{p.name}</span>
                           <span className="price">{formatPrice(p.price)} MT</span>
@@ -292,22 +487,15 @@ export default function CardapioClient() {
                 </ul>
 
                 <div className="wizard-total">
-                  <span>Total estimado</span>
-                  <span className="big">{formatPrice(total)} MT</span>
+                  <span>Total</span>
+                  <span className="big">{formatPrice(wizardTotal)} MT</span>
                 </div>
 
                 <div className="wizard-actions" style={{ marginTop: 24 }}>
-                  <button className="btn btn-ghost" onClick={resetWizard}>
-                    ← Recomeçar
+                  <button className="btn btn-ghost" onClick={resetWizard}>← Recomeçar</button>
+                  <button className="btn btn-primary" onClick={addWizardPicksToCart}>
+                    🛒 Adicionar ao pedido →
                   </button>
-                  <a
-                    href={`https://wa.me/${PHONE_DELIVERY}?text=${whatsappMsg}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary"
-                  >
-                    📲 Enviar pelo WhatsApp
-                  </a>
                 </div>
               </div>
             )}
@@ -322,10 +510,25 @@ export default function CardapioClient() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// VISUAL CATEGORY (cards grid)
+// CATEGORY BLOCK + ITEM CARD (with qty controls)
 // ─────────────────────────────────────────────────────────────────────────────
 
-function CategoryBlock({ cat }: { cat: MenuCategory }) {
+type AddFn = (key: string, partial: Omit<CartItem, "key" | "qty">) => void;
+type IncFn = (key: string) => void;
+
+function CategoryBlock({
+  cat,
+  cart,
+  onAdd,
+  onInc,
+  onDec,
+}: {
+  cat: MenuCategory;
+  cart: Cart;
+  onAdd: AddFn;
+  onInc: IncFn;
+  onDec: IncFn;
+}) {
   return (
     <div className="cardapio-category">
       <div className="cardapio-category-head">
@@ -333,21 +536,62 @@ function CategoryBlock({ cat }: { cat: MenuCategory }) {
         {cat.meta && <span className="cardapio-category-meta">{cat.meta}</span>}
       </div>
       <div className="cardapio-grid">
-        {cat.items.map((it, i) => <ItemCard key={i} item={it} catId={cat.id} />)}
+        {cat.items.map((it, i) => (
+          <ItemCard
+            key={i}
+            item={it}
+            catId={cat.id}
+            idx={i}
+            cart={cart}
+            onAdd={onAdd}
+            onInc={onInc}
+            onDec={onDec}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-function ItemCard({ item, catId }: { item: MenuItem; catId: string }) {
+function ItemCard({
+  item,
+  catId,
+  idx,
+  cart,
+  onAdd,
+  onInc,
+  onDec,
+}: {
+  item: MenuItem;
+  catId: string;
+  idx: number;
+  cart: Cart;
+  onAdd: AddFn;
+  onInc: IncFn;
+  onDec: IncFn;
+}) {
   const visual = getCategoryVisual(catId);
   const isCombo = !!item.includes;
+  const key = `${catId}::${idx}`;
+  const inCart = cart[key];
+  const qty = inCart?.qty || 0;
+
+  const handleAdd = () => {
+    onAdd(key, {
+      name: item.name,
+      meta: item.meta,
+      price: item.price,
+      emoji: visual.emoji,
+      gradient: visual.gradient,
+    });
+  };
 
   return (
-    <article className={"item-card" + (isCombo ? " combo" : "") + (item.highlight ? " highlight" : "")}>
+    <article className={"item-card" + (isCombo ? " combo" : "") + (item.highlight ? " highlight" : "") + (qty > 0 ? " in-cart" : "")}>
       <div className="item-card-visual" style={{ background: visual.gradient }}>
         <span className="emoji">{visual.emoji}</span>
         {item.highlight && <span className="item-card-tag">Mais pedido</span>}
+        {qty > 0 && <span className="item-card-badge">{qty}</span>}
       </div>
       <div className="item-card-body">
         <div className="item-card-head">
@@ -365,8 +609,19 @@ function ItemCard({ item, catId }: { item: MenuItem; catId: string }) {
             {item.includes.map((line, i) => <li key={i}>{line}</li>)}
           </ul>
         )}
-        <div className="item-card-price">
-          {formatPrice(item.price)} <span>MT</span>
+        <div className="item-card-footer">
+          <div className="item-card-price">
+            {formatPrice(item.price)} <span>MT</span>
+          </div>
+          {qty === 0 ? (
+            <button className="add-btn" onClick={handleAdd}>+ Adicionar</button>
+          ) : (
+            <div className="qty-control">
+              <button onClick={() => onDec(key)} aria-label="Diminuir">−</button>
+              <span>{qty}</span>
+              <button onClick={() => onInc(key)} aria-label="Aumentar">+</button>
+            </div>
+          )}
         </div>
       </div>
     </article>
@@ -374,7 +629,7 @@ function ItemCard({ item, catId }: { item: MenuItem; catId: string }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// EXIT POPUP (email capture for combo giveaway)
+// EXIT POPUP
 // ─────────────────────────────────────────────────────────────────────────────
 
 function ExitPopup({ onClose }: { onClose: () => void }) {
@@ -413,9 +668,7 @@ function ExitPopup({ onClose }: { onClose: () => void }) {
         {status !== "ok" ? (
           <>
             <div className="exit-popup-icon">🎁</div>
-            <h2>
-              Espera! Ganha um <span className="em">combo</span> grátis
-            </h2>
+            <h2>Espera! Ganha um <span className="em">combo</span> grátis</h2>
             <p>Deixa o teu email e concorre ao nosso sorteio mensal de um combo Wasabi para 2 pessoas. Sem spam, prometido.</p>
 
             <form onSubmit={submit} className="exit-popup-form">
