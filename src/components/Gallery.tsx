@@ -2,17 +2,14 @@ type Momento = {
   src: string;
   alt: string;
   span: "big" | "small" | "wide";
+  objectPosition?: string;
 };
 
 // Order matters — grid fills row-by-row.
-// Layout (4 cols × 3 rows):
-//   [BIG p1     ] [WIDE p2 ]
-//   [BIG p1     ] [WIDE p3 ]
-//   [WIDE sushi ] [s] [s]
 const MOMENTOS: Momento[] = [
-  { src: "/images/momentos/01.webp", alt: "Clientes felizes no Wasabi", span: "big" },
-  { src: "/images/momentos/05.webp", alt: "Amigos a partilhar combos", span: "wide" },
-  { src: "/images/momentos/06.webp", alt: "Família a celebrar no Wasabi", span: "wide" },
+  { src: "/images/momentos/01.webp", alt: "Clientes felizes no Wasabi", span: "big", objectPosition: "center top" },
+  { src: "/images/momentos/05.webp", alt: "Amigos a partilhar combos", span: "wide", objectPosition: "center top" },
+  { src: "/images/momentos/06.webp", alt: "Família a celebrar no Wasabi", span: "wide", objectPosition: "center 20%" },
   { src: "/images/momentos/04.webp", alt: "Combo Wasabi completo", span: "wide" },
   { src: "/images/momentos/02.webp", alt: "Sushi servido na mesa", span: "small" },
   { src: "/images/momentos/03.webp", alt: "Combo especial", span: "small" },
@@ -34,7 +31,12 @@ export default function Gallery() {
           {MOMENTOS.map((m, i) => (
             <div key={i} className={"momento momento-" + m.span}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={m.src} alt={m.alt} loading="lazy" />
+              <img
+                src={m.src}
+                alt={m.alt}
+                loading="lazy"
+                style={m.objectPosition ? { objectPosition: m.objectPosition } : undefined}
+              />
             </div>
           ))}
         </div>

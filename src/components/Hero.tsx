@@ -1,18 +1,38 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Arrow } from "./Icons";
 import { WHATSAPP_URL } from "@/lib/contact";
 import OpenBadge from "./OpenBadge";
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // iOS Safari often blocks autoplay even with `autoPlay` attribute.
+  // Forcing .play() after mount (with muted=true) bypasses this.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+    // Some iOS versions need a second nudge after metadata loads
+    v.addEventListener("loadedmetadata", tryPlay);
+    return () => v.removeEventListener("loadedmetadata", tryPlay);
+  }, []);
+
   return (
     <section className="hero" id="top">
       <video
+        ref={videoRef}
         className="hero-bg-video"
         src="/videos/chef-hero.mp4"
         autoPlay
         loop
         muted
         playsInline
-        preload="metadata"
+        disablePictureInPicture
+        preload="auto"
         aria-label="Chef do Wasabi a apresentar um prato de sushi"
       />
       <div className="hero-overlay" aria-hidden="true" />
