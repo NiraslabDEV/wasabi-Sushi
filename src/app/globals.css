@@ -170,6 +170,19 @@ img { display: block; max-width: 100%; }
   mask-image: radial-gradient(ellipse 68% 78% at 52% 58%, black 45%, transparent 85%);
   filter: drop-shadow(0 20px 40px rgba(10, 15, 12, 0.18));
 }
+.hero-chef-video {
+  position: absolute;
+  inset: -4% -6% -2% -2%;
+  width: 112%;
+  height: 106%;
+  object-fit: contain;
+  object-position: center bottom;
+  /* fundo branco do vídeo dissolve nas bordas */
+  -webkit-mask-image: radial-gradient(ellipse 72% 82% at 50% 55%, black 55%, transparent 90%);
+  mask-image: radial-gradient(ellipse 72% 82% at 50% 55%, black 55%, transparent 90%);
+  filter: drop-shadow(0 20px 40px rgba(10, 15, 12, 0.15));
+  pointer-events: none;
+}
 .hero-chef-bleed .badge {
   position: absolute;
   top: 18px;

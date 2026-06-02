@@ -30,7 +30,16 @@ export default function Hero() {
         </div>
 
         <div className="hero-chef-bleed">
-          <div className="hero-chef-img" aria-label="Chef do Wasabi com prato de sushi" role="img" />
+          <video
+            className="hero-chef-video"
+            src="/videos/chef-hero.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            aria-label="Chef do Wasabi a apresentar um prato de sushi"
+          />
           <OpenBadge />
           <div className="price-tag">
             <div className="label">Combos desde</div>
