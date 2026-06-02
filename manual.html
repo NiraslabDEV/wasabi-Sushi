@@ -795,6 +795,10 @@
       </div>
     </div>
 
+    <div class="callout green">
+      <strong>BÓNUS — protótipo da Fase 5 já construído.</strong> Antecipámos uma parte do roadmap futuro como prova de conceito: <strong>cardápio digital interactivo com QR para a mesa, carrinho com +/-, wizard guiado de pedido, popup de captura de e-mail, e página do garçom com gestão de estado do pedido</strong>. Está em produção em <code>/cardapio</code> e <code>/pedido/[código]</code>. Não foi incluído no escopo original — fica disponível como upsell para activar quando fizer sentido. Detalhes técnicos completos na <strong>página 6</strong>.
+    </div>
+
     <div class="page-footer">
       <span>Wasabi · Manual Técnico &amp; Visão de Futuro</span>
       <span>Página 2 de 8</span>
@@ -1072,37 +1076,41 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       PÁGINA 6 — ROADMAP FASE 5 + 6 (QR CODE NA MESA, PDV GARÇOM)
+       PÁGINA 6 — F5 PROTÓTIPO PRONTO + F6 DASHBOARD DO GARÇOM
        ═══════════════════════════════════════════════════════════════ -->
   <div class="page">
     <div class="page-header">
       <div class="badge">W</div>
       <span>Wasabi</span>
       <div class="dot"></div>
-      <span>Visão de Futuro</span>
+      <span>Protótipo + Roadmap</span>
       <div class="dot"></div>
-      <span style="margin-left:auto">05 / Roadmap médio prazo</span>
+      <span style="margin-left:auto">05 / Cardápio digital + Dashboard</span>
     </div>
 
-    <h2 class="section-title">Quando o Wasabi virar <span class="em">plataforma</span>.</h2>
-    <p class="lead">A partir da Fase 5, o sistema deixa de ser "site com reservas" e passa a ser o <strong>cérebro operacional</strong> do restaurante. Mesas, garçons, cozinha — tudo conectado em tempo real.</p>
+    <h2 class="section-title">A Fase 5 já está <span class="em">construída</span>.</h2>
+    <p class="lead">Antecipámos o protótipo do cardápio digital interactivo como prova de conceito. Funciona, está em produção, e pode ser activado comercialmente assim que o Wasabi quiser oferecer pedidos pelo celular ao cliente sentado à mesa.</p>
+
+    <div class="callout green">
+      <strong>Estado actual:</strong> <strong>protótipo funcional</strong> em <code>/cardapio</code> e <code>/pedido/[código]</code>. Tem carrinho, wizard, QR para o garçom e gestão de estado do pedido. <strong>Não está no escopo da Fase 1 paga</strong> — fica disponível como upsell quando o Wasabi decidir oferecer este serviço aos clientes.
+    </div>
 
     <div class="roadmap">
-      <div class="roadmap-phase">
+      <div class="roadmap-phase now">
         <div>
           <div class="roadmap-tag">F5</div>
-          <div class="roadmap-meta">~3-4 meses</div>
+          <div class="roadmap-meta">Protótipo pronto</div>
         </div>
         <div class="roadmap-body">
-          <h4>QR Code nas mesas — cliente pede pelo celular</h4>
-          <div class="roadmap-sub">Cada mesa tem um QR fixo. Cliente abre câmara → vê o cardápio do Wasabi → adiciona ao pedido → confirma — tudo sem instalar nada.</div>
+          <h4>Cardápio digital + QR na mesa + carrinho</h4>
+          <div class="roadmap-sub">Cliente aponta a câmara para o QR da mesa → cardápio visual abre → adiciona com botões +/- → mostra o pedido ao garçom via QR.</div>
           <ul>
-            <li><strong>Setup físico</strong>: QR codes plastificados nas mesas (mesa 1, 2, 3...) — custo único de impressão</li>
-            <li><strong>Cliente</strong>: scan → cardápio abre no navegador → escolhe → "Chamar garçom" ou "Confirmar pedido"</li>
-            <li><strong>Pedido chega directo na cozinha</strong> com o número da mesa, sem ambiguidade</li>
-            <li><strong>Cliente acompanha</strong>: "pedido recebido → na cozinha → pronto"</li>
-            <li><strong>Fecha a conta</strong>: chama garçom ou paga directo no app por M-Pesa</li>
-            <li>Reduz erros de comanda. Liberta garçom para atender melhor. Mesas giram mais rápido.</li>
+            <li><strong>Página dedicada</strong> <code>/cardapio</code>: cards visuais por categoria (gradiente colorido + emoji + preço grande), filtros Sushi/Cozinha/Bar — fim das listas de letras corridas</li>
+            <li><strong>Wizard guiado de 3 passos</strong>: Entrada → Prato principal → Bebida. Para clientes que não sabem por onde começar</li>
+            <li><strong>Carrinho com +/-</strong> em cada produto, FAB flutuante a mostrar "🛒 N itens · TOTAL MT", persistido em <code>localStorage</code> (sobrevive a refresh)</li>
+            <li><strong>"Mostrar ao garçom"</strong>: cria pedido na BD (tabela <code>orders</code>) e gera <strong>QR code único</strong> (#ABC123) que o garçom escaneia</li>
+            <li><strong>Exit-intent popup</strong>: quando cliente quase sai do cardápio, pede e-mail para sorteio de combo grátis → guarda em tabela <code>leads</code> (lista marketing futura)</li>
+            <li><strong>Página do garçom</strong> <code>/pedido/[código]</code>: lista do pedido com tipografia grande, botão "Aceitar pedido" (actualiza estado real na BD), placeholders prontos para "🖨 Imprimir cozinha" e "🍺 Imprimir bar" (Fase 7)</li>
           </ul>
         </div>
       </div>
@@ -1110,34 +1118,35 @@
       <div class="roadmap-phase">
         <div>
           <div class="roadmap-tag">F6</div>
-          <div class="roadmap-meta">~4-5 meses</div>
+          <div class="roadmap-meta">Próximo · ~2-3 sem.</div>
         </div>
         <div class="roadmap-body">
-          <h4>App de Garçom no celular (PDV móvel)</h4>
-          <div class="roadmap-sub">O sistema também funciona para o lado oposto: garçom com celular vira ponto de venda móvel — tira pedido directo na mesa, envia para cozinha.</div>
+          <h4>Dashboard do garçom — registo de pedidos por mesa</h4>
+          <div class="roadmap-sub">Painel dedicado para o garçom acompanhar todos os pedidos activos das suas mesas em tempo real, sem precisar guardar QR codes ou anotar em papel.</div>
           <ul>
-            <li><strong>App instalável</strong> (PWA) no celular Android do garçom — sem precisar publicar na Play Store</li>
-            <li><strong>Login por garçom</strong>: cada pedido fica associado a quem atendeu (comissão / desempenho)</li>
-            <li><strong>Mesa → cliente → pedido</strong>: garçom escolhe mesa, vê o cardápio, marca itens, envia</li>
-            <li><strong>Trabalha offline</strong>: se o Wi-Fi cair, o pedido fica guardado e sincroniza quando voltar</li>
-            <li><strong>Modificadores</strong>: "sem cebola", "ponto bem passado", "extra wasabi" — escolhas rápidas</li>
-            <li><strong>Conta dividida</strong> na hora: 4 pessoas dividem o combo igual ou por consumo</li>
+            <li><strong>Lista de pedidos activos</strong> agrupados por mesa (Mesa 1, 2, 3…), com tempo decorrido desde o pedido</li>
+            <li><strong>Estado visível</strong>: pendente / aceito / na cozinha / pronto / entregue — cores e ícones para identificação rápida</li>
+            <li><strong>Filtro "Os meus pedidos"</strong> quando o garçom faz login — cada um vê só o que atende</li>
+            <li><strong>Atribuir mesa</strong> ao pedido (cliente não preenche mesa, mas o garçom marca ao receber)</li>
+            <li><strong>Histórico do dia</strong>: pedidos fechados nas últimas horas, total facturado por garçom (base para comissão futura)</li>
+            <li><strong>Notificação ao chegar pedido novo</strong>: som + badge no topo da tela</li>
+            <li>Constrói sobre a tabela <code>orders</code> e enum <code>OrderStatus</code> que já estão criados no protótipo da F5</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <h3 class="subsection">Como os dois lados convivem</h3>
+    <h3 class="subsection">Como o protótipo já funciona hoje</h3>
     <div class="flow">
-      <div class="flow-step"><div class="num">A</div><strong>Cliente</strong>scan QR na mesa</div>
-      <div class="flow-step"><div class="num">B</div><strong>OU Garçom</strong>tira pedido no app</div>
-      <div class="flow-step"><div class="num">C</div><strong>Banco</strong>regista o pedido</div>
-      <div class="flow-step"><div class="num">D</div><strong>Cozinha</strong>recebe em tela</div>
-      <div class="flow-step"><div class="num">E</div><strong>Cliente</strong>acompanha + paga</div>
+      <div class="flow-step"><div class="num">1</div><strong>Cliente</strong>scan QR da mesa → /cardapio</div>
+      <div class="flow-step"><div class="num">2</div><strong>Adiciona</strong>+/- nos cards visuais</div>
+      <div class="flow-step"><div class="num">3</div><strong>"Mostrar ao garçom"</strong>cria pedido + QR</div>
+      <div class="flow-step"><div class="num">4</div><strong>Garçom escaneia</strong>→ /pedido/[id]</div>
+      <div class="flow-step"><div class="num">5</div><strong>Aceita</strong>→ entrega → fechado</div>
     </div>
 
     <div class="callout">
-      <strong>Por que isto vale o investimento?</strong> Um restaurante com 15 mesas que rotaciona 3x por noite faz ~45 contas/noite. Cada erro de comanda custa em média 200 MT (prato refeito ou comp). Reduzir erros em 50% = ~3.000 MT/semana só nisso. E o cliente que pede pelo celular tende a pedir 15-20% a mais (estudos de mercado em redes que adoptaram QR menu).
+      <strong>Por que isto vale o investimento?</strong> Um restaurante com 15 mesas que rotaciona 3× por noite faz ~45 contas/noite. Cada erro de comanda custa em média 200 MT. Reduzir erros em 50% = ~3.000 MT/semana só nisso. E o cliente que pede pelo telemóvel tende a pedir 15–20% a mais (estudos de mercado em redes que adoptaram QR menu). Adicionar a Dashboard do Garçom (F6) reduz mais o tempo de circulação e permite acompanhar performance por colaborador.
     </div>
 
     <div class="page-footer">
@@ -1308,15 +1317,20 @@
         <ul class="what">
           <li>Tudo do Tier 2</li>
           <li>F2 (Reservas): ~12.000 MZN</li>
-          <li>F3 (Dashboard): ~25.000 MZN</li>
+          <li>F3 (Dashboard menu): ~25.000 MZN</li>
           <li>F4 (Delivery): ~40.000 MZN</li>
-          <li>F5 (QR mesa): ~30.000 MZN</li>
-          <li>F6 (PDV garçom): ~35.000 MZN</li>
+          <li>F6 (Dashboard garçom): ~20.000 MZN</li>
+          <li>F7 (KDS + impressoras): ~45.000 MZN</li>
         </ul>
       </div>
     </div>
 
     <p class="muted" style="font-size:9.5pt;margin-top:4px"><em>Valores indicativos. Cada Fase tem orçamento fechado antes de começar, após levantamento detalhado. Pagamento parcelado conforme entregas.</em></p>
+
+    <h3 class="subsection">Upsell pronto — Cardápio Digital (F5)</h3>
+    <div class="callout green">
+      <strong>Já está construído</strong> e em produção. O Wasabi não pagou esta fase no escopo inicial — ficou como brinde técnico / prova de conceito. Para activar comercialmente (QR codes plastificados nas mesas, formação da equipa, suporte de dia 1, fine-tuning conforme uso real), o investimento de activação é <strong>~15.000 MZN único</strong> (cobre impressão dos QR, instalação, formação e 2 semanas de suporte intensivo). Depois disso, mantém-se dentro do Tier 2/3 sem custo adicional mensal.
+    </div>
 
     <h3 class="subsection">Próximos passos sugeridos</h3>
     <ol style="margin-left:1.2em;color:var(--ink-mid);font-size:10.5pt;line-height:1.8">
