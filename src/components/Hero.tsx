@@ -5,8 +5,20 @@ import OpenBadge from "./OpenBadge";
 export default function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="container hero-grid">
-        <div>
+      <video
+        className="hero-bg-video"
+        src="/videos/chef-hero.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-label="Chef do Wasabi a apresentar um prato de sushi"
+      />
+      <div className="hero-overlay" aria-hidden="true" />
+
+      <div className="container hero-content">
+        <div className="hero-text">
           <div className="hero-eyebrow">
             <span className="pulse" />
             Vilanculos · Moçambique
@@ -29,17 +41,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-chef-bleed">
-          <video
-            className="hero-chef-video"
-            src="/videos/chef-hero.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            aria-label="Chef do Wasabi a apresentar um prato de sushi"
-          />
+        <div className="hero-floating-badges">
           <OpenBadge />
           <div className="price-tag">
             <div className="label">Combos desde</div>
@@ -47,6 +49,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
       <div className="hero-bg-word">wasabi</div>
     </section>
   );

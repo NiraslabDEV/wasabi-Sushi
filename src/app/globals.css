@@ -136,20 +136,76 @@ img { display: block; max-width: 100%; }
   .nav-links { display: none; }
 }
 
-/* ---------- HERO ---------- */
+/* ---------- HERO (full-bleed video) ---------- */
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 56px 0 80px;
   background: var(--paper);
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 48px;
+  min-height: min(740px, calc(100vh - 76px));
+  display: flex;
   align-items: center;
+  padding: 60px 0;
+}
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.82) 30%,
+      rgba(255, 255, 255, 0.35) 60%,
+      rgba(255, 255, 255, 0) 90%),
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0) 25%,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(255, 255, 255, 0.55) 100%);
+}
+.hero-content {
   position: relative;
   z-index: 2;
+  width: 100%;
+}
+.hero-text { max-width: 640px; }
+.hero-floating-badges {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+  z-index: 3;
+}
+@media (max-width: 900px) {
+  .hero { min-height: calc(100vh - 76px); padding: 40px 0; }
+  .hero-overlay {
+    background:
+      linear-gradient(180deg,
+        rgba(255, 255, 255, 0.92) 0%,
+        rgba(255, 255, 255, 0.65) 35%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.85) 100%);
+  }
+  .hero-floating-badges {
+    position: static;
+    flex-direction: row;
+    margin-top: 32px;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
 
 /* ---------- HERO CHEF · sem moldura, fade radial ---------- */
@@ -183,10 +239,7 @@ img { display: block; max-width: 100%; }
   filter: drop-shadow(0 20px 40px rgba(10, 15, 12, 0.15));
   pointer-events: none;
 }
-.hero-chef-bleed .badge {
-  position: absolute;
-  top: 18px;
-  left: 6%;
+.hero .badge {
   background: white;
   color: var(--ink);
   padding: 12px 18px;
@@ -199,18 +252,14 @@ img { display: block; max-width: 100%; }
   align-items: center;
   gap: 10px;
   box-shadow: var(--shadow-md);
-  z-index: 3;
 }
-.hero-chef-bleed .badge .dot {
+.hero .badge .dot {
   width: 8px; height: 8px;
   background: var(--green-bright);
   border-radius: 50%;
 }
-.hero-chef-bleed .badge .dot.closed { background: #c44545; }
-.hero-chef-bleed .price-tag {
-  position: absolute;
-  bottom: 8%;
-  right: 0%;
+.hero .badge .dot.closed { background: #c44545; }
+.hero .price-tag {
   background: var(--green);
   color: white;
   border-radius: 999px;
@@ -218,15 +267,14 @@ img { display: block; max-width: 100%; }
   text-align: center;
   box-shadow: var(--shadow-lg);
   transform: rotate(-6deg);
-  z-index: 3;
 }
-.hero-chef-bleed .price-tag .label {
+.hero .price-tag .label {
   font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   opacity: 0.85;
 }
-.hero-chef-bleed .price-tag .value {
+.hero .price-tag .value {
   font-family: var(--font-display);
   font-size: 22px;
   letter-spacing: 1px;
