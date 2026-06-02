@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
 import { MENU, MenuCategory, MenuItem, MenuSectionId, formatPrice } from "@/data/menu";
 import { getCategoryVisual } from "@/lib/menu-visual";
 import { PHONE_DELIVERY } from "@/lib/contact";
@@ -102,6 +103,9 @@ export default function CardapioClient() {
   const [cart, setCart] = useState<Cart>({});
   const [cartOpen, setCartOpen] = useState(false);
   const [waiterMode, setWaiterMode] = useState(false);
+  const [waiterShortId, setWaiterShortId] = useState<string | null>(null);
+  const [waiterLoading, setWaiterLoading] = useState(false);
+  const [waiterErr, setWaiterErr] = useState<string | null>(null);
 
   const [wizardOpen, setWizardOpen] = useState(false);
   const [step, setStep] = useState(0);
@@ -179,6 +183,36 @@ export default function CardapioClient() {
   }
   function clearCart() {
     setCart({});
+  }
+
+  async function showToWaiter() {
+    setWaiterLoading(true);
+    setWaiterErr(null);
+    setWaiterShortId(null);
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: Object.values(cart), total: totalPrice }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setWaiterErr(data?.error || "Erro a criar pedido");
+      } else if (data.shortId) {
+        setWaiterShortId(data.shortId);
+      }
+    } catch {
+      setWaiterErr("Sem ligação — o garçom pode ler o pedido na tela");
+    }
+    setCartOpen(false);
+    setWaiterMode(true);
+    setWaiterLoading(false);
+  }
+
+  function closeWaiter() {
+    setWaiterMode(false);
+    setWaiterShortId(null);
+    setWaiterErr(null);
   }
 
   const totalItems = useMemo(
@@ -360,8 +394,8 @@ export default function CardapioClient() {
                 </div>
 
                 <div className="cart-actions">
-                  <button className="btn btn-ghost" onClick={() => { setCartOpen(false); setWaiterMode(true); }}>
-                    📋 Mostrar ao garçom
+                  <button className="btn btn-ghost" onClick={showToWaiter} disabled={waiterLoading}>
+                    {waiterLoading ? "A gerar QR..." : "📋 Mostrar ao garçom"}
                   </button>
                   <a
                     href={`https://wa.me/${PHONE_DELIVERY}?text=${whatsappCartMsg}`}
@@ -382,13 +416,37 @@ export default function CardapioClient() {
         </div>
       )}
 
-      {/* WAITER MODE (fullscreen big text) */}
+      {/* WAITER MODE — QR + summary fullscreen */}
       {waiterMode && (
         <div className="waiter-view">
-          <button className="waiter-back" onClick={() => setWaiterMode(false)}>← Voltar</button>
+          <button className="waiter-back" onClick={closeWaiter}>← Voltar</button>
           <div className="waiter-content">
             <div className="kicker">Pedido para o garçom</div>
             <h1>O meu <span className="em">pedido</span></h1>
+
+            {waiterShortId && (
+              <div className="waiter-qr">
+                <div className="waiter-qr-frame">
+                  <QRCodeSVG
+                    value={`${typeof window !== "undefined" ? window.location.origin : ""}/pedido/${waiterShortId}`}
+                    size={260}
+                    level="M"
+                    includeMargin
+                    bgColor="#ffffff"
+                    fgColor="#0a0f0c"
+                  />
+                </div>
+                <p className="waiter-qr-hint">📷 Garçom, aponte a câmara para este código</p>
+                <div className="waiter-qr-code">#{waiterShortId}</div>
+              </div>
+            )}
+
+            {waiterErr && !waiterShortId && (
+              <div className="waiter-err">
+                {waiterErr}
+              </div>
+            )}
+
             <ul className="waiter-items">
               {Object.values(cart).map((it) => (
                 <li key={it.key}>

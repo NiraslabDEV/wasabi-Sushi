@@ -44,3 +44,29 @@ model Lead {
   @@map("leads")
   @@index([createdAt])
 }
+
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  KITCHEN_PRINTED
+  BAR_PRINTED
+  DELIVERED
+  CANCELLED
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  shortId     String      @unique
+  items       Json
+  total       Int
+  status      OrderStatus @default(PENDING)
+  tableNumber String?     @map("table_number")
+  acceptedAt  DateTime?   @map("accepted_at")
+  deliveredAt DateTime?   @map("delivered_at")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt        @map("updated_at")
+
+  @@map("orders")
+  @@index([shortId])
+  @@index([status, createdAt])
+}

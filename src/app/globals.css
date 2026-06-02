@@ -1965,6 +1965,249 @@ img { display: block; max-width: 100%; }
   letter-spacing: 1px;
 }
 
+/* ── QR display in waiter view ── */
+.waiter-qr {
+  background: var(--off);
+  border-radius: 24px;
+  padding: 28px 28px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 28px;
+  box-shadow: var(--shadow-md);
+}
+.waiter-qr-frame {
+  background: white;
+  padding: 14px;
+  border-radius: 18px;
+  box-shadow: 0 6px 22px -8px rgba(10, 15, 12, 0.25);
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+}
+.waiter-qr-frame svg { display: block; }
+.waiter-qr-hint {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 10px;
+  text-align: center;
+}
+.waiter-qr-code {
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: 4px;
+  color: var(--green-deep);
+  font-style: italic;
+}
+.waiter-err {
+  background: #fdecec;
+  border: 1px solid #f5b3b3;
+  color: #b91c1c;
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* ═════════════════════════════════════════════════════════════════════════
+   /pedido/[shortId] — Waiter order page (opens from QR scan)
+   ═════════════════════════════════════════════════════════════════════════ */
+.pedido-page { background: var(--off); min-height: 100vh; }
+.pedido-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: white;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 24px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+}
+.pedido-back {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: white;
+  transition: border-color 0.18s;
+}
+.pedido-back:hover { border-color: var(--ink); }
+.pedido-id {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: var(--ink);
+  text-align: center;
+  justify-self: center;
+}
+.pedido-id .hash { color: var(--green); margin-right: 2px; }
+.pedido-status {
+  color: white;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .pedido-header { padding: 12px 14px; gap: 10px; }
+  .pedido-id { font-size: 20px; letter-spacing: 2px; }
+  .pedido-status { font-size: 10px; padding: 6px 10px; }
+}
+
+.pedido-main { padding: 40px 0 80px; }
+.pedido-head { margin-bottom: 28px; }
+.pedido-head .kicker {
+  font-size: 11px;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.pedido-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.5vw, 56px);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 0.95;
+}
+.pedido-head h1 .em { color: var(--green); }
+.pedido-head .muted { color: var(--muted); font-size: 13px; margin: 0; }
+
+.pedido-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.pedido-items li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  padding: 18px 22px;
+  border-bottom: 1px dashed var(--line);
+  align-items: center;
+}
+.pedido-items li:last-child { border-bottom: none; }
+.pedido-items .line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(15px, 1.8vw, 18px);
+}
+.pedido-items .qty {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.6vw, 28px);
+  color: var(--green);
+  font-style: italic;
+  min-width: 38px;
+}
+.pedido-items .dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.pedido-items .name {
+  font-weight: 600;
+  color: var(--ink);
+}
+.pedido-items .meta {
+  font-size: 0.85em;
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 400;
+}
+.pedido-items .price {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.4vw, 24px);
+  color: var(--ink);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.pedido-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--ink);
+  color: white;
+  border-radius: 18px;
+  padding: 22px 26px;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+.pedido-total .big {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 48px);
+  color: var(--green-bright);
+  letter-spacing: 1px;
+}
+
+.pedido-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.pedido-actions .btn {
+  justify-content: center;
+  padding: 16px 18px;
+  font-size: 14px;
+}
+@media (max-width: 540px) {
+  .pedido-actions { grid-template-columns: 1fr; }
+}
+
+.pedido-future {
+  background: var(--gold-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.5;
+}
+.pedido-future strong { color: var(--amber); }
+
+.pedido-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: white;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+  animation: fabIn 0.3s;
+}
+
 /* ═════════════════════════════════════════════════════════════════════════
    WIZARD MODAL
    ═════════════════════════════════════════════════════════════════════════ */
