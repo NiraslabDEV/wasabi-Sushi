@@ -11,14 +11,12 @@ const conversions = [
   // About (sushi)
   { in: "assets/sushis-bonito.jfif", out: "public/images/about-1.webp", maxW: 1400 },
   { in: "assets/shushi-bonito2.jfif", out: "public/images/about-2.webp", maxW: 1400 },
-  // Gallery — pessoas (vida) — 3 fotos prominentes
+  // Gallery — pessoas (vida) — 5 fotos
   { in: "assets/pessoas-felizes.jfif", out: "public/images/momentos/01.webp", maxW: 1600 },
   { in: "assets/pessoas.png", out: "public/images/momentos/05.webp", maxW: 1400 },
   { in: "assets/pessoas2.png", out: "public/images/momentos/06.webp", maxW: 1400 },
-  // Gallery — sushi (detalhes pequenos)
-  { in: "assets/sushi-bonito3.jfif", out: "public/images/momentos/02.webp", maxW: 1000 },
-  { in: "assets/sushis-bonito.jfif", out: "public/images/momentos/03.webp", maxW: 1000 },
-  { in: "assets/shushi-bonito2.jfif", out: "public/images/momentos/04.webp", maxW: 1200 },
+  { in: "assets/pessoas8.jfif", out: "public/images/momentos/07.webp", maxW: 1400 },
+  { in: "assets/pessoas9.jfif", out: "public/images/momentos/08.webp", maxW: 1400 },
 ];
 
 (async () => {
