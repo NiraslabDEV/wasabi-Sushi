@@ -6,16 +6,17 @@ type Momento = {
 };
 
 // Order matters — grid fills row-by-row.
-// Layout (4 cols × 3 rows = 12 cells):
-//   [BIG (2x2)   ] [WIDE  (2x1)        ]
-//   [BIG (2x2)   ] [WIDE  (2x1)        ]
-//   [WIDE  (2x1)              ] [WIDE  (2x1)              ]
+// Layout (4 cols × 4 rows = 16 cells = 3 BIG (4 each) + 2 WIDE (2 each)):
+//   [BIG 01 (2x2) ] [WIDE 05 (2x1)]
+//   [BIG 01 ====] [WIDE 06 (2x1)]
+//   [BIG 07 (2x2) ] [BIG 08 (2x2) ]
+//   [BIG 07 ====] [BIG 08 ====]
 const MOMENTOS: Momento[] = [
   { src: "/images/momentos/01.webp", alt: "Clientes felizes no Wasabi", span: "big", objectPosition: "center top" },
   { src: "/images/momentos/05.webp", alt: "Amigos a partilhar combos", span: "wide", objectPosition: "center top" },
   { src: "/images/momentos/06.webp", alt: "Família a celebrar no Wasabi", span: "wide", objectPosition: "center 20%" },
-  { src: "/images/momentos/07.webp", alt: "Momentos no Wasabi", span: "wide", objectPosition: "center top" },
-  { src: "/images/momentos/08.webp", alt: "Sorrisos no Wasabi", span: "wide", objectPosition: "center top" },
+  { src: "/images/momentos/07.webp", alt: "Momentos no Wasabi", span: "big", objectPosition: "center top" },
+  { src: "/images/momentos/08.webp", alt: "Sorrisos no Wasabi", span: "big", objectPosition: "center top" },
 ];
 
 export default function Gallery() {
